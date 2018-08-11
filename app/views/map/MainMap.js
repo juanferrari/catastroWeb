@@ -51,7 +51,20 @@ class MainMap extends Component {
     }).catch(error=>{
       console.log(error.stack)
     })
+
   }
+
+  //Este javascript sirve para mostrar la capa osm del geoserver
+  //hay que ver la forma para NO USAR el <MAP> de leaflet y hacerlo con js
+  //aca por algo de los ciclos de vida de leaflet se me muestra una vez y dsp da error
+  /*componentDidUpdate(prevProps, prevState) {
+    var mymap = L.map('mapid');
+    mymap.setView([this.state.lat, this.state.lng], this.state.zoom);
+    L.tileLayer.wms('http://186.33.216.232/geoserver/world/wms?', {
+      layers: 'world:chacabuco_osm'
+    }
+    ).addTo(mymap);
+  }*/
 
   render() {
     const position = [this.state.lat, this.state.lng]
@@ -64,20 +77,20 @@ class MainMap extends Component {
       )
     }
 
-    //return(<div>{this.state.geojson}</div>)
     return (
       <div>
       	<ModalParcelas />
         <div>
-          <Map center={position} zoom={this.state.zoom}>
-            <TileLayer
-              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            />
-            <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
-          </Map>
+        <Map id='map' center={position} zoom={this.state.zoom}>
+          <TileLayer
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          />
+          <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
+        </Map>
         </div>
       </div>
     )
+
   }
 }
 
