@@ -23,8 +23,8 @@ class Navigation extends Component {
                             <Link to="/map"><i className="fa fa-user"></i> <span className="nav-label">Map</span></Link>
                         </li>
 
-        var test = <li  className={this.activeRoute("/test")}>
-                            <Link to="/test"><i className="fa fa-user"></i> <span className="nav-label">Test</span></Link>
+        var busqueda = <li  className={this.activeRoute("/busqueda")}>
+                            <Link to="/busqueda"><i className="fa fa-user"></i> <span className="nav-label">Busqueda</span></Link>
                         </li>
 
 
@@ -51,7 +51,7 @@ class Navigation extends Component {
                             </div>
                         </li>
                         {dashboard}
-                        {test}
+                        {busqueda}
                     </ul>
 
             </nav>
