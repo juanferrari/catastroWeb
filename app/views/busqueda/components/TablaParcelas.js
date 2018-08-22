@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
-import 'react-table/react-table.css';
 import { Field,reduxForm } from 'redux-form';
 
 class TablaParcelas extends Component{

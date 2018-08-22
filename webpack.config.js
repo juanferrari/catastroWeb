@@ -25,16 +25,17 @@ var config = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.HashedModuleIdsPlugin(),
-	new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+  new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
         new webpack.optimize.CommonsChunkPlugin({ name: 'vendor'}),
         new webpack.DefinePlugin({
             'require.specified' : "require.resolve",
             'ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
-            //'SERVICE_URL': 'completar con url de la api"',
+            //'SERVICE_URL': '"http://dev.inmoflow.com/api"',
+            'SERVICE_URL': '"http://localhost:10010/api"',
             'VERSION': JSON.stringify(require('./package.json').version)
         }),
         new HtmlWebpackPlugin({
-         title: 'CatastroWeb',
+         title: 'Inmoflow',
          template: 'public/index.ejs'
         })
     ],
