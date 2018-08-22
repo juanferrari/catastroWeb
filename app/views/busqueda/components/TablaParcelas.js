@@ -4,6 +4,7 @@ import ReactLoading from 'react-loading';
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
+import 'react-table/react-table.css'
 
 class TablaParcelas extends Component{
 
