@@ -7,7 +7,7 @@ var NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 var config = {
     entry: [
-            'webpack-dev-server/client?http://localhost:8000',
+            'webpack-dev-server/client?http://' + require("ip").address() + ':9000/',
             'webpack/hot/only-dev-server',
             'react-hot-loader/patch',
             './app/index.js'
@@ -31,7 +31,7 @@ var config = {
             'require.specified' : "require.resolve",
             'ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
             //'SERVICE_URL': '"http://dev.inmoflow.com/api"',
-            'SERVICE_URL': '"http://localhost:10010/api"',
+            //'SERVICE_URL': '"http://localhost:10010/api"',
             'VERSION': JSON.stringify(require('./package.json').version)
         }),
         new HtmlWebpackPlugin({

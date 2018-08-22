@@ -34,6 +34,11 @@ var config = {
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new ExtractTextPlugin("styles.css"),
+        new webpack.DefinePlugin({
+          'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+          }
+        }),
         new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
           
         new webpack.HashedModuleIdsPlugin(),        
