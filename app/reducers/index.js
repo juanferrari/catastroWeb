@@ -6,7 +6,8 @@ import mapReducer from './reducer_map';
 
 const rootReducer = combineReducers({
   test: testReducer,
-  map: mapReducer
+  map: mapReducer,
+  form: formReducer
 });
 
 export default rootReducer;
