@@ -28,7 +28,7 @@ class Busqueda extends Component{
 		return (
 			<div className="row">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				  <DatosBusqueda />
+				  <DatosBusqueda collapsed='false'/>
         </form>
         <TablaParcelas />    
 			</div>

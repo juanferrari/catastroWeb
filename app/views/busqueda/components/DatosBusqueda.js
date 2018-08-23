@@ -9,14 +9,52 @@ class DatosBusqueda extends Component{
 	constructor(props){
 	    super(props);
 	    this.state = {
+        collapsed:false,
 	    }
 
 	    this.renderField = this.renderField.bind(this);
 	    this.renderCheckbox = this.renderCheckbox.bind(this);
+      this.collapse = this.collapse.bind(this);
   	}
 
 	componentWillMount(){
+    var buttonClass;
+    if(this.props.collapsed == 'true'){
+      this.setState({collapsed:false});
+      buttonClass = 'fa fa-angle-down';
+    }else{
+      this.setState({collapsed:true});
+      buttonClass = 'fa fa-angle-up';
+    }
+    this.setState({collapseButton: <button 
+                          type="button" 
+                          className="btn btn-default" 
+                          data-toggle="collapse" 
+                          data-target="#demo"
+                          onClick={()=>this.collapse()}
+                        >
+                          <i className={buttonClass}></i>
+                        </button>})
 	}
+
+  collapse(){
+    this.setState({collapsed:!this.state.collapsed});
+    var buttonClass;
+    if(this.state.collapsed){
+      buttonClass = 'fa fa-angle-down';
+    }else{
+      buttonClass = 'fa fa-angle-up';
+    }
+    this.setState({collapseButton: <button 
+                          type="button" 
+                          className="btn btn-default" 
+                          data-toggle="collapse" 
+                          data-target="#demo"
+                          onClick={()=>this.collapse()}
+                        >
+                          <i className={buttonClass}></i>
+                        </button>})
+  }
 
 	renderField(field) {
 	    const { meta: { touched, error } } = field;
@@ -60,10 +98,20 @@ class DatosBusqueda extends Component{
     );
   }
 
+  
+
 	render(){
+
+    var buttonClassName;
+    if(this.props.collapsed == 'false'){
+      buttonClassName = 'col-md-12 collapse in';
+    }else{
+      buttonClassName = 'col-md-12 collapse';
+    }
 
 		return (
 		    <div className="col-md-12 ">
+          
           <div className="ibox float-e-margins">
             <div className="ibox-content">
             	<div className="row">
@@ -71,7 +119,10 @@ class DatosBusqueda extends Component{
                 	<h3 style={{'color':'#149bd3','fontWeight':'bold'}}>Filtros de búsqueda</h3>
                 	<hr style={{'width':'100%','color':'#149bd3','borderColor':'#149bd3','borderWidth':'medium','margin':'10px 0','height':'2px'}} />
               	</div>
-              	<div className="col-md-12">
+                <div className='col-lg-2 col-md-2'>
+                  {this.state.collapseButton}
+                </div>
+              	<div id="demo" className={buttonClassName}>
                   <div className="col-lg-2">
                     <Field
                       label="Partida ARBA"
@@ -154,19 +205,19 @@ class DatosBusqueda extends Component{
                       component={this.renderField}
                     />
                   </div>
+                  <div className='col-lg-12 col-md-12 text-center'>
+                    <div role="toolbar" className="btn-group">
+                      <button type="submit" className="btn btn-default">Buscar  <i className="fa fa-search"></i></button>
+                      <button 
+                        className="btn btn-default"
+                        onClick={()=>this.props.destroy('BusquedaForm')}
+                        >
+                          Limpiar  <i className="fa fa-eraser"></i>
+                      </button>
+                    </div>
+                  </div>
         		    </div>
       		    </div>
-              <div className='text-center'>
-                <div role="toolbar" className="btn-group">
-                  <button type="submit" className="btn btn-default">Buscar  <i className="fa fa-search"></i></button>
-                  <button 
-                    className="btn btn-default"
-                    onClick={()=>this.props.destroy('BusquedaForm')}
-                    >
-                      Limpiar  <i className="fa fa-eraser"></i>
-                  </button>
-                </div>
-              </div>
       	    </div>
       	  </div>
         </div>

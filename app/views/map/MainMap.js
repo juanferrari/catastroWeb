@@ -5,6 +5,7 @@ import { updateParcelaInfo, openModal, closeModal } from 'actions/actions_map'
 import axios from 'axios';
 import ModalParcelas from './ModalParcelas'
 import ReactLoading from 'react-loading'
+import DatosBusqueda from 'views/busqueda/components/DatosBusqueda'
 
 class MainMap extends Component {
 
@@ -80,13 +81,17 @@ class MainMap extends Component {
     return (
       <div>
       	<ModalParcelas />
-        <div>
-        <Map id='map' center={position} zoom={this.state.zoom}>
-          <TileLayer
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          />
-          <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
-        </Map>
+        <div className='row'>
+          <Map id='map' center={position} zoom={this.state.zoom}>
+            <TileLayer
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
+          </Map>
+        </div>
+        <br />
+        <div className='row'>
+          <DatosBusqueda collapsed='true'/>
         </div>
       </div>
     )
