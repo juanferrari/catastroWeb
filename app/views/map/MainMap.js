@@ -91,7 +91,7 @@ class MainMap extends Component {
         </div>
         <br />
         <div className='row'>
-          <DatosBusqueda collapsed='true'/>
+          <DatosBusqueda collapsed='true' scrollBottom='true'/>
         </div>
       </div>
     )

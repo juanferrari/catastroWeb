@@ -38,7 +38,13 @@ class DatosBusqueda extends Component{
 	}
 
   collapse(){
+
     this.setState({collapsed:!this.state.collapsed});
+
+    if(this.props.scrollBottom == 'true' && !this.state.collapsed){
+      $("html, body").animate({ scrollTop: $(document).height() });
+    }
+
     var buttonClass;
     if(this.state.collapsed){
       buttonClass = 'fa fa-angle-down';
