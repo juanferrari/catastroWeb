@@ -34,6 +34,16 @@ class TablaParcelas extends Component{
 
     const { parcelas, parcelasFetching }  = this.props;
 
+    var data = [];
+    var pages = -1;
+
+    if(parcelas && parcelas.rows)
+      data = parcelas.rows;
+
+    if(parcelas && parcelas.pages)
+      pages = parcelas.pages;
+
+
     /*if(!parcelas || parcelasFetching){
       return(
         <div className="centeredSpinner" >
@@ -111,24 +121,23 @@ class TablaParcelas extends Component{
                     	<hr style={{'width':'100%','color':'#149bd3','borderColor':'#149bd3','borderWidth':'medium','margin':'10px 0','height':'2px'}} />
                   	</div>
                   	<div className="col-md-12">
-          				<ReactTable className="-striped -highlight"
-                        manual
-                        columns={columns}
-                        defaultPageSize={10}
-                        data={parcelas && parcelas.rows}
-                        pages={parcelas && parcelas.pages}
-                        loading={parcelasFetching}
-                        filterable
-                        onFetchData={this.props.getParcelas}
-                        previousText={'Anterior'}
-                        nextText={'Siguiente'}
-                        loadingText={'Cargando...'}
-                        noDataText={'No existen registros'}
-                        pageText={'Siguiente'}
-                        ofText={'de'}
-                        rowsText={'lineas'}
-                        //defaultFilterMethod={this.filterMethod}
-                      />
+            				<ReactTable className="-striped -highlight"
+                          manual
+                          columns={columns}
+                          defaultPageSize={10}
+                          data={data}
+                          pages={pages}
+                          loading={parcelasFetching}
+                          onFetchData={this.props.getParcelas}
+                          previousText={'Anterior'}
+                          nextText={'Siguiente'}
+                          loadingText={'Cargando...'}
+                          noDataText={'No existen registros'}
+                          pageText={'Siguiente'}
+                          ofText={'de'}
+                          rowsText={'lineas'}
+                          //defaultFilterMethod={this.filterMethod}
+                        />
           		</div>
         		</div>
       	</div>
