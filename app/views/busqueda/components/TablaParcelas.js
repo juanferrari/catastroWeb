@@ -32,7 +32,7 @@ class TablaParcelas extends Component{
 
 	render(){
 
-    const { parcelas, parcelasFetching }  = this.props;
+    const { parcelas, parcelasFetching,filter }  = this.props;
 
     var data = [];
     var pages = -1;
@@ -42,15 +42,6 @@ class TablaParcelas extends Component{
 
     if(parcelas && parcelas.pages)
       pages = parcelas.pages;
-
-
-    /*if(!parcelas || parcelasFetching){
-      return(
-        <div className="centeredSpinner" >
-          <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
-        </div>
-      )
-    }*/
 
 		const columns = [
           {
@@ -128,7 +119,7 @@ class TablaParcelas extends Component{
                           data={data}
                           pages={pages}
                           loading={parcelasFetching}
-                          onFetchData={this.props.getParcelas}
+                          onFetchData={data=>{this.props.getParcelas(data,filter)}}
                           previousText={'Anterior'}
                           nextText={'Siguiente'}
                           loadingText={'Cargando...'}
@@ -136,7 +127,6 @@ class TablaParcelas extends Component{
                           pageText={'Siguiente'}
                           ofText={'de'}
                           rowsText={'lineas'}
-                          //defaultFilterMethod={this.filterMethod}
                         />
           		</div>
         		</div>
@@ -158,7 +148,8 @@ function mapStateToProps(state) {
   console.log('mapStateToProps',state)
   return {
     parcelas: state.parcelas.parcelas,
-    parcelasFetching: state.parcelas.parcelasFetching
+    parcelasFetching: state.parcelas.parcelasFetching,
+    filter: state.parcelas.filter
   }
 
 };

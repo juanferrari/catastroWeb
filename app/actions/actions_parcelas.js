@@ -6,6 +6,15 @@ export const GET_PARCELAS_REQUEST = 'GET_PARCELAS_REQUEST';
 export const GET_PARCELAS_SUCCESS = 'GET_PARCELAS_SUCCESS';
 export const GET_PARCELAS_FAIL = 'GET_PARCELAS_FAIL';
 
+export const UPDATE_FILTER = 'UPDATE_FILTER';
+
+export function updateFilter(filter) {
+  return {
+    type: UPDATE_FILTER,
+    filter
+  }
+}
+
 function getParcelasRequest() {
   return {
     type: GET_PARCELAS_REQUEST,
@@ -25,13 +34,10 @@ function getParcelasFail() {
   }
 }
 
-export function getParcelas(data){
+export function getParcelas(data,filter){
 
-  console.log('dataaa',data)
-
-  var service_url = 'http://186.33.216.232/catastro-service/v1/parcelas?size=' + data.pageSize + '&page=' + data.page;
+  var service_url = 'http://186.33.216.232/catastro-service/v1/parcelas?size=' + data.pageSize + '&page=' + data.page + filter;
   
-
   return function(dispatch) {
         dispatch(getParcelasRequest())
         const request = axios.get(service_url,{

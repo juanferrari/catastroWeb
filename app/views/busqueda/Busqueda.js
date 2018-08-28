@@ -7,7 +7,7 @@ import { Field,reduxForm } from 'redux-form';
 import DatosBusqueda from './components/DatosBusqueda';
 import TablaParcelas from './components/TablaParcelas';
 import lodash from 'lodash';
-import { getParcelas } from 'actions/actions_parcelas'
+import { getParcelas,updateFilter } from 'actions/actions_parcelas'
 
 class Busqueda extends Component{
 
@@ -22,8 +22,32 @@ class Busqueda extends Component{
   }
 
 	onSubmit(values){
-    if(!_.isEmpty(values))
-		  console.log('submit busqueda',values);
+    var data = {};
+    data.pageSize = 10;
+    data.page = 0;
+
+    if(!_.isEmpty(values)){
+      console.log('submit busqueda',values);
+      var filteredQuery = '&searchCatastro='
+      
+
+      //http://186.33.216.232/catastro-service/v1/parcelas?searchCatastro=nomenclaturaCatastroQuinta:442&size=10&page=2
+      if(values.partida_arba)
+        filteredQuery =  filteredQuery + ',id:' + values.partida_arba;
+
+      if(values.circunscripcion)
+        filteredQuery =  filteredQuery + ',nomenclaturaCatastroCircunscripcion:' + values.circunscripcion;
+
+      if(values.seccion)
+        filteredQuery =  filteredQuery + ',nomenclaturaCatastroSeccion:' + values.seccion;
+
+      this.props.updateFilter(filteredQuery);
+      this.props.getParcelas(data,filteredQuery);
+    }else{
+      this.props.updateFilter('');
+      this.props.getParcelas(data,'');
+    }
+		
 	}
 
 	render(){
@@ -54,4 +78,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, { getParcelas })(Busqueda);
+export default connect(mapStateToProps, { getParcelas,updateFilter })(Busqueda);
