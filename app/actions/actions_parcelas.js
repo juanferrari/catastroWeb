@@ -29,6 +29,9 @@ export function getParcelas(data){
 
   console.log('dataaa',data)
 
+  if(!data.page)
+    data.page = 0
+
   var service_url = 'http://186.33.216.232/catastro-service/v1/parcelas?&size=' + data.pageSize + '&page=' + data.page;
   
 
