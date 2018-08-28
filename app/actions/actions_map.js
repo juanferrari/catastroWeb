@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import axios from 'axios';
+import {ROOT_URL} from './index';
 
 export const UPDATE_PARCELA_INFO = 'UPDATE_PARCELA_INFO'
 export const OPEN_MODAL = 'OPEN_MODAL'

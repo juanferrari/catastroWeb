@@ -45,7 +45,7 @@ var config = {
         new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
         new webpack.DefinePlugin({
             "require.specified": "require.resolve",
-            //SERVICE_URL: '"https://urlapiprod"',
+            'SERVICE_URL': '"http://186.33.216.232/catastro-service/v1/"'
         }),
         new HtmlWebpackPlugin({
          title: 'CatastroWeb',

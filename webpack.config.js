@@ -30,8 +30,7 @@ var config = {
         new webpack.DefinePlugin({
             'require.specified' : "require.resolve",
             'ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
-            //'SERVICE_URL': '"http://dev.inmoflow.com/api"',
-            //'SERVICE_URL': '"http://localhost:10010/api"',
+            'SERVICE_URL': '"http://186.33.216.232/catastro-service/v1/"',
             'VERSION': JSON.stringify(require('./package.json').version)
         }),
         new HtmlWebpackPlugin({

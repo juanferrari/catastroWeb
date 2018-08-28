@@ -4,7 +4,8 @@ import ReactLoading from 'react-loading';
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
-import { getParcelas } from 'actions/actions_parcelas'
+import { getParcelas, getParcela } from 'actions/actions_parcelas'
+import { BrowserRouter, Route, Switch, Redirect, Link,Router, hashHistory ,withRouter } from 'react-router-dom';
 import 'react-table/react-table.css'
 
 class TablaParcelas extends Component{
@@ -14,6 +15,7 @@ class TablaParcelas extends Component{
     this.state = {
       data:[]
     }
+    this.abrirFicha = this.abrirFicha.bind(this);
   }
 
 	componentWillMount(){
@@ -30,9 +32,15 @@ class TablaParcelas extends Component{
 		this.setState({data:dataArray})
 	}
 
+  abrirFicha(parcela_id){
+    console.log('this.props',this.props)
+    this.props.history.push(`/ficha/${parcela_id}`);
+  }
+
 	render(){
 
     const { parcelas, parcelasFetching,filter }  = this.props;
+    var abrirFicha = this.abrirFicha;
 
     var data = [];
     var pages = -1;
@@ -54,7 +62,7 @@ class TablaParcelas extends Component{
                                           className={'btn btn-default fa fa-search'}
                                           bsStyle="default"
                                           bsSize="small"
-                                          onClick={()=>{console.log('abrir fila ',value)}}
+                                          onClick={()=>{abrirFicha(value)}}
                                          >
                                          </Button>
                                   },
@@ -145,7 +153,6 @@ TablaParcelas = reduxForm(
 
 
 function mapStateToProps(state) {
-  console.log('mapStateToProps',state)
   return {
     parcelas: state.parcelas.parcelas,
     parcelasFetching: state.parcelas.parcelasFetching,
@@ -154,4 +161,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, { getParcelas })(TablaParcelas);
+export default withRouter(connect(mapStateToProps, { getParcelas,getParcela })(TablaParcelas));
