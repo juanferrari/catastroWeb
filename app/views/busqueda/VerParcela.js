@@ -4,12 +4,9 @@ import ReactLoading from 'react-loading'
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
-import DatosBusqueda from './components/DatosBusqueda';
-import TablaParcelas from './components/TablaParcelas';
 import lodash from 'lodash';
-import { getParcelas } from 'actions/actions_parcelas'
 
-class Busqueda extends Component{
+class VerParcela extends Component{
 
 	constructor(props){
     super(props);
@@ -17,13 +14,8 @@ class Busqueda extends Component{
     }
   }
 
-  componentWillMount(){
-    //this.props.getParcelas();
-  }
-
 	onSubmit(values){
-    if(!_.isEmpty(values))
-		  console.log('submit busqueda',values);
+
 	}
 
 	render(){
@@ -33,19 +25,18 @@ class Busqueda extends Component{
 		return (
 			<div className="row">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				  <DatosBusqueda collapsed='false'/>
-        </form>
-        <TablaParcelas />    
+
+        </form> 
 			</div>
 			)
 	}
 }
 
-Busqueda = reduxForm(
+VerParcela = reduxForm(
   {
     enableReinitialize: true,
-    form: 'BusquedaForm'
-  })(Busqueda);
+    form: 'VerParcelaForm'
+  })(VerParcela);
 
 
 function mapStateToProps(state) {
@@ -54,4 +45,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, { getParcelas })(Busqueda);
+export default connect(mapStateToProps, null)(VerParcela);

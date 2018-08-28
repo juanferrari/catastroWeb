@@ -4,6 +4,7 @@ import ReactLoading from 'react-loading';
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
+import { getParcelas } from 'actions/actions_parcelas'
 import 'react-table/react-table.css'
 
 class TablaParcelas extends Component{
@@ -31,17 +32,28 @@ class TablaParcelas extends Component{
 
 	render(){
 
+    const { parcelas, parcelasFetching }  = this.props;
+
+    /*if(!parcelas || parcelasFetching){
+      return(
+        <div className="centeredSpinner" >
+          <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
+        </div>
+      )
+    }*/
+
 		const columns = [
           {
               Header: '',
               maxWidth: 50,
               filterable:false,
+              accessor: 'id',
               Cell: ({value}) => {
                                   return <Button
                                           className={'btn btn-default fa fa-search'}
                                           bsStyle="default"
                                           bsSize="small"
-                                          onClick={()=>{console.log('abrir fila')}}
+                                          onClick={()=>{console.log('abrir fila ',value)}}
                                          >
                                          </Button>
                                   },
@@ -49,12 +61,18 @@ class TablaParcelas extends Component{
           	},
             {
                 Header: 'Partida Catastro ARBA',
-                accessor:'partida_catastro_arba',
                 maxWidth: 160,
+                Cell: (row) => ( <span >{row.original.catastro && row.original.catastro.id}</span>),
             },
             {
                 Header: 'Nomenclatura',
-                accessor: 'nomenclatura',
+                Cell: (row) => (<span >{row.original.catastro && 
+                                        'Circunscripción: ' + row.original.catastro.nomenclaturaCatastroCircunscripcion +
+                                        ' Sección: ' + row.original.catastro.nomenclaturaCatastroSeccion +
+                                        ' Manzana: ' +  row.original.catastro.nomenclaturaCatastroManzana +
+                                        ' Parcela: ' +  row.original.catastro.nomenclaturaCatastroParcela
+                                        }
+                                </span>),
             },
             {
                 Header: 'Dirección',
@@ -94,46 +112,23 @@ class TablaParcelas extends Component{
                   	</div>
                   	<div className="col-md-12">
           				<ReactTable className="-striped -highlight"
-                      columns={columns}
-                      defaultPageSize={10}
-                      data={this.state.data}
-                      //loading={arePersonsFetching}
-                      //filterable
-                      previousText={'Anterior'}
-                      nextText={'Siguiente'}
-                      loadingText={'Cargando...'}
-                      noDataText={'No existen registros'}
-                      pageText={'Siguiente'}
-                      ofText={'de'}
-                      rowsText={'lineas'}
-                      //defaultFilterMethod={this.filterMethod}
-                      /*getTdProps={(state, rowInfo, column, instance) => {
-                          var ret = {
-
-                              onClick:(e, handleOriginal) => {
-                                  if (this.state.CurrentID ==rowInfo.original.person_id ){
-                                      this.setState({CurrentID: null,CurrentName: null});
-
-                                  }
-                                  else{
-                                      this.setState({CurrentID: rowInfo.original.person_id,CurrentName: rowInfo.row.name,disabled:'disabled'});
-
-                                  }
-                                  this.setState({message_class: "alert alert-danger hidden"})
-                                  this.props.clearMessage();
-                                  if (handleOriginal) {
-                                    handleOriginal()
-                                  }
-                              }
-                          }
-                          if(rowInfo && (this.state.CurrentID == rowInfo.original.person_id)){
-                              ret.style = { background: '#B0C4DE'}
-
-                          }
-
-                          return ret;
-                      }}*/
-                  />
+                        manual
+                        columns={columns}
+                        defaultPageSize={10}
+                        data={parcelas && parcelas.rows}
+                        pages={parcelas && parcelas.pages}
+                        loading={parcelasFetching}
+                        filterable
+                        onFetchData={this.props.getParcelas}
+                        previousText={'Anterior'}
+                        nextText={'Siguiente'}
+                        loadingText={'Cargando...'}
+                        noDataText={'No existen registros'}
+                        pageText={'Siguiente'}
+                        ofText={'de'}
+                        rowsText={'lineas'}
+                        //defaultFilterMethod={this.filterMethod}
+                      />
           		</div>
         		</div>
       	</div>
@@ -151,9 +146,12 @@ TablaParcelas = reduxForm(
 
 
 function mapStateToProps(state) {
-
-  return {}
+  console.log('mapStateToProps',state)
+  return {
+    parcelas: state.parcelas.parcelas,
+    parcelasFetching: state.parcelas.parcelasFetching
+  }
 
 };
 
-export default connect(mapStateToProps, null)(TablaParcelas);
+export default connect(mapStateToProps, { getParcelas })(TablaParcelas);
