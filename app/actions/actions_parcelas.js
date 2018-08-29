@@ -41,7 +41,7 @@ export function editParcela(submitJson){
   
   return function(dispatch) {
         dispatch(editParcelaRequest())
-        const request = axios.post(service_url,submitJson,{
+        const request = axios.put(service_url,submitJson,{
           headers: {
               'Content-Type': 'application/json',
               'X-session': localStorage.getItem('session'),

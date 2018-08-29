@@ -85,7 +85,7 @@ class TablaParcelas extends Component{
             },
             {
                 Header: 'Dirección',
-                accessor: 'direccion',
+                accessor: 'domicilio'
             },
             {
                Header : 'Partida Municipal',
