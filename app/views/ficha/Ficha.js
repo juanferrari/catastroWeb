@@ -229,7 +229,7 @@ function mapStateToProps(state) {
       partido: state.parcelas.parcela.rows[0].partido,
       localidad: state.parcelas.parcela.rows[0].localidad,
       barrio: state.parcelas.parcela.rows[0].barrio,
-      domicicio: state.parcelas.parcela.rows[0].domicicio,
+      domicilio: state.parcelas.parcela.rows[0].domicilio,
       nomenclaturaTituloCircunscripcion: nomCatCin,
       nomenclaturaTituloSeccion: nomTitSec,
       nomenclaturaTituloChacra: nomTitChacra,
