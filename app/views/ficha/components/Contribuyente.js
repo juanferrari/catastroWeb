@@ -4,7 +4,7 @@ import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 
-class Ubicacion extends Component{
+class Contribuyente extends Component{
 
 	constructor(props){
 	    super(props);
@@ -27,6 +27,7 @@ class Ubicacion extends Component{
 	      <div className={className}>
 	        <label>{field.label}</label>
 	        <input
+            disabled
 	          className="form-control"
 	          type="text"
 	          {...field.input}
@@ -44,55 +45,69 @@ class Ubicacion extends Component{
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               	<div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
-                	Ubicación
+                	Contribuyente
               	</div>
               	<div className="panel-body">
                   <div className='row'>
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                       <Field
-                        label="Partido"
-                        name="partido"
+                        label="Apellido"
+                        name="apellidoContribuyente"
                         component={this.renderField}
                       />
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                       <Field
-                        label="Localidad"
-                        name="localidad"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-4">
-                      <Field
-                        label="Barrio"
-                        name="barrio"
+                        label="Nombre"
+                        name="nombreContribuyente"
                         component={this.renderField}
                       />
                     </div>
                   </div>
                   <div className='row'>
-                    <div className="col-lg-12">
+                    <div className="col-lg-6">
+                      <Field
+                        label="DNI - CUIT - CUIL"
+                        name="dniCuitCuilContribuyente"
+                        component={this.renderField}
+                      />
+                    </div>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Teléfono"
+                        name="telefonoContribuyente"
+                        component={this.renderField}
+                      />
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className="col-lg-6">
                       <Field
                         label="Domicilio"
-                        name="domicilio"
+                        name="domicilioContribuyente"
+                        component={this.renderField}
+                      />
+                    </div>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Email"
+                        name="emailContribuyente"
                         component={this.renderField}
                       />
                     </div>
                   </div>
         		    </div>
-
-
       	  </div>
         </div>
 			)
 	}
 }
 
-Ubicacion = reduxForm(
+Contribuyente = reduxForm(
   {
     enableReinitialize: true,
     form: 'FichaForm'
-  })(Ubicacion);
+  })(Contribuyente);
 
 function mapStateToProps(state) {
 
@@ -100,4 +115,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(Ubicacion);
+export default connect(mapStateToProps, null)(Contribuyente);

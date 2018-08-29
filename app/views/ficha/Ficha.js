@@ -5,12 +5,21 @@ import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
-import { getParcela } from 'actions/actions_parcelas';
+import { getParcela, editParcela } from 'actions/actions_parcelas';
 import Ubicacion from './components/Ubicacion';
 import DatosCatastrales from './components/DatosCatastrales';
 import PlanchetaCatastral from './components/PlanchetaCatastral';
 import IdentificacionProvincial from './components/IdentificacionProvincial';
 import PlanchetaCatastralMapa from './components/PlanchetaCatastralMapa';
+import Propietarios from './components/Propietarios';
+import MedidasSuperficies from './components/MedidasSuperficies';
+import Contribuyente from './components/Contribuyente';
+import Indicadores from './components/Indicadores';
+import Valuacion from './components/Valuacion';
+import ExpedienteMensura from './components/ExpedienteMensura';
+import ExpedienteObra from './components/ExpedienteObra';
+import RegistroPropiedad from './components/RegistroPropiedad'
+import CommonHeader from 'components/common/CommonHeader'
 
 class Ficha extends Component{
 
@@ -25,14 +34,56 @@ class Ficha extends Component{
     this.props.getParcela(id);
   }
 
+  componentWillUnmount(){
+    this.props.destroy('FichaForm');
+  }
+
 	onSubmit(values){
-		
+	  const {id} = this.props.match.params;
+
+    var submitJson =  {
+                      "id": id,
+                      "partido": values.partido,
+                      "localidad": values.localidad,
+                      "barrio": values.barrio,
+                      "domicilio": values.domicilio,
+                      "catastro": {
+                        "id": id,
+                        "partidaMunicipal": values.partidaMunicipal,
+                        "codigoPagoElectronico": values.codigoPagoElectronico,
+                        "nomenclaturaCatastroCircunscripcion": values.nomenclaturaCatastroCircunscripcion,
+                        "nomenclaturaCatastroSeccion": values.nomenclaturaCatastroSeccion,
+                        "nomenclaturaCatastroChacra": values.nomenclaturaCatastroChacra,
+                        "nomenclaturaCatastroQuinta": values.nomenclaturaCatastroQuinta,
+                        "nomenclaturaCatastroFraccion": values.nomenclaturaCatastroFraccion,
+                        "nomenclaturaCatastroManzana": values.nomenclaturaCatastroManzana,
+                        "nomenclaturaCatastroParcela": values.nomenclaturaCatastroParcela,
+                        "nomenclaturaTituloCircunscripcion": values.nomenclaturaTituloCircunscripcion,
+                        "nomenclaturaTituloSeccion": values.nomenclaturaTituloSeccion,
+                        "nomenclaturaTituloChacra": values.nomenclaturaTituloChacra,
+                        "nomenclaturaTituloQuinta": values.nomenclaturaTituloQuinta,
+                        "nomenclaturaTituloFraccion": values.nomenclaturaTituloFraccion,
+                        "nomenclaturaTituloManzana": values.nomenclaturaTituloManzana,
+                        "nomenclaturaTituloParcela": values.nomenclaturaTituloParcela
+                      },
+                      "propietarios": []
+                    }
+
+    this.props.editParcela(submitJson);
+    $('html,body').scrollTop(0);
+
 	}
 
 	render(){
 
 		const { handleSubmit } = this.props;
-    const { parcela, parcelaFetching } = this.props;
+    const { parcela, parcelaFetching, parcelaEditing, actionParcela } = this.props;
+
+    if (parcelaEditing){
+      var button_confirm=<button type="submit" className="btn btn-primary" disabled>Confirmar <i className="fa fa-spinner fa-spin"></i></button>
+    }else{
+      var button_confirm=<button type="submit" className="btn btn-primary">Confirmar</button>
+    }
 
     if(!parcela || parcelaFetching){
       return(
@@ -43,25 +94,59 @@ class Ficha extends Component{
     }
 
 		return (
-			<div className="row">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <div className='col-lg-1' />
-            <div className='col-lg-5' >
-				      <Ubicacion />
-              <DatosCatastrales />
+			<div>
+        <CommonHeader />
+        <br />
+        <div className="row">
+            <div className='col-lg-1' />
+            <div className='col-lg-10' >
+             {(actionParcela!=null)?
+              (<div className="col-md-12">
+                  <div className={actionParcela.action_className}>
+                    <strong>{actionParcela.message}</strong>
+                  </div>
+              </div>
+              ):
+              (<div className='hidden'></div>)
+              }
             </div>
-            <div className='col-lg-5' >
-              <PlanchetaCatastral />
-              <div className='row'>
-                <div className='col-lg-6'>
-                  <IdentificacionProvincial />
+        </div>
+        <div className='row'>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <div className='row'>
+              <div className='col-lg-1' />
+              <div className='col-lg-5' >
+  				      <Ubicacion />
+                <DatosCatastrales />
+                <Propietarios />
+                <Contribuyente />
+                <ExpedienteMensura />
+                <ExpedienteObra />
+                <RegistroPropiedad />
+              </div>
+              <div className='col-lg-5' >
+                <PlanchetaCatastral />
+                <div className='row'>
+                  <div className='col-lg-6'>
+                    <IdentificacionProvincial />
+                  </div>
+                  <div className='col-lg-6'>
+                    <PlanchetaCatastralMapa />
+                  </div>
                 </div>
-                <div className='col-lg-6'>
-                  <PlanchetaCatastralMapa />
-                </div>
+                <MedidasSuperficies />
+                <Indicadores />
+                <Valuacion />
               </div>
             </div>
-        </form>  
+            <div className='row text-center'>
+              { button_confirm }
+            </div>
+          </form> 
+        </div>
+        <br/>
+        <br/>
+        <br/>
 			</div>
 			)
 	}
@@ -79,10 +164,34 @@ function mapStateToProps(state) {
   if (!state.parcelas.parcela){
     return {
       parcelaFetching: state.parcelas.parcelaFetching,
-      parcela: state.parcelas.parcela
+      parcela: state.parcelas.parcela,
+      parcelaEditing: state.parcelas.parcelaEditing,
+      actionParcela: state.parcelas.actionParcela
     }
   }
-
+  //Titulo
+  var nomTitCin = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloCircunscripcion;
+  var nomTitSec = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitSec = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloSeccion;
+  var nomTitChacra = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitChacra = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloChacra;
+  var nomTitQuinta = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitQuinta = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloQuinta;
+  var nomTitFraccion = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitFraccion = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloFraccion;
+  var nomTitManzana = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitManzana = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloManzana;
+  var nomTitParcela = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+    nomTitParcela = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloParcela;
+  //Catastro
   var nomCatCin = null;
   if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion;
@@ -114,7 +223,20 @@ function mapStateToProps(state) {
   return {
     parcelaFetching: state.parcelas.parcelaFetching,
     parcela: state.parcelas.parcela,
+    parcelaEditing: state.parcelas.parcelaEditing,
+    actionParcela: state.parcelas.actionParcela,
     initialValues:{
+      partido: state.parcelas.parcela.rows[0].partido,
+      localidad: state.parcelas.parcela.rows[0].localidad,
+      barrio: state.parcelas.parcela.rows[0].barrio,
+      domicicio: state.parcelas.parcela.rows[0].domicicio,
+      nomenclaturaTituloCircunscripcion: nomCatCin,
+      nomenclaturaTituloSeccion: nomTitSec,
+      nomenclaturaTituloChacra: nomTitChacra,
+      nomenclaturaTituloQuinta: nomTitQuinta,
+      nomenclaturaTituloFraccion: nomTitFraccion,
+      nomenclaturaTituloManzana: nomTitManzana,
+      nomenclaturaTituloParcela: nomTitParcela,
       nomenclaturaCatastroCircunscripcion: nomCatCin,
       nomenclaturaCatastroSeccion: nomCatSec,
       nomenclaturaCatastroChacra: nomCatChacra,
@@ -129,4 +251,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, { getParcela })(Ficha);
+export default connect(mapStateToProps, { getParcela,editParcela })(Ficha);

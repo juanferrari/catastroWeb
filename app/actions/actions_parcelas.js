@@ -10,7 +10,51 @@ export const GET_PARCELA_REQUEST = 'GET_PARCELA_REQUEST';
 export const GET_PARCELA_SUCCESS = 'GET_PARCELA_SUCCESS';
 export const GET_PARCELA_FAIL = 'GET_PARCELA_FAIL';
 
+export const EDIT_PARCELA_REQUEST = 'EDIT_PARCELA_REQUEST';
+export const EDIT_PARCELA_SUCCESS = 'EDIT_PARCELA_SUCCESS';
+export const EDIT_PARCELA_FAIL = 'EDIT_PARCELA_FAIL';
+
 export const UPDATE_FILTER = 'UPDATE_FILTER';
+
+function editParcelaRequest() {
+  return {
+    type: EDIT_PARCELA_REQUEST,
+  }
+}
+
+function editParcelaSuccess(request) {
+  return {
+    type: EDIT_PARCELA_SUCCESS,
+    payload: request
+  }
+}
+
+function editParcelaFail() {
+  return {
+    type: EDIT_PARCELA_FAIL
+  }
+}
+
+export function editParcela(submitJson){
+
+  var service_url = ROOT_URL + 'parcelas';
+  
+  return function(dispatch) {
+        dispatch(editParcelaRequest())
+        const request = axios.post(service_url,submitJson,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(editParcelaSuccess(request))
+          }).catch( error =>{
+              dispatch(editParcelaFail())
+              console.log("error",error)
+            })
+      }
+}
 
 function getParcelaRequest() {
   return {

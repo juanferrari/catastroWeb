@@ -4,7 +4,7 @@ import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 
-class Ubicacion extends Component{
+class MedidasSuperficies extends Component{
 
 	constructor(props){
 	    super(props);
@@ -27,6 +27,7 @@ class Ubicacion extends Component{
 	      <div className={className}>
 	        <label>{field.label}</label>
 	        <input
+            disabled
 	          className="form-control"
 	          type="text"
 	          {...field.input}
@@ -44,55 +45,85 @@ class Ubicacion extends Component{
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               	<div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
-                	Ubicación
+                	Medidas y superficies (mts.)
               	</div>
               	<div className="panel-body">
                   <div className='row'>
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                       <Field
-                        label="Partido"
-                        name="partido"
+                        label="Superficie s/ título"
+                        name="supstitulo"
                         component={this.renderField}
                       />
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                       <Field
-                        label="Localidad"
-                        name="localidad"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-4">
-                      <Field
-                        label="Barrio"
-                        name="barrio"
+                        label="Superficie s/ mensura"
+                        name="supsmensura"
                         component={this.renderField}
                       />
                     </div>
                   </div>
                   <div className='row'>
-                    <div className="col-lg-12">
+                    <div className="col-lg-6">
                       <Field
-                        label="Domicilio"
-                        name="domicilio"
+                        label="Frente"
+                        name="frente"
+                        component={this.renderField}
+                      />
+                    </div>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Rumbo"
+                        name="rumboFrente"
+                        component={this.renderField}
+                      />
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Fondo"
+                        name="fondo"
+                        component={this.renderField}
+                      />
+                    </div>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Rumbo"
+                        name="rumboFondo"
+                        component={this.renderField}
+                      />
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Lateral"
+                        name="lateral"
+                        component={this.renderField}
+                      />
+                    </div>
+                    <div className="col-lg-6">
+                      <Field
+                        label="Rumbo"
+                        name="rumboLateral"
                         component={this.renderField}
                       />
                     </div>
                   </div>
         		    </div>
-
-
       	  </div>
         </div>
 			)
 	}
 }
 
-Ubicacion = reduxForm(
+MedidasSuperficies = reduxForm(
   {
     enableReinitialize: true,
     form: 'FichaForm'
-  })(Ubicacion);
+  })(MedidasSuperficies);
 
 function mapStateToProps(state) {
 
@@ -100,4 +131,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(Ubicacion);
+export default connect(mapStateToProps, null)(MedidasSuperficies);

@@ -27,6 +27,7 @@ class IdentificacionProvincial extends Component{
         <div className={className}>
           <label>{field.label}</label>
           <input
+            disabled
             className="form-control"
             type="text"
             {...field.input}
