@@ -35,7 +35,7 @@ class Navigation extends Component {
                         <li className="nav-header">
                             <div className="dropdown profile-element"> <span>
                              </span>
-                               <img src="LOGO" alt="App logo" width="160px" />
+                               <img src="http://geomatica.com.ar/chacabuco/mapa_files/LogoMinInterior.png" alt="App logo" width="160px" />
                                <hr/>
                                 <a data-toggle="dropdown" className="dropdown-toggle" href="#">
                             <span className="clear"> <span className="block m-t-xs"> <strong className="font-bold">LogoImage</strong>

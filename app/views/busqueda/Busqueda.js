@@ -8,6 +8,7 @@ import DatosBusqueda from './components/DatosBusqueda';
 import TablaParcelas from './components/TablaParcelas';
 import lodash from 'lodash';
 import { getParcelas,updateFilter } from 'actions/actions_parcelas'
+import CommonHeader from 'components/common/CommonHeader'
 
 class Busqueda extends Component{
 
@@ -51,6 +52,8 @@ class Busqueda extends Component{
 
 		return (
 			<div className="row">
+        <CommonHeader titulo={'Buscar parcelas'}/>
+        <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				  <DatosBusqueda collapsed='false'/>
         </form>

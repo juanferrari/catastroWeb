@@ -19,17 +19,6 @@ class TablaParcelas extends Component{
   }
 
 	componentWillMount(){
-		var data = {};
-		data.partida_catastro_arba = '26/6787';
-		data.nomenclatura = 'Circunscripción: 1 Sección: A Manzana: 63 Parcela: 17A';
-		data.direccion = 'Domingo Faustino Sarmiento 2, Chacabuco';
-		data.partida_municipal = '15.698';
-		data.contribuyente = 'Acevedo, Matías Exequiel';
-		data.ambito = 'Urbano';
-		data.plano = '22/08/2015';
-		var dataArray = [];
-		dataArray.push(data);
-		this.setState({data:dataArray})
 	}
 
   abrirFicha(parcela_id){

@@ -99,9 +99,28 @@ class Ficha extends Component{
       )
     }
 
+    var circuns = '-';
+    var seccion = '-';
+    var parc = '-';
+    var partido = '';
+
+    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion)
+      circuns = parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion;
+    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroSeccion)
+      seccion = parcela.rows[0].catastro.nomenclaturaCatastroSeccion;
+    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroParcela)
+      parc = parcela.rows[0].catastro.nomenclaturaCatastroParcela;
+    if(parcela.rows[0].partido)
+      partido = parcela.rows[0].partido;
+
+   var titulo = 'Circunscripción: ' + circuns +
+                ', Sección: ' + seccion +
+                ', Parcela: ' +  parc +
+                '. ' + partido;
+
 		return (
 			<div>
-        <CommonHeader />
+        <CommonHeader titulo={titulo}/>
         <br />
         <div className="row">
             <div className='col-lg-1' />
