@@ -39,7 +39,13 @@ class Ficha extends Component{
   }
 
 	onSubmit(values){
-	  const {id} = this.props.match.params;
+	  const { id } = this.props.match.params;
+    const { parcela } = this.props;
+
+    if(parcela.rows[0].catastro)
+      var catastro_id = id;
+    else
+      var catastro_id = undefined;
 
     var submitJson =  {
                       "id": id,
@@ -48,7 +54,7 @@ class Ficha extends Component{
                       "barrio": values.barrio,
                       "domicilio": values.domicilio,
                       "catastro": {
-                        "id": id,
+                        "id": catastro_id,
                         "partidaMunicipal": values.partidaMunicipal,
                         "codigoPagoElectronico": values.codigoPagoElectronico,
                         "nomenclaturaCatastroCircunscripcion": values.nomenclaturaCatastroCircunscripcion,
@@ -160,7 +166,7 @@ Ficha = reduxForm(
 
 
 function mapStateToProps(state) {
-
+  console.log('mapStateToProps',state)
   if (!state.parcelas.parcela){
     return {
       parcelaFetching: state.parcelas.parcelaFetching,
@@ -170,55 +176,31 @@ function mapStateToProps(state) {
     }
   }
   //Titulo
-  var nomTitCin = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+  var nomTitCin,nomTitSec,nomTitChacra,nomTitQuinta,nomTitFraccion,
+      nomTitManzana,nomTitParcela = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro){
     nomTitCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloCircunscripcion;
-  var nomTitSec = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitSec = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloSeccion;
-  var nomTitChacra = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitChacra = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloChacra;
-  var nomTitQuinta = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitQuinta = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloQuinta;
-  var nomTitFraccion = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitFraccion = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloFraccion;
-  var nomTitManzana = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitManzana = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloManzana;
-  var nomTitParcela = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomTitParcela = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloParcela;
+  }
   //Catastro
-  var nomCatCin = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
+  var nomCatCin,nomCatSec,nomCatChacra,nomCatQuinta,nomCatFraccion,
+      nomCatManzana,nomCatParcela,partidaMunicipal,codigoPagoElectronico = null;
+  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro){
     nomCatCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion;
-  var nomCatSec = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatSec = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroSeccion;
-  var nomCatChacra = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatChacra = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroChacra;
-  var nomCatQuinta = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatQuinta = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroQuinta;
-  var nomCatFraccion = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatFraccion = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroFraccion;
-  var nomCatManzana = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatManzana = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroManzana;
-  var nomCatParcela = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     nomCatParcela = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroParcela;
-  var partidaMunicipal = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     partidaMunicipal = state.parcelas.parcela.rows[0].catastro.partidaMunicipal;
-  var codigoPagoElectronico = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro)
     codigoPagoElectronico = state.parcelas.parcela.rows[0].catastro.codigoPagoElectronico;
+  }
 
   return {
     parcelaFetching: state.parcelas.parcelaFetching,
