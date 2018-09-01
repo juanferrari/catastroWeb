@@ -18,23 +18,31 @@ class Main extends React.Component {
 
     }
 
+    componentDidMount(){
+        $("#root").css("background-color", "yellow");
+    }
+
     componentWillMount(){
 
     }
 
     render() {
 
-        let wrapperClass = "gray-bg wrapperClass"; 
+        let wrapperClass = "white-bg wrapperClass"; 
 
         return (
             <div>
               <div id="wrapper">
                   <Progress />
-                  <Navigation location={this.props.location}/>
-                  <div id="page-wrapper" className={wrapperClass}>
+                  
+                  <div >
                       <TopHeader />
-                      <AppRoute />
-                      <Footer />
+                      <div className='row'>
+                        <AppRoute />
+                      </div>
+                      <div className='row'>
+                        <div>{/*<Footer />*/}</div>
+                      </div>
                   </div>
               </div>
             </div>

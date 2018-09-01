@@ -27,7 +27,7 @@ class DatosCatastrales extends Component{
 	      <div className={className}>
 	        <label>{field.label}</label>
 	        <input
-	          className="form-control"
+	          className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched"
 	          type="text"
 	          {...field.input}
 	        />

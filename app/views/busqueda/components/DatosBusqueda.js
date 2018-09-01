@@ -28,7 +28,7 @@ class DatosBusqueda extends Component{
     }
     this.setState({collapseButton: <button 
                           type="button" 
-                          className="btn btn-default" 
+                          className="btn btn-primary btn-sm" 
                           data-toggle="collapse" 
                           data-target="#demo"
                           onClick={()=>this.collapse()}
@@ -53,7 +53,7 @@ class DatosBusqueda extends Component{
     }
     this.setState({collapseButton: <button 
                           type="button" 
-                          className="btn btn-default" 
+                          className="btn btn-primary btn-sm" 
                           data-toggle="collapse" 
                           data-target="#demo"
                           onClick={()=>this.collapse()}
@@ -71,7 +71,7 @@ class DatosBusqueda extends Component{
 	      <div className={className}>
 	        <label>{field.label}</label>
 	        <input
-	          className="form-control"
+	          className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched"
 	          type="text"
 	          {...field.input}
 	        />
@@ -109,23 +109,29 @@ class DatosBusqueda extends Component{
 	render(){
 
     var buttonClassName;
+    var titleClassName;
     if(this.props.collapsed == 'false'){
       buttonClassName = 'col-md-12 collapse in';
     }else{
       buttonClassName = 'col-md-12 collapse';
     }
+    if(this.props.titleCentered == 'true'){
+      titleClassName = 'col-lg-2 col-md-2 col-lg-offset-5 col-md-offset-5';
+    }else{
+      titleClassName = 'col-lg-2 col-md-2';
+    }
+
 
 		return (
 		    <div className="col-md-12 ">
-          
           <div className="ibox float-e-margins">
             <div className="ibox-content">
             	<div className="row">
-              	<div className='col-lg-2 col-md-2'>
-                	<h3 style={{'color':'#149bd3','fontWeight':'bold'}}>Filtros de búsqueda</h3>
+              	<div className={titleClassName}>
+                	<h5 style={{'color':'#149bd3','fontWeight':'bold'}}>Filtros de búsqueda</h5>
                 	<hr style={{'width':'100%','color':'#149bd3','borderColor':'#149bd3','borderWidth':'medium','margin':'10px 0','height':'2px'}} />
               	</div>
-                <div className='col-lg-2 col-md-2'>
+                <div className='col-lg-1 col-md-1'>
                   {this.state.collapseButton}
                 </div>
               	<div id="demo" className={buttonClassName}>
@@ -165,7 +171,7 @@ class DatosBusqueda extends Component{
                   </div>
                   <div className="col-lg-2">
                   	<Field
-                        label="DNI-CUIT-CUIL Contribuyente"
+                        label="DNI-CUIT-CUIL Contrib."
                         name="dni_cuit_cuil"
                         component={this.renderField}
                     />
@@ -213,9 +219,9 @@ class DatosBusqueda extends Component{
                   </div>
                   <div className='col-lg-12 col-md-12 text-center'>
                     <div role="toolbar" className="btn-group">
-                      <button type="submit" className="btn btn-default">Buscar  <i className="fa fa-search"></i></button>
+                      <button type="submit" className="btn btn-primary btn-sm">Buscar  <i className="fa fa-search"></i></button>
                       <button 
-                        className="btn btn-default"
+                        className="btn btn-primary btn-sm"
                         onClick={()=>this.props.destroy('BusquedaForm')}
                         >
                           Limpiar  <i className="fa fa-eraser"></i>

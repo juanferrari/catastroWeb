@@ -5,7 +5,7 @@ class CommonHeader extends Component{
 		return(
       <div className="col-lg-12">
   			<div className="row wrapper border-bottom white-bg page-heading text-center">
-          <div className="col-lg-10">
+          <div className="col-lg-12">
             <h2><strong>{this.props.titulo}</strong></h2>
             <ol className="breadcrumb">
               <li>

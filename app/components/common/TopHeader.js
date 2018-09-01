@@ -22,7 +22,7 @@ class TopHeader extends React.Component {
             <div className="row border-bottom hidden-print">
                 <nav className="navbar navbar-static-top" role="navigation" style={{marginBottom: 0}}>
                     <div className="navbar-header">
-                        <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " onClick={this.toggleNavigation} href="#"><i className="fa fa-bars"></i> </a>
+                        <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="http://186.33.216.232"><i className="fa fa-bars"></i> </a>
                     </div>
                     <div className="hidden-lg hidden-md hidden-sm text-center"  >
                             <div>

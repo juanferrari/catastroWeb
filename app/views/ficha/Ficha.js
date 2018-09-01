@@ -122,52 +122,54 @@ class Ficha extends Component{
 			<div>
         <CommonHeader titulo={titulo}/>
         <br />
-        <div className="row">
-            <div className='col-lg-1' />
-            <div className='col-lg-10' >
-             {(actionParcela!=null)?
-              (<div className="col-md-12">
-                  <div className={actionParcela.action_className}>
-                    <strong>{actionParcela.message}</strong>
-                  </div>
-              </div>
-              ):
-              (<div className='hidden'></div>)
-              }
-            </div>
-        </div>
-        <div className='row'>
-          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-            <div className='row'>
+        <div className="row wrapper border-bottom white-bg page-heading text-center">
+          <div className="row">
               <div className='col-lg-1' />
-              <div className='col-lg-5' >
-  				      <Ubicacion />
-                <DatosCatastrales />
-                <Propietarios />
-                <Contribuyente />
-                <ExpedienteMensura />
-                <ExpedienteObra />
-                <RegistroPropiedad />
-              </div>
-              <div className='col-lg-5' >
-                <PlanchetaCatastral />
-                <div className='row'>
-                  <div className='col-lg-6'>
-                    <IdentificacionProvincial />
-                  </div>
-                  <div className='col-lg-6'>
-                    <PlanchetaCatastralMapa />
-                  </div>
+              <div className='col-lg-10' >
+               {(actionParcela!=null)?
+                (<div className="col-md-12">
+                    <div className={actionParcela.action_className}>
+                      <strong>{actionParcela.message}</strong>
+                    </div>
                 </div>
-                <MedidasSuperficies />
-                <Indicadores />
-                <Valuacion />
+                ):
+                (<div className='hidden'></div>)
+                }
               </div>
-            </div>
-            <div className='row text-center'>
-              { button_confirm }
-            </div>
-          </form> 
+          </div>
+          <div className='row'>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <div className='row'>
+                <div className='col-lg-1' />
+                <div className='col-lg-5' >
+    				      <Ubicacion />
+                  <DatosCatastrales />
+                  <Propietarios />
+                  <Contribuyente />
+                  <ExpedienteMensura />
+                  <ExpedienteObra />
+                  <RegistroPropiedad />
+                </div>
+                <div className='col-lg-5' >
+                  <PlanchetaCatastral />
+                  <div className='row'>
+                    <div className='col-lg-6'>
+                      <IdentificacionProvincial />
+                    </div>
+                    <div className='col-lg-6'>
+                      <PlanchetaCatastralMapa />
+                    </div>
+                  </div>
+                  <MedidasSuperficies />
+                  <Indicadores />
+                  <Valuacion />
+                </div>
+              </div>
+              <div className='row text-center'>
+                { button_confirm }
+              </div>
+            </form> 
+          </div>
         </div>
         <br/>
         <br/>

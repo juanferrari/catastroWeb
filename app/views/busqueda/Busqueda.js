@@ -52,7 +52,6 @@ class Busqueda extends Component{
 
 		return (
 			<div className="row">
-        <CommonHeader titulo={'Buscar parcelas'}/>
         <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				  <DatosBusqueda collapsed='false'/>

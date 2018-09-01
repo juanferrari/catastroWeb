@@ -11,11 +11,11 @@ class Blank extends React.Component {
     }
 
     componentDidMount(){
-        $('body').addClass('gray-bg');
+        $('body').addClass('white-bg');
     }
 
     componentWillUnmount(){
-        $('body').removeClass('gray-bg');
+        $('body').removeClass('white-bg');
     }
 }
 

@@ -19,6 +19,8 @@ import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'node_modules/font-awesome/css/font-awesome.css';
 import 'node_modules/animate.css/animate.min.css';
 import './../public/styles/style.css';
+import 'node_modules/argob-poncho/dist/css/roboto-fontface.css';
+import 'node_modules/argob-poncho/dist/css/poncho.css';
 
 const loggerMiddleware = createLogger();
 

@@ -81,18 +81,25 @@ class MainMap extends Component {
     return (
       <div>
       	<ModalParcelas />
-        <div className='row'>
-          <Map id='map' center={position} zoom={this.state.zoom}>
-            <TileLayer
-              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-            />
-            <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
-          </Map>
+        <div className="row wrapper border-bottom white-bg page-heading text-center">
+          <div className='row'>
+            <div className='col-lg-12'>
+              <DatosBusqueda collapsed='true' titleCentered='true'/>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-lg-10 col-lg-offset-1'>
+              <Map id='map' center={position} zoom={this.state.zoom}>
+                <TileLayer
+                  url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                />
+                <GeoJSON data={this.state.geojson} style={this.getStyle} onEachFeature={this.onEachFeature} />
+              </Map>
+            </div>
+          </div>
         </div>
         <br />
-        <div className='row'>
-          <DatosBusqueda collapsed='true' scrollBottom='true'/>
-        </div>
+        
       </div>
     )
 

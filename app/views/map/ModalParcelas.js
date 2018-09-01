@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { closeModal } from 'actions/actions_map';
 import ReactLoading from 'react-loading'
+import { BrowserRouter, Route, Switch, Redirect, Link,Router, hashHistory ,withRouter } from 'react-router-dom';
 
 class ModalParcelas extends Component {
 
@@ -38,7 +39,8 @@ class ModalParcelas extends Component {
 		          <br/>
 	            </Modal.Body>
 	            <Modal.Footer>
-	              <Button onClick={()=>this.props.closeModal()}>Cancelar</Button>
+	              <button className='btn btn-primary btn-sm 'onClick={()=>this.props.history.push('/ficha/'+parcelaInfo.properties.id)}>Ver parcela</button>
+	              <button className='btn btn-primary btn-sm 'onClick={()=>this.props.closeModal()}>Cancelar</button>
 	            </Modal.Footer>
             </Modal>
 		);
@@ -53,4 +55,4 @@ function mapStateToProps(state) {
   }
 };
 
-export default connect(mapStateToProps, { closeModal })(ModalParcelas);
+export default withRouter(connect(mapStateToProps, { closeModal })(ModalParcelas));

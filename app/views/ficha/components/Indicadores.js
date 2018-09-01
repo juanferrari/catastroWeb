@@ -28,7 +28,7 @@ class Indicadores extends Component{
 	        <label>{field.label}</label>
 	        <input
             disabled
-	          className="form-control"
+	          className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched"
 	          type="text"
 	          {...field.input}
 	        />

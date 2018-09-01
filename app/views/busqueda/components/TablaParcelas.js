@@ -100,12 +100,12 @@ class TablaParcelas extends Component{
         ]
 
 		return (
-      <div className="col-md-12 ">
+      <div className="col-md-12">
           <div className="ibox float-e-margins">
               <div className="ibox-content">
                 	<div className="row">
-                  	<div className='col-lg-2 col-md-2'>
-                    	<h3 style={{'color':'#149bd3','fontWeight':'bold'}}>Resultados de búsqueda</h3>
+                  	<div className='col-lg-4 col-md-4'>
+                    	<h5 style={{'color':'#149bd3','fontWeight':'bold'}}>Resultados de la búsqueda</h5>
                     	<hr style={{'width':'100%','color':'#149bd3','borderColor':'#149bd3','borderWidth':'medium','margin':'10px 0','height':'2px'}} />
                   	</div>
                   	<div className="col-md-12">
