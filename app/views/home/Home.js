@@ -12,8 +12,8 @@ class Home extends Component{
               <img style={{maxHeight:'25vh','margin':'auto','left':'0','right':'0'}}src="https://ppo.mininterior.gob.ar/images/popover/iProyectos.png" alt="" className="img-responsive logo-home" />
             </div>
             <br/>
-            <h2 className="display-4">BANCO DE PROYECTOS</h2>
-            <p className="lead">El Banco de Proyectos tiene como objetivo lograr una gestión eficiente, fluida y ordenada de los proyectos desde su carga en el sistema hasta el inicio de su ejecución.</p>
+            <h2 className="display-4">SISTEMA DE CATASTRO</h2>
+            <p className="lead">{/*Texto explicativo*/}</p>
           </div>
         </div>
         <div className='btn-group' style={{'padding-top': '5vh'}}>
