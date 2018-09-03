@@ -43,7 +43,7 @@ class TopHeader extends React.Component {
 
                         <ul className="nav navbar-top-links navbar-right">
                              
-                            <li><div>Agregar algo aca</div></li>
+                            <li><div>{/*Agregar algo aca*/}</div></li>
                             <li>
                                 <a target="_blank" href="">
                                     <i className="fa fa-question-circle" ></i> 
