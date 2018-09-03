@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logoImg from '../../../public/img/logo-landing.png'
 
 class Home extends Component{
 
@@ -9,7 +10,7 @@ class Home extends Component{
           <div className="container ">
             <br/>
             <div className='text-center'>
-              <img style={{maxHeight:'25vh','margin':'auto','left':'0','right':'0'}}src='https://s3-us-west-2.amazonaws.com/uploadpictest1/unnamed.png' alt="" className="img-responsive logo-home" />
+              <img style={{maxHeight:'25vh','margin':'auto','left':'0','right':'0'}}src={logoImg} alt="" className="img-responsive logo-home" />
             </div>
             <br/>
             <h2 className="display-4">SISTEMA DE CATASTRO</h2>
