@@ -25,17 +25,17 @@ class Busqueda extends Component{
     var data = {};
 
     if(!_.isEmpty(values)){
-      var filteredQuery = '&searchCatastro='
+      var filteredQuery = '&searchParcela='
 
       //http://186.33.216.232/catastro-service/v1/parcelas?searchCatastro=nomenclaturaCatastroQuinta:442&size=10&page=2
       if(values.partida_arba)
         filteredQuery =  filteredQuery + ',id:' + values.partida_arba;
 
       if(values.circunscripcion)
-        filteredQuery =  filteredQuery + ',nomenclaturaCatastroCircunscripcion:' + values.circunscripcion;
+        filteredQuery =  filteredQuery + ',circunscripcion:' + values.circunscripcion;
 
       if(values.seccion)
-        filteredQuery =  filteredQuery + ',nomenclaturaCatastroSeccion:' + values.seccion;
+        filteredQuery =  filteredQuery + ',seccion:' + values.seccion;
 
       this.props.updateFilter(filteredQuery);
       this.props.getParcelas(this.props.tableInfo,filteredQuery);
@@ -51,7 +51,7 @@ class Busqueda extends Component{
 		const { handleSubmit } = this.props;
 
 		return (
-			<div className="row">
+			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
         <br />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				  <DatosBusqueda collapsed='false'/>

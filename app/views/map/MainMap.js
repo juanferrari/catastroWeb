@@ -79,7 +79,7 @@ class MainMap extends Component {
     }
 
     return (
-      <div>
+      <div style={{fontSize:'90%'}}>
       	<ModalParcelas />
         <div className="row wrapper border-bottom white-bg page-heading text-center">
           <div className='row'>

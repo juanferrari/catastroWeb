@@ -77,7 +77,7 @@ function getParcelaFail() {
 
 export function getParcela(parcela_id){
 
-  var service_url = ROOT_URL + 'parcelas?searchParcela=id:' + parcela_id;
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id;
   
   return function(dispatch) {
         dispatch(getParcelaRequest())

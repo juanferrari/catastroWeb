@@ -137,8 +137,8 @@ class DatosBusqueda extends Component{
               	<div id="demo" className={buttonClassName}>
                   <div className="col-lg-2">
                     <Field
-                      label="Partida ARBA"
-                      name="partida_arba"
+                      label="Partida Provincial"
+                      name="partida_provincial"
                       component={this.renderField}
                     />
                     <Field
@@ -171,7 +171,7 @@ class DatosBusqueda extends Component{
                   </div>
                   <div className="col-lg-2">
                   	<Field
-                        label="DNI-CUIT-CUIL Contrib."
+                        label="DNI - CUIT - CUIL"
                         name="dni_cuit_cuil"
                         component={this.renderField}
                     />
@@ -195,8 +195,8 @@ class DatosBusqueda extends Component{
                   </div>
                   <div className="col-lg-2">
                   	<Field
-                        label="Calle"
-                        name="calle"
+                        label="Domicilio"
+                        name="domicilio"
                         component={this.renderField}
                       />
                     <Field
@@ -207,8 +207,8 @@ class DatosBusqueda extends Component{
                   </div>
                   <div className="col-lg-2">
                   	<Field
-                      label="Altura"
-                      name="altura"
+                      label="Localidad"
+                      name="localidad"
                       component={this.renderField}
                     />
                     <Field

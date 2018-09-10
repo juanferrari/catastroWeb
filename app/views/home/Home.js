@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import logoImg from '../../../public/img/logo-landing.png'
 
 class Home extends Component{
-
 	render(){
 		return(
       <div className='text-center'>
-        <div className="jumbotron jumbotron-fluid" style={{maxHeight:'75vh',"backgroundImage": "url('https://ppo.mininterior.gob.ar/images/GP/home.jpg')"}}>
+        <div className="jumbotron jumbotron-fluid" style={{maxHeight:'75vh',"backgroundImage": "url('https://www.argentina.gob.ar/sites/default/files/styles/jumbotron/public/header_ministerio_.jpg')"}}>
           <div className="container ">
             <br/>
             <div className='text-center'>

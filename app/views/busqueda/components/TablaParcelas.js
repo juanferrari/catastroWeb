@@ -58,17 +58,16 @@ class TablaParcelas extends Component{
              // filterMethod: (filter, row) => (console.log("valor row: "+row),row[filter.id].includes(filter.value))
           	},
             {
-                Header: 'Partida Catastro ARBA',
+                Header: 'Partida Provincial',
                 maxWidth: 160,
-                Cell: (row) => ( <span >{row.original.catastro && row.original.catastro.id}</span>),
+                Cell: (row) => ( <span >{row.original.id}</span>),
             },
             {
                 Header: 'Nomenclatura',
-                Cell: (row) => (<span >{row.original.catastro && 
-                                        'Circunscripción: ' + row.original.catastro.nomenclaturaCatastroCircunscripcion +
-                                        ' Sección: ' + row.original.catastro.nomenclaturaCatastroSeccion +
-                                        ' Manzana: ' +  row.original.catastro.nomenclaturaCatastroManzana +
-                                        ' Parcela: ' +  row.original.catastro.nomenclaturaCatastroParcela
+                Cell: (row) => (<span >{'Circunscripción: ' + ((row.original.circunscripcion)?(row.original.circunscripcion):('-')) +
+                                        ' Sección: ' + ((row.original.seccion)?(row.original.seccion):('-')) +
+                                        ' Manzana: ' + ((row.original.manzana)?(row.original.manzana):('-')) +
+                                        ' Parcela: ' + ((row.original.parcelaNom)?(row.original.parcelaNom):('-')) 
                                         }
                                 </span>),
             },

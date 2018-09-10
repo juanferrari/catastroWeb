@@ -41,7 +41,7 @@ class DatosCatastrales extends Component{
 	render(){
 
 		return (
-		    <div className="col-lg-12" id='test'>
+		    <div className="col-lg-12" id='test' style={{fontSize:'90%'}}>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               	<div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
                 	Datos Catastrales
@@ -65,61 +65,61 @@ class DatosCatastrales extends Component{
                   </div>
                   <div className='row'>
                     <div className="col-lg-6">
-                      <h3><strong> Nomenclatura según Catastro: </strong></h3>
+                      <h4><strong>Nomenclatura según Catastro:</strong></h4>
                     </div>
                   </div>
                   <div className='row'>
                     <div className="col-lg-2">
                       <Field
                         label="Circ."
-                        name="nomenclaturaCatastroCircunscripcion"
+                        name="circunscripcion"
                         component={this.renderField}
                       />
                       <Field
                         label="Parcela"
-                        name="nomenclaturaCatastroParcela"
+                        name="parcela"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-2">
                       <Field
                         label="Sec."
-                        name="nomenclaturaCatastroSeccion"
+                        name="seccion"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-2">
                       <Field
                         label="Chacra"
-                        name="nomenclaturaCatastroChacra"
+                        name="chacra"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-2">
                       <Field
                         label="Quinta"
-                        name="nomenclaturaCatastroQuinta"
+                        name="quinta"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-2">
                       <Field
                         label="Fracción"
-                        name="nomenclaturaCatastroFraccion"
+                        name="fraccion"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-2">
                       <Field
                         label="Manzana"
-                        name="nomenclaturaCatastroManzana"
+                        name="manzana"
                         component={this.renderField}
                       />
                     </div>
                   </div>
                   <div className='row'>
                     <div className="col-lg-6">
-                      <h3><strong> Nomenclatura según Título: </strong></h3>
+                      <h4><strong>Nomenclatura según Título:</strong></h4>
                     </div>
                   </div>
                   <div className='row'>

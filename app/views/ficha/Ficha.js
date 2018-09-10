@@ -41,7 +41,7 @@ class Ficha extends Component{
 	onSubmit(values){
 	  const { id } = this.props.match.params;
     const { parcela } = this.props;
-
+    /*
     if(parcela.rows[0].catastro)
       var catastro_id = id;
     else
@@ -75,7 +75,7 @@ class Ficha extends Component{
                       "propietarios": []
                     }
 
-    this.props.editParcela(submitJson);
+    this.props.editParcela(submitJson);*/
     $('html,body').scrollTop(0);
 
 	}
@@ -104,14 +104,14 @@ class Ficha extends Component{
     var parc = '-';
     var partido = '';
 
-    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion)
-      circuns = parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion;
-    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroSeccion)
-      seccion = parcela.rows[0].catastro.nomenclaturaCatastroSeccion;
-    if(parcela.rows[0].catastro && parcela.rows[0].catastro.nomenclaturaCatastroParcela)
-      parc = parcela.rows[0].catastro.nomenclaturaCatastroParcela;
-    if(parcela.rows[0].partido)
-      partido = parcela.rows[0].partido;
+    if(parcela.circunscripcion)
+      circuns = parcela.circunscripcion
+    if(parcela.seccion)
+      seccion = parcela.seccion
+    if(parcela.parcelaNom)
+      parc = parcela.parcelaNom;
+    if(parcela.partido)
+      partido = parcela.partido;
 
    var titulo = 'Circunscripción: ' + circuns +
                 ', Sección: ' + seccion +
@@ -119,7 +119,7 @@ class Ficha extends Component{
                 '. ' + partido;
 
 		return (
-			<div>
+			<div style={{fontSize:'90%'}}>
         <CommonHeader titulo={titulo}/>
         <br />
         <div className="row wrapper border-bottom white-bg page-heading text-center">
@@ -199,28 +199,14 @@ function mapStateToProps(state) {
   //Titulo
   var nomTitCin,nomTitSec,nomTitChacra,nomTitQuinta,nomTitFraccion,
       nomTitManzana,nomTitParcela = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro){
-    nomTitCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloCircunscripcion;
-    nomTitSec = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloSeccion;
-    nomTitChacra = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloChacra;
-    nomTitQuinta = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloQuinta;
-    nomTitFraccion = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloFraccion;
-    nomTitManzana = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloManzana;
-    nomTitParcela = state.parcelas.parcela.rows[0].catastro.nomenclaturaTituloParcela;
-  }
-  //Catastro
-  var nomCatCin,nomCatSec,nomCatChacra,nomCatQuinta,nomCatFraccion,
-      nomCatManzana,nomCatParcela,partidaMunicipal,codigoPagoElectronico = null;
-  if(state.parcelas.parcela.rows[0] && state.parcelas.parcela.rows[0].catastro){
-    nomCatCin = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroCircunscripcion;
-    nomCatSec = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroSeccion;
-    nomCatChacra = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroChacra;
-    nomCatQuinta = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroQuinta;
-    nomCatFraccion = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroFraccion;
-    nomCatManzana = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroManzana;
-    nomCatParcela = state.parcelas.parcela.rows[0].catastro.nomenclaturaCatastroParcela;
-    partidaMunicipal = state.parcelas.parcela.rows[0].catastro.partidaMunicipal;
-    codigoPagoElectronico = state.parcelas.parcela.rows[0].catastro.codigoPagoElectronico;
+  if(state.parcelas.parcela.nomenclaturaTitulo){
+    nomTitCin = state.parcelas.parcela.nomenclaturaTitulo.circunscripcion;
+    nomTitSec = state.parcelas.parcela.nomenclaturaTitulo.seccion;
+    nomTitChacra = state.parcelas.parcela.nomenclaturaTitulo.chacra;
+    nomTitQuinta = state.parcelas.parcela.nomenclaturaTitulo.quinta;
+    nomTitFraccion = state.parcelas.parcela.nomenclaturaTitulo.fraccion;
+    nomTitManzana = state.parcelas.parcela.nomenclaturaTitulo.manzana;
+    nomTitParcela = state.parcelas.parcela.nomenclaturaTitulo.parcelaNom;
   }
 
   return {
@@ -229,26 +215,21 @@ function mapStateToProps(state) {
     parcelaEditing: state.parcelas.parcelaEditing,
     actionParcela: state.parcelas.actionParcela,
     initialValues:{
-      partido: state.parcelas.parcela.rows[0].partido,
-      localidad: state.parcelas.parcela.rows[0].localidad,
-      barrio: state.parcelas.parcela.rows[0].barrio,
-      domicilio: state.parcelas.parcela.rows[0].domicilio,
-      nomenclaturaTituloCircunscripcion: nomCatCin,
+      nomenclaturaTituloCircunscripcion: nomTitCin,
       nomenclaturaTituloSeccion: nomTitSec,
       nomenclaturaTituloChacra: nomTitChacra,
       nomenclaturaTituloQuinta: nomTitQuinta,
       nomenclaturaTituloFraccion: nomTitFraccion,
       nomenclaturaTituloManzana: nomTitManzana,
       nomenclaturaTituloParcela: nomTitParcela,
-      nomenclaturaCatastroCircunscripcion: nomCatCin,
-      nomenclaturaCatastroSeccion: nomCatSec,
-      nomenclaturaCatastroChacra: nomCatChacra,
-      nomenclaturaCatastroQuinta: nomCatQuinta,
-      nomenclaturaCatastroFraccion: nomCatFraccion,
-      nomenclaturaCatastroManzana: nomCatManzana,
-      nomenclaturaCatastroParcela: nomCatParcela,
-      partidaMunicipal:partidaMunicipal,
-      codigoPagoElectronico: codigoPagoElectronico
+      circunscripcion: state.parcelas.parcela.circunscripcion,
+      seccion: state.parcelas.parcela.seccion,
+      chacra: state.parcelas.parcela.chacra,
+      quinta: state.parcelas.parcela.quinta,
+      fraccion: state.parcelas.parcela.fraccion,
+      manzana: state.parcelas.parcela.manzana,
+      parcela: state.parcelas.parcela.parcelaNom,
+      partidaProvincial: state.parcelas.parcela.partidaProvincial,
     }
   }
 
