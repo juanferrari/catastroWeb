@@ -1,0 +1,26 @@
+p.btn-buscarProyectos {
+    background-color: #0094d4;
+    padding: 6% 0 6% 0;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 15%;
+    font-size: 16px;
+}
+
+p.btn-buscarProyectos:hover {
+    background-color: #26c0e1;
+}
+
+p.btn-tramite {
+    background-color: #0094d4;
+    padding: 1% 0 1% 0;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 2%;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+p.btn-tramite:hover {
+    background-color: #26c0e1;
+}
