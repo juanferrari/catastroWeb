@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect, Link,Router, hashHistory ,withRouter } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
@@ -77,7 +78,7 @@ class Catastro extends Component{
                         </a>
                       </div>
                       <div className="col-xs-12">
-                        <a onClick={()=>console.log('catastro')}>
+                        <a onClick={()=>this.props.history.push(`/asignacionCalle`)}>
                           <p className="text-center btn-tramite">
                             ASIGNACIÓN DE CALLE
                           </p>
@@ -100,4 +101,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(Catastro);
+export default withRouter(connect(mapStateToProps, null)(Catastro));

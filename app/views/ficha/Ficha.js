@@ -85,12 +85,6 @@ class Ficha extends Component{
 		const { handleSubmit } = this.props;
     const { parcela, parcelaFetching, parcelaEditing, actionParcela } = this.props;
 
-    if (parcelaEditing){
-      var button_confirm=<button type="submit" className="btn btn-primary" disabled>Confirmar <i className="fa fa-spinner fa-spin"></i></button>
-    }else{
-      var button_confirm=<button type="submit" className="btn btn-primary">Confirmar</button>
-    }
-
     if(!parcela || parcelaFetching){
       return(
         <div className="centeredSpinner" >
@@ -164,9 +158,6 @@ class Ficha extends Component{
                   <Indicadores />
                   <Valuacion />
                 </div>
-              </div>
-              <div className='row text-center'>
-                { button_confirm }
               </div>
             </form> 
           </div>

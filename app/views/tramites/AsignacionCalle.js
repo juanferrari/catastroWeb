@@ -6,9 +6,8 @@ import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
-import Catastro from './components/Catastro';
-import Valuacion from './components/Valuacion';
-import Otros from './components/Otros';
+import DatosCatastrales from './components/DatosCatastrales';
+import Ubicacion from 'views/ficha/components/Ubicacion'
 
 class Busqueda extends Component{
 
@@ -25,17 +24,15 @@ class Busqueda extends Component{
 
   	return (
         <div style={{fontSize:'90%'}}>
-          <CommonHeader titulo="Acceso a trámites"/>
+          <CommonHeader titulo="Asignación de calle"/>
           <div className="row wrapper border-bottom white-bg page-heading text-center">
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
-              
               <br />
               <div className='col-md-6' style={{marginTop:'2%'}}>
-                <Catastro />
+                <DatosCatastrales />
               </div>
               <div className='col-md-6' style={{marginTop:'2%'}}>
-                <Valuacion />
-                <Otros />
+                <Ubicacion />
               </div>   
       			</div>
           </div>

@@ -27,6 +27,7 @@ class Ubicacion extends Component{
 	      <div className={className}>
 	        <label>{field.label}</label>
 	        <input
+            disabled
 	          className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched"
 	          type="text"
 	          {...field.input}
@@ -73,7 +74,7 @@ class Ubicacion extends Component{
                   <div className='row'>
                     <div className="col-lg-12">
                       <Field
-                        label="Domicilio"
+                        label="Calle"
                         name="domicilio"
                         component={this.renderField}
                       />

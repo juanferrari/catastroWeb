@@ -65,11 +65,6 @@ class DatosCatastrales extends Component{
                     </div>
                   </div>
                   <div className='row'>
-                    <div className="col-lg-6">
-                      <h4><strong>Nomenclatura según Catastro:</strong></h4>
-                    </div>
-                  </div>
-                  <div className='row'>
                     <div className="col-lg-2">
                       <Field
                         label="Circ."
@@ -114,60 +109,6 @@ class DatosCatastrales extends Component{
                       <Field
                         label="Manzana"
                         name="manzana"
-                        component={this.renderField}
-                      />
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className="col-lg-6">
-                      <h4><strong>Nomenclatura según Título:</strong></h4>
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Circ."
-                        name="nomenclaturaTituloCircunscripcion"
-                        component={this.renderField}
-                      />
-                      <Field
-                        label="Parcela"
-                        name="nomenclaturaTituloParcela"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Sec."
-                        name="nomenclaturaTituloSeccion"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Chacra"
-                        name="nomenclaturaTituloChacra"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Quinta"
-                        name="nomenclaturaTituloQuinta"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Fracción"
-                        name="nomenclaturaTituloFraccion"
-                        component={this.renderField}
-                      />
-                    </div>
-                    <div className="col-lg-2">
-                      <Field
-                        label="Manzana"
-                        name="nomenclaturaTituloManzana"
                         component={this.renderField}
                       />
                     </div>
