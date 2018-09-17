@@ -7,7 +7,7 @@ import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
 import DatosCatastrales from './components/DatosCatastrales';
-import Ubicacion from 'views/ficha/components/Ubicacion'
+import UbicacionCalle from './components/UbicacionCalle';
 
 class Busqueda extends Component{
 
@@ -28,11 +28,8 @@ class Busqueda extends Component{
           <div className="row wrapper border-bottom white-bg page-heading text-center">
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />
-              <div className='col-md-6' style={{marginTop:'2%'}}>
-                <DatosCatastrales />
-              </div>
-              <div className='col-md-6' style={{marginTop:'2%'}}>
-                <Ubicacion />
+              <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
+                <UbicacionCalle />
               </div>   
       			</div>
           </div>

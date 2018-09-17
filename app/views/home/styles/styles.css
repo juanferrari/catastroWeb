@@ -24,3 +24,13 @@ p.btn-tramite {
 p.btn-tramite:hover {
     background-color: #26c0e1;
 }
+
+.list-item {
+    display: inline-block;
+}
+
+.delete-button{
+    float: right;
+    padding-left: 3px;
+    cursor: pointer;
+}

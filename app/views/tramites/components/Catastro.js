@@ -19,6 +19,8 @@ class Catastro extends Component{
 
 	render(){
 
+    const {id} = this.props.match.params;
+
 		return (
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
@@ -78,7 +80,7 @@ class Catastro extends Component{
                         </a>
                       </div>
                       <div className="col-xs-12">
-                        <a onClick={()=>this.props.history.push(`/asignacionCalle`)}>
+                        <a onClick={()=>this.props.history.push(`/asignacionCalle/${id}`)}>
                           <p className="text-center btn-tramite">
                             ASIGNACIÓN DE CALLE
                           </p>

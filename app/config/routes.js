@@ -11,8 +11,8 @@ const AppRoute =() => (
 
         <div>
           <Switch>
-          	<Route path="/asignacionCalle" component={AsignacionCalle}/>
-          	<Route path="/tramites" component={Tramites}/>
+          	<Route path="/asignacionCalle/:id" component={AsignacionCalle}/>
+          	<Route path="/tramites/:id" component={Tramites}/>
           	<Route path="/ficha/:id" component={Ficha}/>
           	<Route path="/busqueda" component={Busqueda}/>
             <Route path="/map" component={MainMap}/>
