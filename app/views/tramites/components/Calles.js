@@ -12,8 +12,8 @@ class Calles extends Component{
 	    super(props);
 	    this.state = {
         collapsed:false,
-        calles: [{value:1,label:'Sarmiento'},{value:2,label:'Avellaneda'},{value:3,label:'Mitre'},{value:4,label:'Rivadavia'}],
-        callesParcela:[{value:4,label:'Rivadavia'},{value:2,label:'Avellaneda'}],
+        calles: [],
+        callesParcela:[],
         calleSeleccionada: null
 	    }
 
@@ -24,10 +24,23 @@ class Calles extends Component{
   	}
 
 	componentWillMount(){
-    var calles = this.state.calles;
-    var callesParcela = this.state.callesParcela;
 
+    var callesRaw = this.props.calles;
+    var callesParcelaRaw = this.props.callesParcela;
+    var calles = [];
+    var callesParcela = [];
     var valuesCalles = [];
+
+    console.log('callesRaw',callesRaw);
+    console.log('callesParcelaRaw',callesParcelaRaw);
+
+    for(var calle of callesRaw){
+      calles.push({value:calle.id,label:calle.nombre})
+    }
+
+    for(var calle of callesParcelaRaw){
+      callesParcela.push({value:calle.id,label:calle.nombre})
+    }
 
     for(var calle of callesParcela){
       valuesCalles.push(calle.value);
@@ -35,7 +48,7 @@ class Calles extends Component{
 
     calles = calles.filter(calle => !valuesCalles.includes(calle.value));
 
-    this.setState({calles})
+    this.setState({calles,callesParcela})
 	}
 
 	renderField(field) {
@@ -132,6 +145,8 @@ class Calles extends Component{
                 value={calleSeleccionada}
                 onChange={this.handleChange}
                 placeholder='Agregar una calle'
+                filterProp="id"
+                matchProp="nombre"
               />
             </div>
             <div 
@@ -154,7 +169,8 @@ class Calles extends Component{
 */
 function mapStateToProps(state) {
 
-  return {}
+  return {
+  }
 
 };
 

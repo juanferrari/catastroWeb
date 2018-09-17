@@ -73,7 +73,7 @@ class Ubicacion extends Component{
                       />
                     </div>
                   </div>
-                  <Calles />
+                  <Calles calles={this.props.calles} callesParcela={this.props.callesParcela}/>
         		    </div>
 
 
