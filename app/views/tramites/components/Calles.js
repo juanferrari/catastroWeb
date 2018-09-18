@@ -31,9 +31,6 @@ class Calles extends Component{
     var callesParcela = [];
     var valuesCalles = [];
 
-    console.log('callesRaw',callesRaw);
-    console.log('callesParcelaRaw',callesParcelaRaw);
-
     for(var calle of callesRaw){
       calles.push({value:calle.id,label:calle.nombre})
     }
@@ -49,6 +46,7 @@ class Calles extends Component{
     calles = calles.filter(calle => !valuesCalles.includes(calle.value));
 
     this.setState({calles,callesParcela})
+    this.props.onChange(callesParcela);
 	}
 
 	renderField(field) {
@@ -73,16 +71,16 @@ class Calles extends Component{
 	}
 
   borrarCalle(value){
-    console.log('borrarCalle',value);
+
     var callesParcela = this.state.callesParcela;
     var calles = this.state.calles;
 
     var calleBorrar = callesParcela.filter(calle => calle.value == value)[0];
-    console.log('calleBorrar',calleBorrar)
+
     calles.push(calleBorrar);
     callesParcela = callesParcela.filter(calle=> calle.value != value);
     this.setState({calles,callesParcela});
-
+    this.props.onChange(callesParcela);
   }
 
   agregarCalle(){
@@ -98,16 +96,17 @@ class Calles extends Component{
       }
 
       calles = calles.filter(calle => !valuesCalles.includes(calle.value));
-      console.log('calles a elegir',calles)
+
 
       this.setState({callesParcela:callesActuales,calles:calles,calleSeleccionada:null})
+      this.props.onChange(callesActuales);
     }
   }
 
   handleChange(calleSeleccionada){
 
     this.setState({ calleSeleccionada });
-    console.log(`Option selected:`, calleSeleccionada);
+
   }
 
 	render(){
@@ -161,12 +160,6 @@ class Calles extends Component{
 	}
 }
 
-/*Calles = reduxForm(
-  {
-    enableReinitialize: true,
-    form: 'FichaForm'
-  })(Calles);
-*/
 function mapStateToProps(state) {
 
   return {

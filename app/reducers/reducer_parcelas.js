@@ -9,12 +9,21 @@ import {
     EDIT_PARCELA_REQUEST,
     EDIT_PARCELA_SUCCESS,
     EDIT_PARCELA_FAIL,
-    UPDATE_FILTER
+    UPDATE_FILTER,
+    EDIT_CALLES_REQUEST,
+    EDIT_CALLES_SUCCESS,
+    EDIT_CALLES_FAIL
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case EDIT_CALLES_REQUEST:
+            return { ...state, parcelaEditing:true};
+        case EDIT_CALLES_SUCCESS:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Asignación de calles realizada exitosamente.',action_className:'alert alert-success'}};
+        case EDIT_CALLES_FAIL:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Error al asignar las calles a la parcela.',action_className:'alert alert-danger'}};
         case UPDATE_FILTER:
             return { ...state, filter:action.filter};
         case EDIT_PARCELA_REQUEST:

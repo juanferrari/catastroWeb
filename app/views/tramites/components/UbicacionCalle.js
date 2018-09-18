@@ -73,10 +73,8 @@ class Ubicacion extends Component{
                       />
                     </div>
                   </div>
-                  <Calles calles={this.props.calles} callesParcela={this.props.callesParcela}/>
+                  <Calles calles={this.props.calles} callesParcela={this.props.callesParcela} onChange={this.props.onChange}/>
         		    </div>
-
-
       	  </div>
         </div>
 			)

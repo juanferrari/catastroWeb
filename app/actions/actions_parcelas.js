@@ -16,6 +16,52 @@ export const EDIT_PARCELA_FAIL = 'EDIT_PARCELA_FAIL';
 
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 
+export const EDIT_CALLES_REQUEST = 'EDIT_CALLES_REQUEST';
+export const EDIT_CALLES_SUCCESS = 'EDIT_CALLES_SUCCESS';
+export const EDIT_CALLES_FAIL = 'EDIT_CALLES_FAIL';
+
+function editCallesRequest() {
+  return {
+    type: EDIT_CALLES_REQUEST,
+  }
+}
+
+function editCallesSuccess(request,callback) {
+  callback();
+  return {
+    type: EDIT_CALLES_SUCCESS,
+    payload: request
+  }
+}
+
+function editCallesFail(callback) {
+  callback();
+  return {
+    type: EDIT_CALLES_FAIL
+  }
+}
+
+export function editCalles(submitJson,parcela_id,callback){
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/calles';
+  
+  return function(dispatch) {
+        dispatch(editCallesRequest())
+        const request = axios.put(service_url,submitJson,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(editCallesSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(editCallesFail(callback))
+              console.log("error",error)
+            })
+      }
+}
+
 function editParcelaRequest() {
   return {
     type: EDIT_PARCELA_REQUEST,
