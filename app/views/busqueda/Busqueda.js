@@ -49,15 +49,21 @@ class Busqueda extends Component{
 	render(){
 
 		const { handleSubmit } = this.props;
+    var breadcrumb = [
+                      {url:`/busqueda`,tag:'Búsqueda',active:true},
+                     ]
 
 		return (
-			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
+      <div>
+        <CommonHeader titulo={'Búsqueda'} breadcrumb={breadcrumb}/>
         <br />
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-				  <DatosBusqueda collapsed='false'/>
-        </form>
-        <TablaParcelas />    
-			</div>
+  			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+  				  <DatosBusqueda collapsed='false'/>
+          </form>
+          <TablaParcelas />    
+  			</div>
+      </div>
 			)
 	}
 }

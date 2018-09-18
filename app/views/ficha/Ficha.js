@@ -84,6 +84,12 @@ class Ficha extends Component{
 
 		const { handleSubmit } = this.props;
     const { parcela, parcelaFetching, parcelaEditing, actionParcela } = this.props;
+    const {id} = this.props.match.params;
+
+    var breadcrumb = [
+                      {url:`/busqueda`,tag:'Búsqueda',active:false},
+                      {url:`/ficha/${id}`,tag:'Ficha',active:true}
+                     ]
 
     if(!parcela || parcelaFetching){
       return(
@@ -114,7 +120,7 @@ class Ficha extends Component{
 
 		return (
 			<div style={{fontSize:'90%'}}>
-        <CommonHeader titulo={titulo}/>
+        <CommonHeader titulo={titulo} breadcrumb={breadcrumb}/>
         <br />
         <div className="row wrapper border-bottom white-bg page-heading text-center">
           <div className="row">

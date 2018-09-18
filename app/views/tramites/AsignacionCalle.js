@@ -51,7 +51,14 @@ class Busqueda extends Component{
 	render(){
 
     const {calles,callesFetching,parcela,parcelaFetching} = this.props;
+    const {id} = this.props.match.params;
     var onConfirm = this.onConfirm;
+    
+    var breadcrumb = [
+                      {url:`/busqueda`,tag:'Búsqueda',active:false},
+                      {url:`/tramites/${id}`,tag:'Trámites',active:false},
+                      {url:`/asignacionCalle/${id}`,tag:'Asignación de calle',active:true}
+                     ]
 
     if(!calles || callesFetching || !parcela || parcelaFetching){
       return(
@@ -63,7 +70,7 @@ class Busqueda extends Component{
 
   	return (
         <div style={{fontSize:'90%'}}>
-          <CommonHeader titulo="Asignación de calle"/>
+          <CommonHeader titulo="Asignación de calle" breadcrumb={breadcrumb}/>
           <div className="row wrapper border-bottom white-bg page-heading text-center">
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />

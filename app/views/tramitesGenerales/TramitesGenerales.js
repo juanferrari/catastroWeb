@@ -7,11 +7,9 @@ import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
 import ShowMessage from 'components/common/ShowMessage';
-import Catastro from './components/Catastro';
-import Valuacion from './components/Valuacion';
-import Otros from './components/Otros';
+import DatosMunicipio from './components/DatosMunicipio';
 
-class Tramites extends Component{
+class TramitesGenerales extends Component{
 
 	constructor(props){
     super(props);
@@ -24,11 +22,8 @@ class Tramites extends Component{
 
 	render(){
 
-    const {actionParcela} = this.props;
-    const {id} = this.props.match.params;
     var breadcrumb = [
-                      {url:`/busqueda`,tag:'Búsqueda',active:false},
-                      {url:`/tramites/${id}`,tag:'Trámites',active:true}
+                      {url:`/tramitesGenerales`,tag:'Acceso a trámites',active:true},
                      ]
 
   	return (
@@ -36,14 +31,9 @@ class Tramites extends Component{
           <CommonHeader titulo="Acceso a trámites" breadcrumb={breadcrumb}/>
           <div className="row wrapper border-bottom white-bg page-heading text-center">
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
-              <ShowMessage action={actionParcela}/>
               <br />
-              <div className='col-md-6' style={{marginTop:'2%'}}>
-                <Catastro />
-              </div>
-              <div className='col-md-6' style={{marginTop:'2%'}}>
-                <Valuacion />
-                <Otros />
+              <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
+                <DatosMunicipio />
               </div>   
       			</div>
           </div>
@@ -60,4 +50,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, { })(Tramites);
+export default connect(mapStateToProps, { })(TramitesGenerales);

@@ -34,3 +34,11 @@ p.btn-tramite:hover {
     padding-left: 3px;
     cursor: pointer;
 }
+
+li.narrow{
+    padding: 3px;
+}
+
+.narrow{
+    height: 3px;
+}

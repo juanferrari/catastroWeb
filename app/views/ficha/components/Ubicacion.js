@@ -41,6 +41,8 @@ class Ubicacion extends Component{
 
 	render(){
 
+    const {parcela}=this.props;
+
 		return (
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
@@ -74,14 +76,27 @@ class Ubicacion extends Component{
                   <div className='row'>
                     <div className="col-lg-12">
                       <Field
-                        label="Calle"
+                        label="Domicilio"
                         name="domicilio"
                         component={this.renderField}
                       />
                     </div>
                   </div>
         		    </div>
-
+                <div className='row' style={{display:(parcela.calles.length>0)?'inherit':'none'}}>
+                  <strong>Calles asociadas a la parcela:</strong>
+                </div>
+                <ul className="list-group">
+                  {
+                    _.map(parcela.calles, function (calle) {
+                      return(
+                        <li key={calle.id} className='list-group-item narrow' >
+                          <div className='list-item'>{calle.nombre}</div>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
 
       	  </div>
         </div>
@@ -97,7 +112,9 @@ Ubicacion = reduxForm(
 
 function mapStateToProps(state) {
 
-  return {}
+  return {
+    parcela: state.parcelas.parcela
+  }
 
 };
 
