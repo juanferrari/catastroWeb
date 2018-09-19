@@ -38,14 +38,14 @@ class AccionesCalles extends Component{
                     </a>
                   </div>
                   <div className="col-xs-12">
-                    <a onClick={()=>console.log('Modificar calle existente')}>
+                    <a onClick={()=>this.props.history.push('/modificarCalle')}>
                       <p className="text-center btn-tramite">
                         Modificar una calle existente
                       </p>
                     </a>
                   </div>
                   <div className="col-xs-12">
-                    <a onClick={()=>console.log('Eliminar una calle')}>
+                    <a onClick={()=>this.props.history.push('/eliminarCalle')}>
                       <p className="text-center btn-tramite">
                         Eliminar una calle
                       </p>

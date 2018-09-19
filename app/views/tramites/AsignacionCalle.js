@@ -8,7 +8,7 @@ import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
 import DatosCatastrales from './components/DatosCatastrales';
 import UbicacionCalle from './components/UbicacionCalle';
-import { getCalles } from 'actions/actions_calles'
+import { getCalles } from 'actions/actions_calles';
 import { getParcela, editCalles } from 'actions/actions_parcelas';
 
 class Busqueda extends Component{

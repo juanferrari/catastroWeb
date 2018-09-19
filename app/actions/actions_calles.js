@@ -10,6 +10,51 @@ export const EDIT_CALLE_REQUEST = 'EDIT_CALLE_REQUEST';
 export const EDIT_CALLE_SUCCESS = 'EDIT_CALLE_SUCCESS';
 export const EDIT_CALLE_FAIL = 'EDIT_CALLE_FAIL';
 
+export const DELETE_CALLE_REQUEST = 'DELETE_CALLE_REQUEST';
+export const DELETE_CALLE_SUCCESS = 'DELETE_CALLE_SUCCESS';
+export const DELETE_CALLE_FAIL = 'DELETE_CALLE_FAIL';
+
+function deleteCalleRequest() {
+  return {
+    type: DELETE_CALLE_REQUEST,
+  }
+}
+
+function deleteCalleSuccess(request,callback) {
+  callback();
+  return {
+    type: DELETE_CALLE_SUCCESS,
+    payload: request
+  }
+}
+
+function deleteCalleFail(callback) {
+  callback();
+  return {
+    type: DELETE_CALLE_FAIL
+  }
+}
+
+export function deleteCalle(calle_id,callback){
+
+  var service_url = ROOT_URL + 'calles?id=' + calle_id;
+  return function(dispatch) {
+        dispatch(deleteCalleRequest())
+        const request = axios.delete(service_url,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(deleteCalleSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(deleteCalleFail(callback))
+              console.log("error",error)
+            })
+      }
+}
+
 function editCalleRequest() {
   return {
     type: EDIT_CALLE_REQUEST,

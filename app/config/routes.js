@@ -9,11 +9,15 @@ import AsignacionCalle from 'views/tramites/AsignacionCalle';
 import TramitesGenerales from 'views/tramitesGenerales/TramitesGenerales';
 import ModificacionCalles from 'views/tramitesGenerales/ModificacionCalles';
 import AgregarCalle from 'views/tramitesGenerales/AgregarCalle';
+import ModificarCalle from 'views/tramitesGenerales/ModificarCalle';
+import EliminarCalle from 'views/tramitesGenerales/EliminarCalle';
 
 const AppRoute =() => (
 
         <div>
           <Switch>
+            <Route path="/eliminarCalle" component={EliminarCalle}/>
+            <Route path="/modificarCalle" component={ModificarCalle}/>
             <Route path="/agregarCalle" component={AgregarCalle}/>
             <Route path="/modificacionCalles" component={ModificacionCalles}/>
             <Route path="/tramitesGenerales" component={TramitesGenerales}/>
