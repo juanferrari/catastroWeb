@@ -4,8 +4,8 @@ import ReactLoading from 'react-loading'
 import ReactTable from 'react-table';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
-import DatosBusqueda from './components/DatosBusqueda';
-import TablaParcelas from './components/TablaParcelas';
+import DatosBusqueda from 'views/busqueda/components/DatosBusqueda';
+import TablaParcelas from 'views/busqueda/components/TablaParcelas';
 import lodash from 'lodash';
 import { getParcelas,updateFilter } from 'actions/actions_parcelas'
 import CommonHeader from 'components/common/CommonHeader'
@@ -49,13 +49,38 @@ class Busqueda extends Component{
 	render(){
 
 		const { handleSubmit } = this.props;
+    const {tramite} = this.props.match.params;
+
     var breadcrumb = [
                       {url:`/busqueda`,tag:'Búsqueda',active:true},
                      ]
 
+    var titulo = 'Búsqueda';
+
+    if(tramite){
+
+      switch(tramite){
+        case 'asignacionCalle':
+          titulo = 'Asignación de calle';
+          break;
+        case 'visadoPlanoMensura':
+          titulo = 'Visado de plano de mensura';
+          break;
+      }
+
+
+      breadcrumb = [
+                      {url:`/tramites`,tag:'Trámites',active:false},
+                      {url:`/busqueda/${tramite}`,tag:titulo,active:true},
+                   ]
+
+    }
+
+
+
 		return (
       <div>
-        <CommonHeader titulo={'Búsqueda'} breadcrumb={breadcrumb}/>
+        <CommonHeader titulo={titulo} breadcrumb={breadcrumb}/>
         <br />
   			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
           <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

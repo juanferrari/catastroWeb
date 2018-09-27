@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect, Link,Router, hashHistory ,withRouter } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
@@ -55,6 +56,13 @@ class Otros extends Component{
                           </p>
                         </a>
                       </div>
+                      <div className="col-xs-12">
+                        <a onClick={()=>this.props.history.push(`/modificacionCalles`)}>
+                          <p className="text-center btn-tramite">
+                            MODIFICACIÓN DE CALLES
+                          </p>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -72,4 +80,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(Otros);
+export default withRouter(connect(mapStateToProps, null)(Otros));

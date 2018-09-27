@@ -34,7 +34,7 @@ class Home extends Component{
               </a>
             </div>
             <div className="col-xs-4 col-md-4 col-centered">
-              <a onClick={()=>this.props.history.push(`/tramitesGenerales`)}>
+              <a onClick={()=>this.props.history.push(`/tramites`)}>
                 <p className="text-center btn-buscarProyectos">
                   Acceso a trámites
                 </p>

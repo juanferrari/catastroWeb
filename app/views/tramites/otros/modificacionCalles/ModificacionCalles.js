@@ -21,7 +21,7 @@ class ModificacionCalles extends Component{
 	render(){
     const {actionCalles} = this.props;
     var breadcrumb = [
-                      {url:`/tramitesGenerales`,tag:'Acceso a trámites',active:false},
+                      {url:`/tramites`,tag:'Acceso a trámites',active:false},
                       {url:`/modificacionCalles`,tag:'Modificación de una calle',active:true}
                      ]
 

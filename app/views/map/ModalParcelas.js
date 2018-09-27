@@ -26,20 +26,20 @@ class ModalParcelas extends Component {
 
 	            <Modal.Body>
 	              <label>Layer: </label>
-		          {parcelaInfo.properties.layer}
+		          {parcelaInfo.layer}
 		          <br/>
 		          <label>Id de la parcela: </label>
-		          {parcelaInfo.properties.id}
+		          {parcelaInfo.id}
 		          <br/>
 		          <label>Etiqueta: </label>
-		          {parcelaInfo.properties.etiqueta}
+		          {parcelaInfo.etiqueta}
 		          <br/>
 		          <label>Nomenclatura: </label>
-		          {parcelaInfo.properties.nomencla}
+		          {parcelaInfo.nomencla}
 		          <br/>
 	            </Modal.Body>
 	            <Modal.Footer>
-	              <button className='btn btn-primary btn-sm 'onClick={()=>this.props.history.push('/ficha/'+parcelaInfo.properties.id)}>Ver parcela</button>
+	              <button className='btn btn-primary btn-sm 'onClick={()=>this.props.history.push('/ficha/'+parcelaInfo.id)}>Ver parcela</button>
 	              <button className='btn btn-primary btn-sm 'onClick={()=>this.props.closeModal()}>Cancelar</button>
 	            </Modal.Footer>
             </Modal>

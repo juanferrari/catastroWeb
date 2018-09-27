@@ -27,8 +27,7 @@ class Tramites extends Component{
     const {actionParcela} = this.props;
     const {id} = this.props.match.params;
     var breadcrumb = [
-                      {url:`/busqueda`,tag:'Búsqueda',active:false},
-                      {url:`/tramites/${id}`,tag:'Trámites',active:true}
+                      {url:`/tramites`,tag:'Trámites',active:true}
                      ]
 
   	return (

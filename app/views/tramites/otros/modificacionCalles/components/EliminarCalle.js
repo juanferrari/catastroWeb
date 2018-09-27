@@ -6,7 +6,7 @@ import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import CommonHeader from 'components/common/CommonHeader';
 import { getCalles,deleteCalle } from 'actions/actions_calles';
-import SelectCalle from './components/SelectCalle';
+import SelectCalle from './SelectCalle';
 
 class EliminarCalle extends Component{
 
@@ -27,13 +27,17 @@ class EliminarCalle extends Component{
     this.props.deleteCalle(values.calle.value,()=>{this.props.history.push('/modificacionCalles')})
   }  
 
+  componentWillUnmount(){
+    this.props.destroy('EliminarCalleForm');
+  }
+
 	render(){
 
     const {handleSubmit} = this.props;
     const {calles,callesFetching} = this.props;
 
     var breadcrumb = [
-                      {url:`/tramitesGenerales`,tag:'Acceso a trámites',active:false},
+                      {url:`/tramites`,tag:'Acceso a trámites',active:false},
                       {url:`/modificacionCalles`,tag:'Modificación de una calle',active:false},
                       {url:`/eliminarCalle`,tag:'Eliminar una calle',active:true}
                      ]

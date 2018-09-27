@@ -31,7 +31,7 @@ class Catastro extends Component{
                   <div className='row'>
                     <div className="col-lg-12">
                       <div className="col-xs-12">
-                        <a onClick={()=>console.log('catastro')}>
+                        <a onClick={()=>this.props.history.push(`/busqueda/visadoPlanoMensura`)}>
                           <p className="text-center btn-tramite">
                             VISADO DE PLANO DE MENSURA
                           </p>
@@ -80,7 +80,7 @@ class Catastro extends Component{
                         </a>
                       </div>
                       <div className="col-xs-12">
-                        <a onClick={()=>this.props.history.push(`/asignacionCalle/${id}`)}>
+                        <a onClick={()=>this.props.history.push(`/busqueda/asignacionCalle`)}>
                           <p className="text-center btn-tramite">
                             ASIGNACIÓN DE CALLE
                           </p>

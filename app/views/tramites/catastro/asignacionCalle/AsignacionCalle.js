@@ -55,8 +55,7 @@ class Busqueda extends Component{
     var onConfirm = this.onConfirm;
     
     var breadcrumb = [
-                      {url:`/busqueda`,tag:'Búsqueda',active:false},
-                      {url:`/tramites/${id}`,tag:'Trámites',active:false},
+                      {url:`/tramites/`,tag:'Trámites',active:false},
                       {url:`/asignacionCalle/${id}`,tag:'Asignación de calle',active:true}
                      ]
 

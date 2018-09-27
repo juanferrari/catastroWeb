@@ -5,15 +5,13 @@ import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import CommonHeader from 'components/common/CommonHeader';
-import { editCalle,getCalles } from 'actions/actions_calles';
-import SelectCalle from './components/SelectCalle';
+import {editCalle} from 'actions/actions_calles';
 
-class ModificarCalle extends Component{
+class AgregarCalle extends Component{
 
 	constructor(props){
 	    super(props);
 	    this.state = {
-        calles:[]
 	    }
 
       this.onSubmit = this.onSubmit.bind(this);
@@ -21,12 +19,10 @@ class ModificarCalle extends Component{
   }
 
 	componentWillMount(){
-    this.props.getCalles();
 	}
 
   onSubmit(values){
-    var calle = {id:values.calle.value,nombre:values.nombre}
-    this.props.editCalle(calle,()=>{this.props.history.push('/modificacionCalles')})
+    this.props.editCalle(values,()=>{this.props.history.push('/modificacionCalles')})
   }  
 
   renderField(field) {
@@ -35,7 +31,7 @@ class ModificarCalle extends Component{
       const className = `form-group ${touched && error ? 'has-error' : ''}`;
 
       return (
-        <div className={className + ' text-center'}>
+        <div className={className}>
           <label>{field.label}</label>
           <input
             className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched text-center"
@@ -49,24 +45,19 @@ class ModificarCalle extends Component{
       );
   }
 
+  componentWillUnmount(){
+    this.props.destroy('AgregarCalleForm');
+  } 
+
 	render(){
 
     const {handleSubmit} = this.props;
-    const {calles,callesFetching} = this.props;
 
     var breadcrumb = [
-                      {url:`/tramitesGenerales`,tag:'Acceso a trámites',active:false},
+                      {url:`/tramites`,tag:'Acceso a trámites',active:false},
                       {url:`/modificacionCalles`,tag:'Modificación de una calle',active:false},
-                      {url:`/modificarCalle`,tag:'Modificar una calle',active:true}
+                      {url:`/agregarCalle`,tag:'Agregar una calle',active:true}
                      ]
-
-    if(!calles || callesFetching){
-      return(
-        <div className="centeredSpinner" >
-          <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
-        </div>
-      )
-    }
 
 		return (
       <div style={{fontSize:'90%'}}>
@@ -77,13 +68,12 @@ class ModificarCalle extends Component{
             <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
              <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               <div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
-                Modificar calle
+                Agregar calle
               </div>
               <div className="panel-body">
                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                  <SelectCalle calles={calles}/>
                   <Field
-                    label="Ingrese el nuevo nombre de la calle:"
+                    label="Ingrese el nombre de la nueva calle:"
                     name="nombre"
                     component={this.renderField}
                   />
@@ -107,27 +97,19 @@ function validate(values) {
   if (!values.nombre) {
     error.nombre = 'Ingrese un nombre para la calle';
   }
-
-  if (!values.calle) {
-    error.calle = 'Seleccione una calle';
-  }
-
   return error;
 }
 
-ModificarCalle = reduxForm(
+AgregarCalle = reduxForm(
   {
-    form: 'ModificarCalleForm',
+    form: 'AgregarCalleForm',
     validate
-  })(ModificarCalle);
+  })(AgregarCalle);
 
 function mapStateToProps(state) {
 
-  return {
-    calles: state.calles.calles,
-    callesFetching: state.calles.callesFetching
-  }
+  return {}
 
 };
 
-export default withRouter(connect(mapStateToProps, {editCalle,getCalles})(ModificarCalle));
+export default withRouter(connect(mapStateToProps, {editCalle})(AgregarCalle));

@@ -28,15 +28,19 @@ class TablaParcelas extends Component{
   }
 
   abrirTramite(parcela_id){
+    const {tramite} = this.props.match.params;
     console.log('this.props',this.props)
-    this.props.history.push(`/tramites/${parcela_id}`);
+    this.props.history.push(`/${tramite}/${parcela_id}`);
   }
 
 	render(){
 
     const { parcelas, parcelasFetching,filter }  = this.props;
+    const {tramite} = this.props.match.params;
+
     var abrirFicha = this.abrirFicha;
     var abrirTramite = this.abrirTramite;
+
 
     var data = [];
     var pages = -1;
@@ -47,41 +51,46 @@ class TablaParcelas extends Component{
     if(parcelas && parcelas.pages)
       pages = parcelas.pages;
 
+    var firstColumn = {
+                        Header: '',
+                        maxWidth: 50,
+                        filterable:false,
+                        accessor: 'id',
+                        Cell: ({value}) => {
+                                            return <Button
+                                                    className={'btn btn-default fa fa-search'}
+                                                    bsStyle="default"
+                                                    bsSize="small"
+                                                    onClick={()=>{abrirFicha(value)}}
+                                                    title="Ir a la ficha de la parcela."
+                                                   >
+                                                   </Button>
+                                            },
+                       // filterMethod: (filter, row) => (console.log("valor row: "+row),row[filter.id].includes(filter.value))
+                      }
+
+    if(tramite){
+      firstColumn = {
+                      Header: '',
+                      maxWidth: 50,
+                      filterable:false,
+                      accessor: 'id',
+                      Cell: ({value}) => {
+                                          return <Button
+                                                  className={'btn btn-default fa fa-clipboard'}
+                                                  bsStyle="default"
+                                                  bsSize="small"
+                                                  onClick={()=>{abrirTramite(value)}}
+                                                  title="Iniciar trámite."
+                                                 >
+                                                 </Button>
+                                          },
+                     // filterMethod: (filter, row) => (console.log("valor row: "+row),row[filter.id].includes(filter.value))
+                    }
+    }
+
 		const columns = [
-            {
-              Header: '',
-              maxWidth: 50,
-              filterable:false,
-              accessor: 'id',
-              Cell: ({value}) => {
-                                  return <Button
-                                          className={'btn btn-default fa fa-search'}
-                                          bsStyle="default"
-                                          bsSize="small"
-                                          onClick={()=>{abrirFicha(value)}}
-                                          title="Ir a la ficha de la parcela."
-                                         >
-                                         </Button>
-                                  },
-             // filterMethod: (filter, row) => (console.log("valor row: "+row),row[filter.id].includes(filter.value))
-          	},
-            {
-              Header: '',
-              maxWidth: 50,
-              filterable:false,
-              accessor: 'id',
-              Cell: ({value}) => {
-                                  return <Button
-                                          className={'btn btn-default fa fa-clipboard'}
-                                          bsStyle="default"
-                                          bsSize="small"
-                                          onClick={()=>{abrirTramite(value)}}
-                                          title="Iniciar trámite."
-                                         >
-                                         </Button>
-                                  },
-             // filterMethod: (filter, row) => (console.log("valor row: "+row),row[filter.id].includes(filter.value))
-            },
+            firstColumn,
             {
                 Header: 'Partida Provincial',
                 maxWidth: 160,
