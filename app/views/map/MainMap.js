@@ -20,7 +20,8 @@ class MainMap extends Component {
       parcela:null,
       map: null,
       wmsParams: null,
-      url: null
+      url: null,
+      currentGeoJsonLayer: null
     }
     this.getFeatureInfo = this.getFeatureInfo.bind(this);
   }
@@ -34,8 +35,10 @@ class MainMap extends Component {
   }
 
   componentWillMount(){
-    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&maxFeatures=100&outputFormat=application%2Fjson';
+    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&maxFeatures=1&outputFormat=application%2Fjson';
     //var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&outputFormat=application%2Fjson';
+
+
     axios.get(service_url)
     .then(data=>{
       this.setState({geojson:JSON.parse(data.request.response)});
@@ -86,34 +89,39 @@ class MainMap extends Component {
           width: size.x,
           layers: this.state.wmsParams.layers,
           query_layers: this.state.wmsParams.layers,
-          info_format: 'text/html'
+          info_format: 'application/json'
         };
     
-    params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
-    params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
+    params[params.version === '1.3.0' ? 'i' : 'x'] = Math.trunc(point.x);
+    params[params.version === '1.3.0' ? 'j' : 'y'] = Math.trunc(point.y);
     
     var geoserverUrl = this.state.url + L.Util.getParamString(params, this.state.url, true);
 
     axios.get(geoserverUrl)
     .then(data=>{
 
-      var el = document.createElement( 'html' );
-      el.innerHTML = data.request.response;
-
-      var tr = el.getElementsByTagName( 'tr' );
-
       var parcela = {};
+      var map = this.state.map;
+      var layer = this.state.currentGeoJsonLayer;
+      var parcelaJson = JSON.parse(data.request.response);
 
-      if(tr && tr[1] && tr[1].children && tr[1].children[1]){
-        parcela.id = tr[1].children[1].innerText;
-        parcela.layer = tr[1].children[11].innerText;
-        parcela.etiqueta = tr[1].children[4].innerText;
-        parcela.nomencla = tr[1].children[2].innerText;
+      if(layer)
+        layer.clearLayers();
+
+      layer = L.geoJSON(parcelaJson).addTo(map);
+
+      this.setState({currentGeoJsonLayer:layer})
+
+      if(parcelaJson.features[0]){
+        parcela.id = parcelaJson.features[0].properties.id;
+        parcela.layer = parcelaJson.features[0].properties.layer;
+        parcela.etiqueta = parcelaJson.features[0].properties.etiqueta;
+        parcela.nomencla = parcelaJson.features[0].properties.nomencla;
 
         this.props.updateParcelaInfo(parcela);
         this.props.openModal();
       }
-
+      
     }).catch(error=>{
       console.log(error.stack)
     })
