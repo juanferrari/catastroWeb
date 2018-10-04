@@ -1,11 +1,14 @@
 const validate = values => {
   const errors = {}
-  if (!values.firstName) {
-    errors.firstName = 'Required'
+
+  if(!values.nroExpediente){
+    errors.nroExpediente = 'Ingrese el número de expediente'
   }
-  if (!values.lastName) {
-    errors.lastName = 'Required'
+
+  if(!values.nroPlano){
+    errors.nroPlano = 'Ingrese el número de plano'
   }
+
   if (!values.email) {
     errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {

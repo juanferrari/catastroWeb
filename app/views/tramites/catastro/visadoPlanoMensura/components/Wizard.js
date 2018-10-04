@@ -34,11 +34,6 @@ class WizardForm extends Component {
         {page === 2 &&
           <WizardFormSecondPage
             previousPage={this.previousPage}
-            onSubmit={this.nextPage}
-          />}
-        {page === 3 &&
-          <WizardFormThirdPage
-            previousPage={this.previousPage}
             onSubmit={onSubmit}
           />}
       </div>
