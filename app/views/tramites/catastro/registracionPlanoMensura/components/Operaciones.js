@@ -5,7 +5,7 @@ import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 
-class Catastro extends Component{
+class Operaciones extends Component{
 
 	constructor(props){
 	    super(props);
@@ -25,72 +25,63 @@ class Catastro extends Component{
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               	<div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
-                	Catastro
+                	Operaciones
               	</div>
               	<div className="panel-body">
                   <div className='row'>
                     <div className="col-lg-12">
                       <div className="col-xs-12">
-                        <a onClick={()=>this.props.history.push(`/busqueda/visadoPlanoMensura`)}>
+                        <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            VISADO DE PLANO DE MENSURA
-                          </p>
-                        </a>
-                      </div>
-                      <div className="col-xs-12">
-                        <a onClick={()=>this.props.history.push(`/busqueda/registracionPlanoMensura`)}>
-                          <p className="text-center btn-tramite">
-                            REGISTRACIÓN DE PLANO DE MENSURA
+                            UNIFICACIÓN DE PARCELAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            COPIA DE PLANCHETAS
+                            SUBDIVISIÓN DE PARCELA
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            REGISTRACIÓN DE PLANO DE POSESIÓN
+                            UNIFICACIÓN Y SUBDIVISIÓN DE PARCELAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            EMPADRONAMIENTO DE PARCELAS INFORMALES
+                            PROPIEDAD HORIZONTAL
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            CAMBIO DE TITULARIDAD
+                            MODIFICACIÓN DE MEDIDAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
                           <p className="text-center btn-tramite">
-                            ASIGNACIÓN DE NÚMERO DOMICILIARIO
+                            MODIFICACIÓN DE NOMENCLATURA CATASTRAL
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
-                        <a onClick={()=>this.props.history.push(`/busqueda/asignacionCalle`)}>
+                        <a onClick={()=>this.props.history.push(`/nomenclaturaTitulo/${id}`)}>
                           <p className="text-center btn-tramite">
-                            ASIGNACIÓN DE CALLE
+                            MODIFICACIÓN DE NOMENCLATURA SEGÚN TÍTULO
                           </p>
                         </a>
                       </div>
                     </div>
                   </div>
         		    </div>
-
-
       	  </div>
         </div>
 			)
@@ -103,4 +94,4 @@ function mapStateToProps(state) {
 
 };
 
-export default withRouter(connect(mapStateToProps, null)(Catastro));
+export default withRouter(connect(mapStateToProps, null)(Operaciones));

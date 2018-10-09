@@ -6,9 +6,9 @@ import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
-import Wizard from './components/Wizard'
+import Operaciones from './components/Operaciones';
 
-class VisadoPlanoMensura extends Component{
+class RegistracionPlanoMensura extends Component{
 
 	constructor(props){
     super(props);
@@ -32,8 +32,8 @@ class VisadoPlanoMensura extends Component{
 
     var breadcrumb = [
                       {url:`/tramites/`,tag:'Trámites',active:false},
-                      {url:`/busqueda/visadoPlanoMensura/`,tag:'Búsqueda',active:false},
-                      {url:`/visadoPlanoMensura/${id}`,tag:'Visado de plano de mensura',active:true}
+                      {url:`/busqueda/registracionPlanoMensura/`,tag:'Búsqueda',active:false},
+                      {url:`/registracionPlanoMensura/${id}`,tag:'Registración de plano de mensura',active:true}
                      ]
 
     if(false){
@@ -46,12 +46,12 @@ class VisadoPlanoMensura extends Component{
 
   	return (
         <div style={{fontSize:'90%'}}>
-          <CommonHeader titulo="Visado de plano de mensura" breadcrumb={breadcrumb}/>
+          <CommonHeader titulo="Registración de plano de mensura" breadcrumb={breadcrumb}/>
           <div className="row wrapper border-bottom white-bg page-heading text-center">
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />
               <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
-                <Wizard />
+                <Operaciones />
               </div>
       			</div>
           </div>
@@ -68,4 +68,4 @@ function mapStateToProps(state){
 
 };
 
-export default connect(mapStateToProps, { })(VisadoPlanoMensura);
+export default connect(mapStateToProps, { })(RegistracionPlanoMensura);

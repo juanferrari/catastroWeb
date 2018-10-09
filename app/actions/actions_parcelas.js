@@ -20,6 +20,52 @@ export const EDIT_CALLES_REQUEST = 'EDIT_CALLES_REQUEST';
 export const EDIT_CALLES_SUCCESS = 'EDIT_CALLES_SUCCESS';
 export const EDIT_CALLES_FAIL = 'EDIT_CALLES_FAIL';
 
+export const EDIT_NOMENCLATURA_REQUEST = 'EDIT_NOMENCLATURA_REQUEST';
+export const EDIT_NOMENCLATURA_SUCCESS = 'EDIT_NOMENCLATURA_SUCCESS';
+export const EDIT_NOMENCLATURA_FAIL = 'EDIT_NOMENCLATURA_FAIL';
+
+function editNomenclaturaRequest() {
+  return {
+    type: EDIT_NOMENCLATURA_REQUEST,
+  }
+}
+
+function editNomenclaturaSuccess(request,callback) {
+  callback();
+  return {
+    type: EDIT_NOMENCLATURA_SUCCESS,
+    payload: request
+  }
+}
+
+function editNomenclaturaFail(callback) {
+  callback();
+  return {
+    type: EDIT_NOMENCLATURA_FAIL
+  }
+}
+
+export function editNomenclatura(submitJson,parcela_id,callback){
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/nomenclaturaTitulo';
+  
+  return function(dispatch) {
+        dispatch(editNomenclaturaRequest())
+        const request = axios.put(service_url,submitJson,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(editNomenclaturaSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(editNomenclaturaFail(callback))
+              console.log("error",error)
+            })
+      }
+}
+
 function editCallesRequest() {
   return {
     type: EDIT_CALLES_REQUEST,

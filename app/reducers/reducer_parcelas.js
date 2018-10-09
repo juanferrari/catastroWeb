@@ -12,12 +12,21 @@ import {
     UPDATE_FILTER,
     EDIT_CALLES_REQUEST,
     EDIT_CALLES_SUCCESS,
-    EDIT_CALLES_FAIL
+    EDIT_CALLES_FAIL,
+    EDIT_NOMENCLATURA_REQUEST,
+    EDIT_NOMENCLATURA_SUCCESS,
+    EDIT_NOMENCLATURA_FAIL
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case EDIT_NOMENCLATURA_REQUEST:
+            return { ...state, parcelaEditing:true};
+        case EDIT_NOMENCLATURA_SUCCESS:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Modificación de nomenclatura realizada exitosamente.',action_className:'alert alert-success'}};
+        case EDIT_NOMENCLATURA_FAIL:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Error al modificar la nomenclatura de la parcela.',action_className:'alert alert-danger'}};
         case EDIT_CALLES_REQUEST:
             return { ...state, parcelaEditing:true};
         case EDIT_CALLES_SUCCESS:

@@ -11,11 +11,15 @@ import AgregarCalle from 'views/tramites/otros/modificacionCalles/components/Agr
 import ModificarCalle from 'views/tramites/otros/modificacionCalles/components/ModificarCalle';
 import EliminarCalle from 'views/tramites/otros/modificacionCalles/components/EliminarCalle';
 import VisadoPlanoMensura from 'views/tramites/catastro/visadoPlanoMensura/VisadoPlanoMensura';
+import RegistracionPlanoMensura from 'views/tramites/catastro/registracionPlanoMensura/RegistracionPlanoMensura';
+import NomenclaturaTitulo from 'views/tramites/catastro/nomenclaturaTitulo/NomenclaturaTitulo';
 
 const AppRoute =() => (
 
         <div>
           <Switch>
+            <Route path="/nomenclaturaTitulo/:id" component={NomenclaturaTitulo}/>
+            <Route path="/registracionPlanoMensura/:id" component={RegistracionPlanoMensura}/>
             <Route path="/visadoPlanoMensura/:id" component={VisadoPlanoMensura}/>
             <Route path="/asignacionCalle/:id" component={AsignacionCalle}/>
             <Route path="/eliminarCalle" component={EliminarCalle}/>
