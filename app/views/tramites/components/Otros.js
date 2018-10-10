@@ -30,28 +30,28 @@ class Otros extends Component{
                     <div className="col-lg-12">
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             REGISTRACIÓN DE PLANO DE OBRA
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             CAMBIO DE DESTINO
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             HABILITACIÓN DE COMERCIO E INDUSTRIA
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             EXIMICIÓN IMPOSITIVA
                           </p>
                         </a>

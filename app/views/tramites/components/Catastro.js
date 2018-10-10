@@ -46,35 +46,35 @@ class Catastro extends Component{
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             COPIA DE PLANCHETAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             REGISTRACIÓN DE PLANO DE POSESIÓN
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             EMPADRONAMIENTO DE PARCELAS INFORMALES
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             CAMBIO DE TITULARIDAD
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             ASIGNACIÓN DE NÚMERO DOMICILIARIO
                           </p>
                         </a>

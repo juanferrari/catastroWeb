@@ -29,14 +29,14 @@ class Valuacion extends Component{
                     <div className="col-lg-12">
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             OBRAS PÚBLICAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             EMPADRONAMIENTO DE CONSTRUCCIONES NO DECLARADAS
                           </p>
                         </a>

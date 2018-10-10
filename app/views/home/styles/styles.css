@@ -42,3 +42,14 @@ li.narrow{
 #wmsContainer {
     cursor: pointer;
 }
+
+p.btn-disabled {
+    background-color: #606566;
+    padding: 1% 0 1% 0;
+    color: #fff;
+    font-weight: 400;
+    margin-top: 2%;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: default;
+}

@@ -32,42 +32,42 @@ class Operaciones extends Component{
                     <div className="col-lg-12">
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             UNIFICACIÓN DE PARCELAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             SUBDIVISIÓN DE PARCELA
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             UNIFICACIÓN Y SUBDIVISIÓN DE PARCELAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             PROPIEDAD HORIZONTAL
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             MODIFICACIÓN DE MEDIDAS
                           </p>
                         </a>
                       </div>
                       <div className="col-xs-12">
                         <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-tramite">
+                          <p className="text-center btn-disabled">
                             MODIFICACIÓN DE NOMENCLATURA CATASTRAL
                           </p>
                         </a>
