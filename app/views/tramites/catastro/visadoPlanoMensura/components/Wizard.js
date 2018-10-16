@@ -10,7 +10,8 @@ class WizardForm extends Component {
     this.previousPage = this.previousPage.bind(this)
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      page: 1
+      page: 1,
+      rerender:false
     }
   }
   nextPage() {
@@ -27,10 +28,15 @@ class WizardForm extends Component {
 
   render() {
     var onSubmit = this.onSubmit;
-    const { page } = this.state
+    const { page,fileList } = this.state
     return (
       <div>
-        {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage} />}
+        {page === 1 && <WizardFormFirstPage 
+                          onSubmit={this.nextPage} 
+                          subirArchivo={this.subirArchivo}
+                          rerender={this.rerender}
+                          fileList={fileList} 
+                          />}
         {page === 2 &&
           <WizardFormSecondPage
             previousPage={this.previousPage}
