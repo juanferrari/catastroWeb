@@ -51,7 +51,7 @@ class VisadoPlanoMensura extends Component{
       			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />
               <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
-                <Wizard />
+                <Wizard id={id}/>
               </div>
       			</div>
           </div>

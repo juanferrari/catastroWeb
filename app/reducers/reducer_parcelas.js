@@ -15,12 +15,21 @@ import {
     EDIT_CALLES_FAIL,
     EDIT_NOMENCLATURA_REQUEST,
     EDIT_NOMENCLATURA_SUCCESS,
-    EDIT_NOMENCLATURA_FAIL
+    EDIT_NOMENCLATURA_FAIL,
+    UPLOAD_PLANO_REQUEST,
+    UPLOAD_PLANO_SUCCESS,
+    UPLOAD_PLANO_FAIL
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case UPLOAD_PLANO_REQUEST:
+            return { ...state, planoUploading:true};
+        case UPLOAD_PLANO_SUCCESS:
+            return { ...state, planoUploading:false, actionParcela:{message:'Archivo subido correctamente.',action_className:'alert alert-success'}};
+        case UPLOAD_PLANO_FAIL:
+            return { ...state, planoUploading:false, actionParcela:{message:'Error al subir el archivo.',action_className:'alert alert-danger'}};
         case EDIT_NOMENCLATURA_REQUEST:
             return { ...state, parcelaEditing:true};
         case EDIT_NOMENCLATURA_SUCCESS:

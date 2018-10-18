@@ -100,7 +100,7 @@ class FileUploader extends Component{
             />
             <div 
               className="list-item delete-button"
-              onClick={()=> deleteFile(file.file_id,file.file_name)}
+              onClick={()=> deleteFile(index,fields)}
             >
               &#x2715;
             </div>
@@ -119,7 +119,7 @@ class FileUploader extends Component{
       buttonClassName = 'col-md-12 collapse';
     }
 
-    if (!this.props.files) {
+    /*if (!this.props.files) {
       return (
         <div className="row">
           <div className="centeredSpinner" >
@@ -128,7 +128,7 @@ class FileUploader extends Component{
         </div>
       );
 
-    }
+    }*/
 
     return (
               <div className="row text-center">

@@ -36,6 +36,7 @@ class WizardForm extends Component {
                           subirArchivo={this.subirArchivo}
                           rerender={this.rerender}
                           fileList={fileList} 
+                          id={this.props.id}
                           />}
         {page === 2 &&
           <WizardFormSecondPage

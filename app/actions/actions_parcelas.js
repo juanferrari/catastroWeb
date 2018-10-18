@@ -24,6 +24,52 @@ export const EDIT_NOMENCLATURA_REQUEST = 'EDIT_NOMENCLATURA_REQUEST';
 export const EDIT_NOMENCLATURA_SUCCESS = 'EDIT_NOMENCLATURA_SUCCESS';
 export const EDIT_NOMENCLATURA_FAIL = 'EDIT_NOMENCLATURA_FAIL';
 
+export const UPLOAD_PLANO_REQUEST = 'UPLOAD_PLANO_REQUEST';
+export const UPLOAD_PLANO_SUCCESS = 'UPLOAD_PLANO_SUCCESS';
+export const UPLOAD_PLANO_FAIL = 'UPLOAD_PLANO_FAIL';
+
+function uploadPlanoRequest() {
+  return {
+    type: UPLOAD_PLANO_REQUEST,
+  }
+}
+
+function uploadPlanoSuccess(request) {
+  return {
+    type: UPLOAD_PLANO_SUCCESS,
+    payload: request
+  }
+}
+
+function uploadPlanoFail() {
+  return {
+    type: UPLOAD_PLANO_FAIL
+  }
+}
+
+export function uploadPlano(file,parcela_id){
+
+  var formData = new FormData();
+  formData.append("file", file);
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/expedienteMensura/plano';
+  
+  return function(dispatch) {
+        dispatch(uploadPlanoRequest())
+        const request = axios.post(service_url,formData,{
+          headers: {
+              'Content-Type': 'multipart/form-data',
+              'accept':"*/*",
+              'cache-control':"no-cache"
+        }}).then( request =>{
+            dispatch(uploadPlanoSuccess(request))
+          }).catch( error =>{
+              dispatch(uploadPlanoFail())
+              console.log("error uploadPlano",error)
+            })
+      }
+}
+
 function editNomenclaturaRequest() {
   return {
     type: EDIT_NOMENCLATURA_REQUEST,
