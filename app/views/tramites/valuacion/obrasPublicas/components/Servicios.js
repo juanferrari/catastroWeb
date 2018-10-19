@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
-import Calles from './Calles';
 
-class UbicacionCalle extends Component{
+class Servicios extends Component{
 
 	constructor(props){
 	    super(props);
@@ -18,7 +17,13 @@ class UbicacionCalle extends Component{
   	}
 
 	componentWillMount(){
+
 	}
+
+  handleSwitch(el,state){
+    console.log('switch el ',el)
+    console.log('switch state ',state)
+  }
 
 	renderField(field) {
 	    const { meta: { touched, error } } = field;
@@ -26,19 +31,16 @@ class UbicacionCalle extends Component{
 	    const className = `form-group ${touched && error ? 'has-error' : ''}`;
 
 	    return (
-	      <div className={className}>
-	        <label>{field.label}</label>
-	        <input
-            disabled
-	          className="form-control input-sm ng-pristine ng-valid ng-empty ng-touched"
-	          type="text"
-	          {...field.input}
-	        />
-	        <div className="text-help">
-	          {touched ? error : ''}
-	        </div>
-	      </div>
-	    );
+        <div>
+          <strong>{field.label}</strong>
+
+          <label className="switch">
+            <input type="checkbox"/>
+            <span className="slider"></span>
+          </label>
+        </div>
+            
+      );
 	} 
 
 	render(){
@@ -47,33 +49,32 @@ class UbicacionCalle extends Component{
 		    <div className="col-lg-12" id='test'>
           <div className="panel panel-info" style={{'borderColor': '#bce8f1'}}>
               	<div className='panel-heading' style={{'color': '#31708f','backgroundColor':'#d9edf7','borderColor': '#bce8f1'}}>
-                	Ubicación
+                	Servicios
               	</div>
               	<div className="panel-body">
                   <div className='row'>
                     <div className="col-lg-4">
                       <Field
-                        label="Partido"
-                        name="partido"
+                        label="Agua"
+                        name="agua"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-4">
                       <Field
-                        label="Localidad"
-                        name="localidad"
+                        label="Alumbrado"
+                        name="alumbrado"
                         component={this.renderField}
                       />
                     </div>
                     <div className="col-lg-4">
                       <Field
-                        label="Barrio"
-                        name="barrio"
+                        label="Barrido"
+                        name="barrido"
                         component={this.renderField}
                       />
                     </div>
                   </div>
-                  <Calles calles={this.props.calles} callesParcela={this.props.callesParcela} onChange={this.props.onChange}/>
         		    </div>
       	  </div>
         </div>
@@ -81,11 +82,11 @@ class UbicacionCalle extends Component{
 	}
 }
 
-UbicacionCalle = reduxForm(
+Servicios = reduxForm(
   {
     enableReinitialize: true,
     form: 'FichaForm'
-  })(UbicacionCalle);
+  })(Servicios);
 
 function mapStateToProps(state) {
 
@@ -93,4 +94,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(UbicacionCalle);
+export default connect(mapStateToProps, null)(Servicios);

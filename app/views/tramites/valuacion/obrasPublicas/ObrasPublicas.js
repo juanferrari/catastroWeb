@@ -6,13 +6,12 @@ import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
-import UbicacionCalle from './components/UbicacionCalle';
-import { getCalles } from 'actions/actions_calles';
-import { getParcela, editCalles } from 'actions/actions_parcelas';
+import Servicios from './components/Servicios';
+import { getParcela } from 'actions/actions_parcelas';
 
-class AsignacionCalle extends Component{
+class ObrasPublicas extends Component{
 
-	constructor(props){
+  constructor(props){
     super(props);
     this.state = {
       callesParcela:[]
@@ -23,7 +22,6 @@ class AsignacionCalle extends Component{
 
   componentWillMount(){
     const {id} = this.props.match.params;
-    this.props.getCalles();
     this.props.getParcela(id)
   }
 
@@ -47,18 +45,18 @@ class AsignacionCalle extends Component{
       })
   }
 
-	render(){
+  render(){
 
-    const {calles,callesFetching,parcela,parcelaFetching} = this.props;
+    const {parcela,parcelaFetching} = this.props;
     const {id} = this.props.match.params;
     var onConfirm = this.onConfirm;
     
     var breadcrumb = [
                       {url:`/tramites/`,tag:'Trámites',active:false},
-                      {url:`/asignacionCalle/${id}`,tag:'Asignación de calle',active:true}
+                      {url:`/obrasPublicas/${id}`,tag:'Obras Públicas',active:true}
                      ]
 
-    if(!calles || callesFetching || !parcela || parcelaFetching){
+    if(parcela || parcelaFetching){
       return(
         <div className="centeredSpinner" >
           <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
@@ -66,23 +64,23 @@ class AsignacionCalle extends Component{
       )
     }
 
-  	return (
+    return (
         <div style={{fontSize:'90%'}}>
-          <CommonHeader titulo="Asignación de calle" breadcrumb={breadcrumb}/>
+          <CommonHeader titulo="Obras Públicas" breadcrumb={breadcrumb}/>
           <div className="row wrapper border-bottom white-bg page-heading text-center">
-      			<div className="row" style={{margin:'5vh',fontSize:'90%'}}>
+            <div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />
               <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
-                <UbicacionCalle calles={calles} callesParcela={parcela.calles} onChange={this.onChange}/>
+                <Servicios />
               </div>
               <br/> 
-      			</div>
+            </div>
             <div className='row'>
               <button className='btn btn-primary' onClick={()=> onConfirm()}>Confirmar</button>
             </div>
           </div>
         </div>
-  			)
+        )
   }
 }
 
@@ -90,12 +88,8 @@ function mapStateToProps(state){
   //console.log('mapStateToProps',state)
 
   return {
-    calles: state.calles.calles,
-    callesFetching: state.calles.callesFetching,
-    parcela: state.parcelas.parcela,
-    parcelaFetching: state.parcelas.parcelaFetching
   }
 
 };
 
-export default connect(mapStateToProps, { getCalles,getParcela,editCalles })(AsignacionCalle);
+export default connect(mapStateToProps, { getParcela })(ObrasPublicas);

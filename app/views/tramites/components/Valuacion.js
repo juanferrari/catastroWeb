@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
+import { BrowserRouter, Route, Switch, Redirect, Link,Router, hashHistory ,withRouter } from 'react-router-dom';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 
@@ -28,8 +29,8 @@ class Valuacion extends Component{
                   <div className='row'>
                     <div className="col-lg-12">
                       <div className="col-xs-12">
-                        <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-disabled">
+                        <a onClick={()=>this.props.history.push(`/busqueda/obrasPublicas`)}>
+                          <p className="text-center btn-tramite">
                             OBRAS PÚBLICAS
                           </p>
                         </a>
@@ -58,4 +59,4 @@ function mapStateToProps(state) {
 
 };
 
-export default connect(mapStateToProps, null)(Valuacion);
+export default withRouter(connect(mapStateToProps, null)(Valuacion));
