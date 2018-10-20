@@ -13,6 +13,7 @@ class Indicadores extends Component{
 	    }
 
 	    this.renderField = this.renderField.bind(this);
+      this.renderIndicador = this.renderIndicador.bind(this);
   	}
 
 	componentWillMount(){
@@ -38,6 +39,20 @@ class Indicadores extends Component{
 	      </div>
 	    );
 	} 
+
+  renderIndicador(field){
+    if(field.input.value){
+      return(
+      <span className="label label-info">{field.label}</span>
+      )
+    }else{
+      return(
+      <span className="label label-danger">{field.label}</span>
+      )
+    }
+    
+
+  }
 
 	render(){
 
@@ -79,25 +94,53 @@ class Indicadores extends Component{
                   <br/>
                   <div className='row'>
                     <div className="col-lg-3">
-                      <span className="label label-info">Pavimento</span>
+                      <Field
+                        label="Pavimento"
+                        name="pavimento"
+                        component={this.renderIndicador}
+                      />
                       <br/>
                       <br/>
-                      <span className="label label-info">Cloacas</span>
+                      <Field
+                        label="Cloacas"
+                        name="cloacas"
+                        component={this.renderIndicador}
+                      />
                     </div>
                     <div className="col-lg-3">
-                      <span className="label label-info">Alumbrado</span>
+                      <Field
+                        label="Alumbrado"
+                        name="alumbrado"
+                        component={this.renderIndicador}
+                      />
                       <br/>
                       <br/>
-                      <span className="label label-danger">Recolección</span>
+                      <Field
+                        label="Recolección"
+                        name="recoleccion"
+                        component={this.renderIndicador}
+                      />
                     </div>
                     <div className="col-lg-3">
-                      <span className="label label-danger">Gas</span>
+                      <Field
+                        label="Gas"
+                        name="gas"
+                        component={this.renderIndicador}
+                      />
                       <br/>
                       <br/>
-                      <span className="label label-danger">Barrido</span>
+                      <Field
+                        label="Barrido"
+                        name="barrido"
+                        component={this.renderIndicador}
+                      />
                     </div>
                     <div className="col-lg-3">
-                      <span className="label label-danger">Agua</span>
+                      <Field
+                        label="Agua"
+                        name="agua"
+                        component={this.renderIndicador}
+                      />
                     </div>
                   </div>
         		    </div>

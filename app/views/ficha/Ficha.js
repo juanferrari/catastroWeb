@@ -206,6 +206,25 @@ function mapStateToProps(state) {
     nomTitParcela = state.parcelas.parcela.nomenclaturaTitulo.parcelaNom;
   }
 
+  var agua = false;
+  var alumbrado = false;
+  var barrido = false;
+  var cloacas = false;
+  var gas = false;
+  var pavimento = false;
+  var recoleccion = false;
+
+  if(state.parcelas.parcela.indicadores){
+    var ind = state.parcelas.parcela.indicadores;
+    agua = ind.agua;
+    alumbrado = ind.alumbrado;
+    barrido = ind.barrido;
+    cloacas = ind.cloacas;
+    gas = ind.gas;
+    pavimento = ind.pavimento;
+    recoleccion = ind.recoleccion;
+  }
+
   return {
     parcelaFetching: state.parcelas.parcelaFetching,
     parcela: state.parcelas.parcela,
@@ -227,6 +246,13 @@ function mapStateToProps(state) {
       manzana: state.parcelas.parcela.manzana,
       parcela: state.parcelas.parcela.parcelaNom,
       partidaProvincial: state.parcelas.parcela.partidaProvincial,
+      agua,
+      alumbrado,
+      barrido,
+      cloacas,
+      gas,
+      pavimento,
+      recoleccion
     }
   }
 

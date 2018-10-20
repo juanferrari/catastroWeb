@@ -13,29 +13,27 @@ class Servicios extends Component{
         calles: [{calle_id:1,nombre:'calleOne'},{calle_id:2,nombre:'calleTwo'},{calle_id:3,nombre:'calleThree'}]
 	    }
 
-	    this.renderField = this.renderField.bind(this);
+	    this.renderSwitch = this.renderSwitch.bind(this);
   	}
 
 	componentWillMount(){
 
 	}
 
-  handleSwitch(el,state){
-    console.log('switch el ',el)
-    console.log('switch state ',state)
-  }
-
-	renderField(field) {
+	renderSwitch(field) {
 	    const { meta: { touched, error } } = field;
 
 	    const className = `form-group ${touched && error ? 'has-error' : ''}`;
 
 	    return (
         <div>
-          <strong>{field.label}</strong>
-
           <label className="switch">
-            <input type="checkbox"/>
+            <input 
+              type="checkbox" 
+              defaultChecked={field.input.value}
+              {...field.input}
+            />
+            <span className="test">{field.label}</span>
             <span className="slider"></span>
           </label>
         </div>
@@ -53,25 +51,43 @@ class Servicios extends Component{
               	</div>
               	<div className="panel-body">
                   <div className='row'>
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 col-lg-offset-2">
                       <Field
                         label="Agua"
                         name="agua"
-                        component={this.renderField}
+                        component={this.renderSwitch}
+                      />
+                      <Field
+                        label="Barrido"
+                        name="barrido"
+                        component={this.renderSwitch}
+                      />
+                      <Field
+                        label="Cloacas"
+                        name="cloacas"
+                        component={this.renderSwitch}
+                      />
+                      <Field
+                        label="Gas"
+                        name="gas"
+                        component={this.renderSwitch}
                       />
                     </div>
                     <div className="col-lg-4">
                       <Field
                         label="Alumbrado"
                         name="alumbrado"
-                        component={this.renderField}
+                        component={this.renderSwitch}
                       />
-                    </div>
-                    <div className="col-lg-4">
                       <Field
-                        label="Barrido"
-                        name="barrido"
-                        component={this.renderField}
+                        label="Pavimento"
+                        name="pavimento"
+                        component={this.renderSwitch}
+                      />
+                      <Field
+                        label="Recolección"
+                        name="recoleccion"
+                        component={this.renderSwitch}
                       />
                     </div>
                   </div>
@@ -85,12 +101,10 @@ class Servicios extends Component{
 Servicios = reduxForm(
   {
     enableReinitialize: true,
-    form: 'FichaForm'
+    form: 'ObrasPublicasForm'
   })(Servicios);
 
 function mapStateToProps(state) {
-
-  return {}
 
 };
 

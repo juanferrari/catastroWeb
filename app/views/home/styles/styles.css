@@ -57,9 +57,10 @@ p.btn-disabled {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 210px;
   height: 22px;
-  margin:8px;
+  box-shadow: 0 0 1px #2196F3;
+  border-radius: 4px;
 }
 
 .switch input { 
@@ -68,6 +69,19 @@ p.btn-disabled {
   height: 0;
 }
 
+.test {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  border-radius: 4px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -75,7 +89,8 @@ p.btn-disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  margin-left: 150px;
+  background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -84,25 +99,27 @@ p.btn-disabled {
   position: absolute;
   height: 20px;
   width: 32px;
-  left: 1px;
+  right: 1px;
   bottom: 1px;
-  background-color: white;
+  background-color: #2196F3;
   -webkit-transition: .4s;
   transition: .4s;
-  content: "No";
+  content: "";
+  border-radius: 4px;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+input:not(:checked) ~ .test {
+  background-color: #E8E8E8;
+  color: gray;
 }
 
-input:focus + .slider {
+input:focus ~ .slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-  content: "Si";
+input:not(:checked) ~ .slider:before {
+  -webkit-transform: translateX(-26px);
+  -ms-transform: translateX(-26px);
+  transform: translateX(-26px);
+  content: "";
 }

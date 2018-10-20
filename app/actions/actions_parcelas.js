@@ -28,6 +28,53 @@ export const UPLOAD_PLANO_REQUEST = 'UPLOAD_PLANO_REQUEST';
 export const UPLOAD_PLANO_SUCCESS = 'UPLOAD_PLANO_SUCCESS';
 export const UPLOAD_PLANO_FAIL = 'UPLOAD_PLANO_FAIL';
 
+export const EDIT_INDICADORES_REQUEST = 'EDIT_INDICADORES_REQUEST';
+export const EDIT_INDICADORES_SUCCESS = 'EDIT_INDICADORES_SUCCESS';
+export const EDIT_INDICADORES_FAIL = 'EDIT_INDICADORES_FAIL';
+
+function editIndicadoresRequest() {
+  return {
+    type: EDIT_INDICADORES_REQUEST,
+  }
+}
+
+function editIndicadoresSuccess(request,callback) {
+  callback();
+  return {
+    type: EDIT_INDICADORES_SUCCESS,
+    payload: request
+  }
+}
+
+function editIndicadoresFail(callback) {
+  callback();
+  return {
+    type: EDIT_INDICADORES_FAIL
+  }
+}
+
+export function editIndicadores(submitJson,parcela_id,callback){
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/indicadores';
+  
+  return function(dispatch) {
+        dispatch(editIndicadoresRequest())
+        const request = axios.put(service_url,submitJson,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(editIndicadoresSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(editIndicadoresFail(callback))
+              console.log("error",error)
+            })
+      }
+}
+
+
 function uploadPlanoRequest() {
   return {
     type: UPLOAD_PLANO_REQUEST,

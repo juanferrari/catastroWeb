@@ -7,7 +7,7 @@ import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
 import Servicios from './components/Servicios';
-import { getParcela } from 'actions/actions_parcelas';
+import { getParcela,editIndicadores } from 'actions/actions_parcelas';
 
 class ObrasPublicas extends Component{
 
@@ -16,8 +16,7 @@ class ObrasPublicas extends Component{
     this.state = {
       callesParcela:[]
     }
-    this.onChange = this.onChange.bind(this);
-    this.onConfirm = this.onConfirm.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount(){
@@ -25,38 +24,26 @@ class ObrasPublicas extends Component{
     this.props.getParcela(id)
   }
 
-  onChange(callesParcela){
-    console.log('callesParcela',callesParcela);
-    this.setState({callesParcela});
-  }
 
-  onConfirm(){
+  onSubmit(values){
     const {id} = this.props.match.params;
-    var calles = this.state.callesParcela;
-    var idsParcelas = [];
+    console.log('values',values)
+    console.log('id',id)
+    this.props.editIndicadores(values,id,()=>{this.props.history.push('/tramites')});
 
-    for(var calle of calles){
-      idsParcelas.push({id:calle.value})
-    }
-
-    if(idsParcelas.length > 0)
-      this.props.editCalles(idsParcelas,id,()=>{
-        this.props.history.push(`/tramites/${id}`)
-      })
   }
 
   render(){
 
-    const {parcela,parcelaFetching} = this.props;
+    const {parcela,parcelaFetching,handleSubmit} = this.props;
     const {id} = this.props.match.params;
-    var onConfirm = this.onConfirm;
     
     var breadcrumb = [
                       {url:`/tramites/`,tag:'Trámites',active:false},
                       {url:`/obrasPublicas/${id}`,tag:'Obras Públicas',active:true}
                      ]
 
-    if(parcela || parcelaFetching){
+    if(!parcela || parcelaFetching){
       return(
         <div className="centeredSpinner" >
           <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
@@ -71,12 +58,14 @@ class ObrasPublicas extends Component{
             <div className="row" style={{margin:'5vh',fontSize:'90%'}}>
               <br />
               <div className='col-md-6 col-md-offset-3' style={{marginTop:'2%'}}>
+              <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Servicios />
+                <div className='row'>
+                  <button type='submit'className='btn btn-primary'>Confirmar</button>
+                </div>
+              </form>
               </div>
               <br/> 
-            </div>
-            <div className='row'>
-              <button className='btn btn-primary' onClick={()=> onConfirm()}>Confirmar</button>
             </div>
           </div>
         </div>
@@ -84,12 +73,47 @@ class ObrasPublicas extends Component{
   }
 }
 
+ObrasPublicas = reduxForm(
+  {
+    enableReinitialize: true,
+    form: 'ObrasPublicasForm'
+  })(ObrasPublicas);
+
 function mapStateToProps(state){
   //console.log('mapStateToProps',state)
+  var agua = false;
+  var alumbrado = false;
+  var barrido = false;
+  var cloacas = false;
+  var gas = false;
+  var pavimento = false;
+  var recoleccion = false;
+
+  if(state.parcelas.parcela && state.parcelas.parcela.indicadores){
+    var ind = state.parcelas.parcela.indicadores;
+    agua = ind.agua;
+    alumbrado = ind.alumbrado;
+    barrido = ind.barrido;
+    cloacas = ind.cloacas;
+    gas = ind.gas;
+    pavimento = ind.pavimento;
+    recoleccion = ind.recoleccion;
+  }
 
   return {
+    parcela: state.parcelas.parcela,
+    parcelaFetching: state.parcelas.parcelaFetching,
+    initialValues:{
+      agua,
+      alumbrado,
+      barrido,
+      cloacas,
+      gas,
+      pavimento,
+      recoleccion
+    }
   }
 
 };
 
-export default connect(mapStateToProps, { getParcela })(ObrasPublicas);
+export default connect(mapStateToProps, { getParcela,editIndicadores })(ObrasPublicas);

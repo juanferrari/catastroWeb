@@ -18,12 +18,21 @@ import {
     EDIT_NOMENCLATURA_FAIL,
     UPLOAD_PLANO_REQUEST,
     UPLOAD_PLANO_SUCCESS,
-    UPLOAD_PLANO_FAIL
+    UPLOAD_PLANO_FAIL,
+    EDIT_INDICADORES_REQUEST,
+    EDIT_INDICADORES_SUCCESS,
+    EDIT_INDICADORES_FAIL
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case EDIT_INDICADORES_REQUEST:
+            return { ...state, parcelaEditing:true};
+        case EDIT_INDICADORES_SUCCESS:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Modificación de indicadores realizada exitosamente.',action_className:'alert alert-success'}};
+        case EDIT_INDICADORES_FAIL:
+            return { ...state, parcelaEditing:false, actionParcela:{message:'Error al modificar los indicadores de la parcela.',action_className:'alert alert-danger'}};
         case UPLOAD_PLANO_REQUEST:
             return { ...state, planoUploading:true};
         case UPLOAD_PLANO_SUCCESS:
