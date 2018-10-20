@@ -31,20 +31,15 @@ class Main extends React.Component {
         let wrapperClass = "white-bg wrapperClass"; 
 
         return (
-            <div>
-              <div id="wrapper">
-                  <Progress />
-                  
-                  <div >
-                      <TopHeader />
-                      <div className='row'>
-                        <AppRoute />
-                      </div>
-                      <div className='row'>
-                        <div>{/*<Footer />*/}</div>
-                      </div>
-                  </div>
+            <div style={{paddingBottom:'5vh'}}>
+              <div id="wrapper" style={{paddingBottom:'5vh','height':'95vh'}}>
+                <Progress />
+                <div >
+                  <TopHeader />
+                  <AppRoute />
+                </div>
               </div>
+              <Footer />
             </div>
           )
 

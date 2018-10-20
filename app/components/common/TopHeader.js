@@ -24,6 +24,9 @@ class TopHeader extends React.Component {
                     <div className="navbar-header">
                         <a className="navbar-minimalize minimalize-styl-2 btn btn-primary " href="http://186.33.216.232"><i className="fa fa-bars"></i> </a>
                     </div>
+                    <div >
+                        <img src='https://ppo.mininterior.gob.ar/images/logos/LogoMinInterior.png' style={{height:'50px',position:'absolute',marginTop:'10px',paddingTop:'10px'}}/>
+                    </div>
                     <div className="hidden-lg hidden-md hidden-sm text-center"  >
                             <div>
                                 <img style={{maxWidth:'50%',maxHeight:'80%',marginTop:"3vh",float:'left'}} src=""/>

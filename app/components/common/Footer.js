@@ -7,12 +7,13 @@ class Footer extends Component {
 
         var year = moment().format('YYYY');
         return (
-            <div className="footer hidden-print">
-                <div className="pull-right">
-
+            <div className="footer hidden-print text-center" 
+                style={{height:'5vh',position:'absolute',bottom:'auto',left:0,right:0}}>
+                <div className="pull-left">
+                    <img src='https://ppo.mininterior.gob.ar/images/logos/LogoMinInterior.png' style={{height:'30px',position:'absolute',marginTop:'1px'}}/>
                 </div>
                 <div>
-                    <strong>Copyright</strong> CatastroWeb&copy; {year}
+                    Sistema de Catastro {year}
                 </div>
             </div>
         )
