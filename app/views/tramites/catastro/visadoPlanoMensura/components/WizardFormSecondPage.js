@@ -22,11 +22,11 @@ class WizardFormSecondPage extends Component {
     var buttonConfirm;
 
     if(this.props.notReady){
-      buttonConfirm = <button className="submit btn btn-primary" type="submit" disabled={pristine || submitting}>
+      buttonConfirm = <button className="submit btn btn-primary" type="submit" >
                         Guardar y continuar después
                       </button>
     }else{
-      buttonConfirm = <button className="submit btn btn-primary" type="submit" disabled={pristine || submitting || this.state.notReady}>
+      buttonConfirm = <button className="submit btn btn-primary" type="submit" disabled={this.state.notReady}>
                         Visar
                       </button>
     }
@@ -42,7 +42,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Conforme estado de cuentas tasas municipales"
-                    name="tasasMunicipales"
+                    name="conformeEstadoCuentasTasasMun"
                     component={renderCheckbox}
                   />
                 </div>
@@ -51,7 +51,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Conforme código"
-                    name="codigo"
+                    name="conformeCodigo"
                     component={renderCheckbox}
                   />
                 </div>
@@ -60,7 +60,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Corroboración en plancheta (medidas, linderos, superficies y nomenclatura catastral y urbana)"
-                    name="plancheta"
+                    name="corroboracionPlancheta"
                     component={renderCheckbox}
                   />
                 </div>
@@ -69,7 +69,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Corroboración restricciones"
-                    name="restricciones"
+                    name="corroboracionRestricciones"
                     component={renderCheckbox}
                   />
                 </div>
@@ -78,7 +78,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Corroboración designación según título"
-                    name="designacion"
+                    name="corroboracionDesignacionTitulo"
                     component={renderCheckbox}
                   />
                 </div>
@@ -87,7 +87,7 @@ class WizardFormSecondPage extends Component {
                 <div className="col-lg-7 col-lg-offset-3">
                   <Field
                     label="Corroboración de dominio"
-                    name="dominio"
+                    name="corroboracionDominio"
                     component={renderCheckbox}
                   />
                 </div>
@@ -110,8 +110,8 @@ function mapStateToProps(state) {
   var notReady = true;
   var w = state.form.wizard.values;
 
-  if(w && w.tasasMunicipales && w.dominio && w.designacion && w.restricciones
-     && w.plancheta && w.codigo){
+  if(w && w.conformeEstadoCuentasTasasMun && w.corroboracionDominio && w.corroboracionDesignacionTitulo && w.corroboracionRestricciones
+     && w.corroboracionPlancheta && w.conformeCodigo){
     notReady = false;
   }
 
@@ -122,10 +122,10 @@ function mapStateToProps(state) {
 }
 
 WizardFormSecondPage = reduxForm({
-  enableReinitialize : true,
   form: 'wizard', // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
-  forceUnregisterOnUnmount: true // <------ unregister fields on unmount
-})(WizardFormSecondPage);
+  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  validate
+})(WizardFormSecondPage)
 
 export default withRouter(connect(mapStateToProps, { })(WizardFormSecondPage));

@@ -6,7 +6,8 @@ import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm } from 'redux-form';
 import lodash from 'lodash';
 import CommonHeader from 'components/common/CommonHeader';
-import Wizard from './components/Wizard'
+import Wizard from './components/Wizard';
+import { getExpedienteMensura } from 'actions/actions_parcelas';
 
 class VisadoPlanoMensura extends Component{
 
@@ -14,21 +15,16 @@ class VisadoPlanoMensura extends Component{
     super(props);
     this.state = {
     }
-    this.onConfirm = this.onConfirm.bind(this);
   }
 
   componentWillMount(){
-
-  }
-
-  onConfirm(){
-    console.log('onConfirm');
+    const {id} = this.props.match.params;
+    this.props.getExpedienteMensura(id);
   }
 
 	render(){
 
     const {id} = this.props.match.params;
-    var onConfirm = this.onConfirm;
 
     var breadcrumb = [
                       {url:`/tramites/`,tag:'Trámites',active:false},
@@ -64,8 +60,9 @@ function mapStateToProps(state){
   //console.log('mapStateToProps',state)
 
   return {
+    expedienteMensura: state.parcelas.expedienteMensura
   }
 
 };
 
-export default connect(mapStateToProps, { })(VisadoPlanoMensura);
+export default connect(mapStateToProps, { getExpedienteMensura })(VisadoPlanoMensura);

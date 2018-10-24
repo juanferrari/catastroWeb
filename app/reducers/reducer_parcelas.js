@@ -21,12 +21,40 @@ import {
     UPLOAD_PLANO_FAIL,
     EDIT_INDICADORES_REQUEST,
     EDIT_INDICADORES_SUCCESS,
-    EDIT_INDICADORES_FAIL
+    EDIT_INDICADORES_FAIL,
+    EDIT_EXP_MENSURA_REQUEST,
+    EDIT_EXP_MENSURA_SUCCESS,
+    EDIT_EXP_MENSURA_FAIL,
+    GET_EXPEDIENTE_MENSURA_REQUEST,
+    GET_EXPEDIENTE_MENSURA_SUCCESS,
+    GET_EXPEDIENTE_MENSURA_FAIL,
+    DELETE_PLANO_REQUEST,
+    DELETE_PLANO_SUCCESS,
+    DELETE_PLANO_FAIL
+
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case GET_EXPEDIENTE_MENSURA_REQUEST:
+            return { ...state, expedienteFetching:true};
+        case GET_EXPEDIENTE_MENSURA_SUCCESS:
+            return { ...state, expedienteFetching:false, expedienteMensura:action.payload.data};
+        case GET_EXPEDIENTE_MENSURA_FAIL:
+            return { ...state, expedienteFetching:false};
+        case DELETE_PLANO_REQUEST:
+            return { ...state, expMensuraDeleting:true};
+        case DELETE_PLANO_SUCCESS:
+            return { ...state, expMensuraDeleting:false, actionParcela:{message:'Visado de plano de mensura realizado exitosamente.',action_className:'alert alert-success'}};
+        case DELETE_PLANO_FAIL:
+            return { ...state, expMensuraDeleting:false, actionParcela:{message:'Error al visar el plano de mensura de la parcela.',action_className:'alert alert-danger'}};
+        case EDIT_EXP_MENSURA_REQUEST:
+            return { ...state, expMensuraEditing:true};
+        case EDIT_EXP_MENSURA_SUCCESS:
+            return { ...state, expMensuraEditing:false, actionParcela:{message:'Visado de plano de mensura realizado exitosamente.',action_className:'alert alert-success'}};
+        case EDIT_EXP_MENSURA_FAIL:
+            return { ...state, expMensuraEditing:false, actionParcela:{message:'Error al visar el plano de mensura de la parcela.',action_className:'alert alert-danger'}};
         case EDIT_INDICADORES_REQUEST:
             return { ...state, parcelaEditing:true};
         case EDIT_INDICADORES_SUCCESS:

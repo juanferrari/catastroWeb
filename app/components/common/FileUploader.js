@@ -4,7 +4,6 @@ import ReactLoading from 'react-loading';
 import {Button,Modal} from 'react-bootstrap';
 import { Field,reduxForm,FieldArray } from 'redux-form';
 import UploadButton from 'components/common/UploadButton';
-//import '../styles/styles.css'
 
 class FileUploader extends Component{
 
@@ -79,7 +78,7 @@ class FileUploader extends Component{
     var subirArchivo = this.props.onFileUpload;
 
     const renderFiles = ({ fields, meta: { error } }) =>
-    <div>
+    <div className={`form-group ${ !this.props.pristine && error ? 'has-error' : ''}`}>
       <UploadButton
             className="btn btn-info"
             onChange={(e) => subirArchivo(e.target.files,fields)}
@@ -106,9 +105,12 @@ class FileUploader extends Component{
             </div>
           </li>
         )}
-        
+        <div className="text-help">
+          {!this.props.pristine ? error : ''}
+        </div>
       </ul>
     </div>
+
     if(this.props.notCollapsible == 'true'){
      title = null;
     }
@@ -149,7 +151,7 @@ class FileUploader extends Component{
                   <div className='row'>
                     {this.props.uploadButton}
                   </div>
-                  <FieldArray name={`files`} component={renderFiles} />
+                  <FieldArray name='files' component={renderFiles} />
                 </div>
                 {this.props.error}
               </div>

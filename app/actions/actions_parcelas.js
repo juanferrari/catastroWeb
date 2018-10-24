@@ -32,6 +32,142 @@ export const EDIT_INDICADORES_REQUEST = 'EDIT_INDICADORES_REQUEST';
 export const EDIT_INDICADORES_SUCCESS = 'EDIT_INDICADORES_SUCCESS';
 export const EDIT_INDICADORES_FAIL = 'EDIT_INDICADORES_FAIL';
 
+export const EDIT_EXP_MENSURA_REQUEST = 'EDIT_EXP_MENSURA_REQUEST';
+export const EDIT_EXP_MENSURA_SUCCESS = 'EDIT_EXP_MENSURA_SUCCESS';
+export const EDIT_EXP_MENSURA_FAIL = 'EDIT_EXP_MENSURA_FAIL';
+
+export const GET_EXPEDIENTE_MENSURA_REQUEST = 'GET_EXPEDIENTE_MENSURA_REQUEST';
+export const GET_EXPEDIENTE_MENSURA_SUCCESS = 'GET_EXPEDIENTE_MENSURA_SUCCESS';
+export const GET_EXPEDIENTE_MENSURA_FAIL = 'GET_EXPEDIENTE_MENSURA_FAIL';
+
+export const DELETE_PLANO_REQUEST = 'DELETE_PLANO_REQUEST';
+export const DELETE_PLANO_SUCCESS = 'DELETE_PLANO_SUCCESS';
+export const DELETE_PLANO_FAIL = 'DELETE_PLANO_FAIL';
+
+function deletePlanoRequest() {
+  return {
+    type: DELETE_PLANO_REQUEST,
+  }
+}
+
+function deletePlanoSuccess(request,callback) {
+  if(callback)
+    callback();
+  return {
+    type: DELETE_PLANO_SUCCESS,
+    payload: request
+  }
+}
+
+function deletePlanoFail(callback) {
+  if(callback)
+    callback();
+  return {
+    type: DELETE_PLANO_FAIL
+  }
+}
+
+export function deletePlano(parcela_id,plano_id,callback){
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/expedienteMensura/planos/' + plano_id;
+  
+  return function(dispatch) {
+        dispatch(deletePlanoRequest())
+        const request = axios.delete(service_url,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(deletePlanoSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(deletePlanoFail(callback))
+              console.log("error",error)
+            })
+      }
+}
+
+function getExpedienteMensuraRequest() {
+  return {
+    type: GET_EXPEDIENTE_MENSURA_REQUEST,
+  }
+}
+
+function getExpedienteMensuraSuccess(request) {
+  return {
+    type: GET_EXPEDIENTE_MENSURA_SUCCESS,
+    payload: request
+  }
+}
+
+function getExpedienteMensuraFail() {
+  return {
+    type: GET_EXPEDIENTE_MENSURA_FAIL
+  }
+}
+
+export function getExpedienteMensura(parcela_id){
+
+  var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/expedienteMensura';
+  
+  return function(dispatch) {
+        dispatch(getExpedienteMensuraRequest())
+        const request = axios.get(service_url,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(getExpedienteMensuraSuccess(request))
+          }).catch( error =>{
+              dispatch(getExpedienteMensuraFail())
+              console.log("error",error)
+            })
+      }
+}
+
+function editExpMensuraRequest() {
+  return {
+    type: EDIT_EXP_MENSURA_REQUEST,
+  }
+}
+
+function editExpMensuraSuccess(request) {
+  return {
+    type: EDIT_EXP_MENSURA_SUCCESS,
+    payload: request
+  }
+}
+
+function editExpMensuraFail() {
+  return {
+    type: EDIT_EXP_MENSURA_FAIL
+  }
+}
+
+export function editExpMensura(id,submitJson){
+
+  var service_url = ROOT_URL + 'parcelas/' + id + '/expedienteMensura';
+  
+  return function(dispatch) {
+        dispatch(editExpMensuraRequest())
+        const request = axios.put(service_url,submitJson,{
+          headers: {
+              'Content-Type': 'application/json',
+              'X-session': localStorage.getItem('session'),
+              'X-user':localStorage.getItem('user_id'),
+
+          }}).then( request =>{
+            dispatch(editExpMensuraSuccess(request))
+          }).catch( error =>{
+              dispatch(editExpMensuraFail())
+              console.log("error",error)
+            })
+      }
+}
+
 function editIndicadoresRequest() {
   return {
     type: EDIT_INDICADORES_REQUEST,
@@ -100,7 +236,7 @@ export function uploadPlano(file,parcela_id){
   formData.append("file", file);
 
   var service_url = ROOT_URL + 'parcelas/' + parcela_id + '/expedienteMensura/plano';
-  
+
   return function(dispatch) {
         dispatch(uploadPlanoRequest())
         const request = axios.post(service_url,formData,{
