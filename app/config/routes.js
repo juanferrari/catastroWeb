@@ -14,11 +14,13 @@ import VisadoPlanoMensura from 'views/tramites/catastro/visadoPlanoMensura/Visad
 import RegistracionPlanoMensura from 'views/tramites/catastro/registracionPlanoMensura/RegistracionPlanoMensura';
 import NomenclaturaTitulo from 'views/tramites/catastro/nomenclaturaTitulo/NomenclaturaTitulo';
 import ObrasPublicas from 'views/tramites/valuacion/obrasPublicas/ObrasPublicas';
+import UnificacionParcelas from 'views/tramites/catastro/unificacionParcelas/UnificacionParcelas';
 
 const AppRoute =() => (
 
         <div>
           <Switch>
+            <Route path="/unificacionParcelas/:id" component={UnificacionParcelas}/>
             <Route path="/obrasPublicas/:id" component={ObrasPublicas}/>
             <Route path="/nomenclaturaTitulo/:id" component={NomenclaturaTitulo}/>
             <Route path="/registracionPlanoMensura/:id" component={RegistracionPlanoMensura}/>

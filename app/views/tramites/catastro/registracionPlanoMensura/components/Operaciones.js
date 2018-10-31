@@ -31,8 +31,8 @@ class Operaciones extends Component{
                   <div className='row'>
                     <div className="col-lg-12">
                       <div className="col-xs-12">
-                        <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-disabled">
+                        <a onClick={()=>this.props.history.push(`/unificacionParcelas/${id}`)}>
+                          <p className="text-center btn-tramite">
                             UNIFICACIÓN DE PARCELAS
                           </p>
                         </a>

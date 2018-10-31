@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
-import { updateParcelaInfo, openModal, closeModal } from 'actions/actions_map'
+import { updateParcelaInfo } from 'actions/actions_map'
 import axios from 'axios';
-import ModalParcelas from './ModalParcelas'
-import ReactLoading from 'react-loading'
-import DatosBusqueda from 'views/busqueda/components/DatosBusqueda'
+import ReactLoading from 'react-loading';
 
-class MainMap extends Component {
+class UnificacionParcelas extends Component {
 
   constructor(props){
     super(props);
     this.state = {
       lat: -34.64235943,
       lng: -60.46995009,
-      zoom: 16,
+      zoom: 22,
       open: false,
       geojson:null,
       parcela:null,
@@ -35,19 +33,33 @@ class MainMap extends Component {
   }
 
   componentWillMount(){
-    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&maxFeatures=1&outputFormat=application%2Fjson';
-    //var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&outputFormat=application%2Fjson';
+    const {id} = this.props.match.params;
+    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&outputFormat=application%2Fjson&featureID='
+    service_url = service_url + id;
 
+    //console.log('service_url',service_url);
 
     axios.get(service_url)
     .then(data=>{
-      this.setState({geojson:JSON.parse(data.request.response)});
+
+      var parcelaJson = JSON.parse(data.request.response);
+
+      var myStyle = {
+       "color": "#ff7800",
+       "weight": 5,
+       "opacity": 0.65
+      };
+
+      var lng = parcelaJson.features[0].geometry.coordinates[0][0][0][0];
+      var lat = parcelaJson.features[0].geometry.coordinates[0][0][0][1];
+
+      this.setState({geojson:parcelaJson});
 
       var map = L.map('map');
 
       map.getContainer().setAttribute('id', 'wmsContainer');
 
-      map.setView([this.state.lat, this.state.lng], this.state.zoom);
+      map.setView([lat, lng], this.state.zoom);
 
       L.tileLayer.wms('http://186.33.216.232/geoserver/world/wms?', {
         layers: 'world:chacabuco_osm'
@@ -59,6 +71,8 @@ class MainMap extends Component {
         opacity: 0.5
       }
       ).addTo(map);
+
+      L.geoJSON(parcelaJson,{style: myStyle}).addTo(map);
 
       map.on('click', this.getFeatureInfo, this);
 
@@ -118,7 +132,6 @@ class MainMap extends Component {
         parcela.nomencla = parcelaJson.features[0].properties.nomencla;
 
         this.props.updateParcelaInfo(parcela);
-        this.props.openModal();
       }
       
     }).catch(error=>{
@@ -127,7 +140,6 @@ class MainMap extends Component {
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng]
 
     if(!this.state.geojson){
       return(
@@ -139,13 +151,7 @@ class MainMap extends Component {
 
     return (
       <div style={{fontSize:'90%'}}>
-        <ModalParcelas />
         <div className="row wrapper border-bottom white-bg page-heading text-center">
-          <div className='row'>
-            <div className='col-lg-12'>
-              <DatosBusqueda collapsed='true' titleCentered='true'/>
-            </div>
-          </div>
           <div className='col-lg-8 col-lg-offset-2' id='map' />
         </div>
         <br />
@@ -156,4 +162,4 @@ class MainMap extends Component {
   }
 }
 
-export default connect(null, { updateParcelaInfo, openModal, closeModal })(MainMap);
+export default connect(null, { updateParcelaInfo })(UnificacionParcelas);
