@@ -60,8 +60,6 @@ function deletePlanoSuccess(request,callback) {
 }
 
 function deletePlanoFail(callback) {
-  if(callback)
-    callback();
   return {
     type: DELETE_PLANO_FAIL
   }
@@ -82,7 +80,7 @@ export function deletePlano(parcela_id,plano_id,callback){
           }}).then( request =>{
             dispatch(deletePlanoSuccess(request,callback))
           }).catch( error =>{
-              dispatch(deletePlanoFail(callback))
+              dispatch(deletePlanoFail())
               console.log("error",error)
             })
       }
@@ -217,7 +215,9 @@ function uploadPlanoRequest() {
   }
 }
 
-function uploadPlanoSuccess(request) {
+function uploadPlanoSuccess(request,callback) {
+  if(callback)
+    callback();
   return {
     type: UPLOAD_PLANO_SUCCESS,
     payload: request
@@ -230,7 +230,7 @@ function uploadPlanoFail() {
   }
 }
 
-export function uploadPlano(file,parcela_id){
+export function uploadPlano(file,parcela_id,callback){
 
   var formData = new FormData();
   formData.append("file", file);
@@ -245,7 +245,7 @@ export function uploadPlano(file,parcela_id){
               'accept':"*/*",
               'cache-control':"no-cache"
         }}).then( request =>{
-            dispatch(uploadPlanoSuccess(request))
+            dispatch(uploadPlanoSuccess(request,callback))
           }).catch( error =>{
               dispatch(uploadPlanoFail())
               console.log("error uploadPlano",error)

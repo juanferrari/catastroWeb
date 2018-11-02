@@ -76,6 +76,7 @@ class FileUploader extends Component{
     var title = 'Archivos:';
     var renderField = this.renderField;
     var subirArchivo = this.props.onFileUpload;
+    var loading = this.props.loading;
 
     const renderFiles = ({ fields, meta: { error } }) =>
     <div className={`form-group ${ !this.props.pristine && error ? 'has-error' : ''}`}>
@@ -83,9 +84,9 @@ class FileUploader extends Component{
             className="btn btn-info"
             onChange={(e) => subirArchivo(e.target.files,fields)}
             style={{ visible: true }}
-            disabled={false}
+            disabled={loading}
             label={" Adjuntar plano"}
-            spinner={<i className="fa fa-spinner fa-spin" style={{ display: (false) ? 'inherit' : 'none' }}></i>}
+            spinner={<i className="fa fa-spinner fa-spin" style={{ display: (loading) ? 'inherit' : 'none' }}></i>}
             icon={<span className="glyphicon glyphicon-upload"></span>}
           />
       <ul className="list-group">
