@@ -15,11 +15,13 @@ import RegistracionPlanoMensura from 'views/tramites/catastro/registracionPlanoM
 import NomenclaturaTitulo from 'views/tramites/catastro/nomenclaturaTitulo/NomenclaturaTitulo';
 import ObrasPublicas from 'views/tramites/valuacion/obrasPublicas/ObrasPublicas';
 import UnificacionParcelas from 'views/tramites/catastro/unificacionParcelas/UnificacionParcelas';
+import SubdivisionParcela from 'views/tramites/catastro/subdivisionParcela/SubdivisionParcela';
 
 const AppRoute =() => (
 
         <div>
           <Switch>
+            <Route path="/subdivisionParcela/:id" component={SubdivisionParcela}/>
             <Route path="/unificacionParcelas/:id" component={UnificacionParcelas}/>
             <Route path="/obrasPublicas/:id" component={ObrasPublicas}/>
             <Route path="/nomenclaturaTitulo/:id" component={NomenclaturaTitulo}/>

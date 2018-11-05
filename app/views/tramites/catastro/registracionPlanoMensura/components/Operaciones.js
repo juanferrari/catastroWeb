@@ -38,8 +38,8 @@ class Operaciones extends Component{
                         </a>
                       </div>
                       <div className="col-xs-12">
-                        <a onClick={()=>console.log('catastro')}>
-                          <p className="text-center btn-disabled">
+                        <a onClick={()=>this.props.history.push(`/subdivisionParcela/${id}`)}>
+                          <p className="text-center btn-tramite">
                             SUBDIVISIÓN DE PARCELA
                           </p>
                         </a>
