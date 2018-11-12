@@ -84,9 +84,31 @@ class SubdivisionParcela extends Component {
       var drawControl = new L.Control.Draw({
          edit: {
              featureGroup: drawnItems
+         },
+         draw: {
+             polyline:false,
+             marker: false,
+             rectangle:false,
+             circle:false,
+             circlemarker:false
          }
       });
+
       map.addControl(drawControl);
+
+
+      map.on(L.Draw.Event.CREATED, function (e) {
+         var type = e.layerType,
+             layer = e.layer;
+
+         drawnItems.addLayer(layer);
+
+         if (type === 'marker') {
+             // Do marker specific actions
+         }
+         // Do whatever else you need to. (save to db; add to map etc)
+         //map.addLayer(layer);
+      });
 
       /*var modifiedDraw = L.drawLocal.extend({
          draw: {
