@@ -14,7 +14,7 @@ class SubdivisionParcela extends Component {
     this.state = {
       lat: -34.64235943,
       lng: -60.46995009,
-      zoom: 22,
+      zoom: 16,
       open: false,
       geojson:null,
       parcela:null,
@@ -45,6 +45,27 @@ class SubdivisionParcela extends Component {
     .then(data=>{
 
       var parcelaJson = JSON.parse(data.request.response);
+      var drawnItems = new L.FeatureGroup();
+
+      var latLong = [];
+      var thisTime = true;
+      var savedLatLong = [];
+      parcelaJson.features.forEach(function(currentFeature){
+
+          currentFeature.geometry.coordinates[0].forEach(function(locationArray){
+
+              locationArray.forEach(function(location){
+
+                  latLong.push([location[1] , location[0]]);
+                  savedLatLong.push([location[1] , location[0]]);
+              });
+          });
+
+          var polygon = L.polygon(latLong).addTo(drawnItems);
+          latLong = [];
+      });
+
+      console.log('savedLatLong',savedLatLong)
 
       var myStyle = {
        "color": "#ff7800",
@@ -79,7 +100,7 @@ class SubdivisionParcela extends Component {
       //map.on('click', this.getFeatureInfo, this);
 
       // FeatureGroup is to store editable layers
-      var drawnItems = new L.FeatureGroup();
+      
       map.addLayer(drawnItems);
       var drawControl = new L.Control.Draw({
          edit: {
@@ -90,16 +111,22 @@ class SubdivisionParcela extends Component {
              marker: false,
              rectangle:false,
              circle:false,
-             circlemarker:false
+             circlemarker:false,
+             polygon:false
          }
       });
 
       map.addControl(drawControl);
 
+      //drawnItems.addLayer(L.geoJSON(parcelaJson));
+
+      
 
       map.on(L.Draw.Event.CREATED, function (e) {
          var type = e.layerType,
              layer = e.layer;
+
+         //console.log('drawn layer',layer);
 
          drawnItems.addLayer(layer);
 
