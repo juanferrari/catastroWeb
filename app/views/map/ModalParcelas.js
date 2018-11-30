@@ -25,16 +25,13 @@ class ModalParcelas extends Component {
 	            </Modal.Header>
 
 	            <Modal.Body>
-	              <label>Layer: </label>
+	              <label>{"Capa:\u00A0"}</label>
 		          {parcelaInfo.layer}
 		          <br/>
-		          <label>Id de la parcela: </label>
+		          <label>{'Id de la parcela:\u00A0'}</label>
 		          {parcelaInfo.id}
 		          <br/>
-		          <label>Etiqueta: </label>
-		          {parcelaInfo.etiqueta}
-		          <br/>
-		          <label>Nomenclatura: </label>
+		          <label>{'Nomenclatura:\u00A0'}</label>
 		          {parcelaInfo.nomencla}
 		          <br/>
 	            </Modal.Body>
@@ -48,7 +45,7 @@ class ModalParcelas extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state",state)
+  //console.log("state",state)
   return {
     parcelaInfo: state.map.parcelaInfo,
     showModal: state.map.showModal
