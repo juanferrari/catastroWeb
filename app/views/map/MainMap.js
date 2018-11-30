@@ -191,7 +191,7 @@ class MainMap extends Component {
         var map = this.state.map;
         var layer = this.state.currentGeoJsonLayer;
         var parcelaJson = JSON.parse(data.request.response);
-        //console.log('parcela',parcelaJson)
+        console.log('data',data)
         if(layer)
           layer.clearLayers();
 

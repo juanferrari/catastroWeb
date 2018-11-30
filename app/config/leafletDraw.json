@@ -2,20 +2,20 @@
   "draw": {
     "toolbar": {
       "actions": {
-        "title": "Cancel - your text-",
-        "text": "your text"
+        "title": "Cancelar",
+        "text": "Cancelar"
       },
       "finish": {
-        "title": "your text",
-        "text": "your text"
+        "title": "Aceptar",
+        "text": "Aceptar"
       },
       "undo": {
-        "title": "your text",
-        "text": "your text"
+        "title": "Deshacer",
+        "text": "Deshacer"
       },
       "buttons": {
         "polyline": "- your text-",
-        "polygon": "- your text-",
+        "polygon": "Dibujar subdivisión",
         "rectangle": "- your text-",
         "circle": "- your text-",
         "marker": "- your text-",
@@ -41,9 +41,9 @@
       },
       "polygon": {
         "tooltip": {
-          "start": "- your text-.",
-          "cont": "- your text-.",
-          "end": "- your text-."
+          "start": "Comenzar",
+          "cont": "Continuar",
+          "end": "Finalizar"
         }
       },
       "polyline": {
