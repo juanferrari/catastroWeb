@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
-import { updateParcelaInfo } from 'actions/actions_map'
+import { updateParcelaInfo } from 'actions/actions_map';
+import { subdividirParcela } from 'actions/actions_parcelas'; 
 import axios from 'axios';
 import ReactLoading from 'react-loading';
 import { FeatureGroup,Draw,addControl,extend } from 'leaflet-draw';
 import 'leaflet-draw/dist/leaflet.draw.css';
+import leafletDrawJson from 'config/leafletDraw.json';
 
 class SubdivisionParcela extends Component {
 
@@ -14,16 +16,18 @@ class SubdivisionParcela extends Component {
     this.state = {
       lat: -34.64235943,
       lng: -60.46995009,
-      zoom: 16,
+      zoom: 25,
       open: false,
       geojson:null,
       parcela:null,
       map: null,
       wmsParams: null,
       url: null,
-      currentGeoJsonLayer: null
+      currentGeoJsonLayer: null,
+      subdividirEnabled: false
     }
-    this.getFeatureInfo = this.getFeatureInfo.bind(this);
+    //this.getFeatureInfo = this.getFeatureInfo.bind(this);
+    this.subdividir = this.subdividir.bind(this);
   }
 
   getStyle(feature, layer) {
@@ -35,21 +39,29 @@ class SubdivisionParcela extends Component {
   }
 
   componentWillMount(){
+
     const {id} = this.props.match.params;
     var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&outputFormat=application%2Fjson&featureID='
     service_url = service_url + id;
-
-    //console.log('service_url',service_url);
 
     axios.get(service_url)
     .then(data=>{
 
       var parcelaJson = JSON.parse(data.request.response);
+      
       var drawnItems = new L.FeatureGroup();
 
       var latLong = [];
       var thisTime = true;
       var savedLatLong = [];
+
+      var latLongNuevo = [];
+
+      latLongNuevo.push([-34.629739,-60.475689])
+      latLongNuevo.push([-34.62960193604793,-60.475535570202915])
+      latLongNuevo.push([-34.629701589530306,-60.47530367216218])
+      latLongNuevo.push([-34.629739,-60.475689])
+
       parcelaJson.features.forEach(function(currentFeature){
 
           currentFeature.geometry.coordinates[0].forEach(function(locationArray){
@@ -61,6 +73,9 @@ class SubdivisionParcela extends Component {
               });
           });
 
+
+          console.log('coords original',latLong)
+          console.log('coords nuevas',latLongNuevo )
           var polygon = L.polygon(latLong).addTo(drawnItems);
           latLong = [];
       });
@@ -80,6 +95,10 @@ class SubdivisionParcela extends Component {
 
       var map = L.map('map');
 
+      map.zoomControl.remove();
+
+      L.control.zoom({zoomInTitle:'Acercar',zoomOutTitle:'Alejar'}).addTo(map);
+
       map.getContainer().setAttribute('id', 'wmsContainer');
 
       map.setView([lat, lng], this.state.zoom);
@@ -90,7 +109,7 @@ class SubdivisionParcela extends Component {
       ).addTo(map);
 
       var wmsInfo = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
-        layers: 'world:parcela_registro_grafico_provincial',
+        layers: 'world:parcelas_provinciales',
         opacity: 0.5
       }
       ).addTo(map);
@@ -102,17 +121,24 @@ class SubdivisionParcela extends Component {
       // FeatureGroup is to store editable layers
       
       map.addLayer(drawnItems);
+
+     
+      L.drawLocal = leafletDrawJson;
+      
+
       var drawControl = new L.Control.Draw({
          edit: {
-             featureGroup: drawnItems
+
+            featureGroup: drawnItems,
+            remove:false
          },
          draw: {
-             polyline:false,
-             marker: false,
-             rectangle:false,
-             circle:false,
-             circlemarker:false,
-             polygon:false
+            polyline:false,
+            marker: false,
+            rectangle:false,
+            circle:false,
+            circlemarker:false,
+            polygon: false
          }
       });
 
@@ -120,22 +146,31 @@ class SubdivisionParcela extends Component {
 
       //drawnItems.addLayer(L.geoJSON(parcelaJson));
 
-      
+      console.log('drawItems',drawnItems);
 
-      map.on(L.Draw.Event.CREATED, function (e) {
-         var type = e.layerType,
-             layer = e.layer;
+      var context = this;
 
-         //console.log('drawn layer',layer);
+      map.on('draw:edited', function (e) {
+         var layers = e.layers;
+         console.log('edited layer',layers._layers[1]._latlngs)
 
-         drawnItems.addLayer(layer);
+         var polygon = L.polygon(layers._layers[1]._latlngs)
 
-         if (type === 'marker') {
-             // Do marker specific actions
-         }
-         // Do whatever else you need to. (save to db; add to map etc)
-         //map.addLayer(layer);
-      });
+         var gojsonPolygon = polygon.toGeoJSON();
+
+         gojsonPolygon.crs = {"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::4326"}};
+         gojsonPolygon.type = 'Polygon';
+         gojsonPolygon.coordinates = gojsonPolygon.geometry.coordinates;
+         delete gojsonPolygon.geometry;
+
+         console.log('polygon geojson',JSON.stringify(gojsonPolygon));
+
+         context.setState({subdividirEnabled:true,subdivisionJson:gojsonPolygon})
+
+         layers.eachLayer(function (layer) {
+             //do whatever you want; most likely save back to db
+         });
+     });
 
       /*var modifiedDraw = L.drawLocal.extend({
          draw: {
@@ -155,6 +190,7 @@ class SubdivisionParcela extends Component {
 
   }
 
+  /*
   getFeatureInfo(evt){
 
     var point = this.state.map.latLngToContainerPoint(evt.latlng, this.state.map.getZoom()),
@@ -209,6 +245,16 @@ class SubdivisionParcela extends Component {
       console.log(error.stack)
     })
   }
+  */
+
+  subdividir(){
+    const {id} = this.props.match.params;
+    console.log('subdividir parcela id',id);
+    console.log('subdividir parcela json',this.state.subdivisionJson);
+    var geoJson = JSON.stringify(this.state.subdivisionJson);
+    console.log('sendd',geoJson);
+    this.props.subdividirParcela(id,geoJson,()=>{this.props.history.push(`/tramites/${id}`)})
+  }
 
   render() {
 
@@ -226,11 +272,18 @@ class SubdivisionParcela extends Component {
           <div className='col-lg-8 col-lg-offset-2' id='map' />
         </div>
         <br />
-        
+        <div className='row text-center'>
+          <button 
+            className='btn btn-primary' 
+            onClick={this.subdividir}
+            disabled={!this.state.subdividirEnabled}
+          > Subdividir 
+          </button>
+        </div>
       </div>
     )
 
   }
 }
 
-export default connect(null, { updateParcelaInfo })(SubdivisionParcela);
+export default connect(null, { updateParcelaInfo,subdividirParcela })(SubdivisionParcela);

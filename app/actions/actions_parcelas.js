@@ -44,6 +44,54 @@ export const DELETE_PLANO_REQUEST = 'DELETE_PLANO_REQUEST';
 export const DELETE_PLANO_SUCCESS = 'DELETE_PLANO_SUCCESS';
 export const DELETE_PLANO_FAIL = 'DELETE_PLANO_FAIL';
 
+export const SUBDIVIDIR_PARCELA_REQUEST = 'SUBDIVIDIR_PARCELA_REQUEST';
+export const SUBDIVIDIR_PARCELA_SUCCESS = 'SUBDIVIDIR_PARCELA_SUCCESS';
+export const SUBDIVIDIR_PARCELA_FAIL = 'SUBDIVIDIR_PARCELA_FAIL';
+
+
+function subdividirParcelaRequest() {
+  return {
+    type: SUBDIVIDIR_PARCELA_REQUEST,
+  }
+}
+
+function subdividirParcelaSuccess(request,callback) {
+  if(callback)
+    callback();
+  return {
+    type: SUBDIVIDIR_PARCELA_SUCCESS,
+    payload: request
+  }
+}
+
+function subdividirParcelaFail(callback) {
+  if(callback)
+    callback();
+  return {
+    type: SUBDIVIDIR_PARCELA_FAIL
+  }
+}
+
+export function subdividirParcela(parcela_id,values,callback){
+
+  var service_url = ROOT_URL + 'parcelas/geom/' + parcela_id + '/subdividir';
+
+  return function(dispatch) {
+        dispatch(subdividirParcelaRequest())
+        const request = axios.post(service_url,values,{
+          headers: {
+              'Content-Type': 'application/json',
+              'accept':"*/*",
+              'cache-control':"no-cache"
+        }}).then( request =>{
+            dispatch(subdividirParcelaSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(subdividirParcelaFail(callback))
+              console.log("error subdividirParcela",error.stack)
+            })
+      }
+}
+
 function deletePlanoRequest() {
   return {
     type: DELETE_PLANO_REQUEST,
@@ -132,20 +180,24 @@ function editExpMensuraRequest() {
   }
 }
 
-function editExpMensuraSuccess(request) {
+function editExpMensuraSuccess(request,callback) {
+  if(callback)
+    callback()
   return {
     type: EDIT_EXP_MENSURA_SUCCESS,
     payload: request
   }
 }
 
-function editExpMensuraFail() {
+function editExpMensuraFail(callback) {
+  if(callback)
+    callback()
   return {
     type: EDIT_EXP_MENSURA_FAIL
   }
 }
 
-export function editExpMensura(id,submitJson){
+export function editExpMensura(id,submitJson,callback){
 
   var service_url = ROOT_URL + 'parcelas/' + id + '/expedienteMensura';
   
@@ -158,9 +210,9 @@ export function editExpMensura(id,submitJson){
               'X-user':localStorage.getItem('user_id'),
 
           }}).then( request =>{
-            dispatch(editExpMensuraSuccess(request))
+            dispatch(editExpMensuraSuccess(request,callback))
           }).catch( error =>{
-              dispatch(editExpMensuraFail())
+              dispatch(editExpMensuraFail(callback))
               console.log("error",error)
             })
       }

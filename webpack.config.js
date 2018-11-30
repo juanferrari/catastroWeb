@@ -31,6 +31,7 @@ var config = {
             'require.specified' : "require.resolve",
             'ENVIRONMENT': JSON.stringify(process.env.NODE_ENV || 'development'),
             'SERVICE_URL': '"http://186.33.216.232/catastro-service/v1/"',
+            //'SERVICE_URL': '"http://localhost:8080/catastro-service/v1/"',
             'VERSION': JSON.stringify(require('./package.json').version)
         }),
         new HtmlWebpackPlugin({
@@ -76,7 +77,7 @@ var config = {
                     }
                   },
                   {
-                    test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                    test: /\.(eot|com|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                     loader: 'url-loader',
                     options:{
                       limit:'10000',

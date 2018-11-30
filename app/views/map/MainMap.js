@@ -43,6 +43,12 @@ class MainMap extends Component {
     .then(data=>{
       this.setState({geojson:JSON.parse(data.request.response)});
 
+      var myStyle = {
+       "color": "#ff7800",
+       "weight": 5,
+       "opacity": 0.65
+      };
+
       var map = L.map('map');
 
       map.getContainer().setAttribute('id', 'wmsContainer');
@@ -50,19 +56,37 @@ class MainMap extends Component {
       map.setView([this.state.lat, this.state.lng], this.state.zoom);
 
       L.tileLayer.wms('http://186.33.216.232/geoserver/world/wms?', {
-        layers: 'world:chacabuco_osm'
+        layers: 'world:chacabuco_osm',
+        opacity: 1
+
       }
       ).addTo(map);
 
-      var wmsInfo = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
-        layers: 'world:parcela_registro_grafico_provincial',
-        opacity: 0.5
+      var layerProvincial = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
+        layers: 'world:parcelas_provinciales',
+        transparent:true,
+        format:'image/png'
       }
       ).addTo(map);
+
+      var layerMunicipal = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
+        layers: 'world:parcelas_municipales',
+        transparent:true,
+        format:'image/png'
+      }
+      ).addTo(map);
+
+      var baseMaps = {
+          "Parcelas Provinciales": layerProvincial,
+          "Parcelas Municipales": layerMunicipal
+          
+      };
 
       map.on('click', this.getFeatureInfo, this);
 
-      this.setState({map:wmsInfo._map,wmsParams:wmsInfo.wmsParams,url:wmsInfo._url});
+      L.control.layers(null,baseMaps).addTo(map);
+
+      this.setState({map:layerProvincial._map,wmsParams:layerProvincial.wmsParams,url:layerProvincial._url});
 
     }).catch(error=>{
       console.log(error.stack)

@@ -43,8 +43,8 @@ class WizardForm extends Component {
       "numeroExpediente": values.numeroExpediente,
       "numeroPlanoMensura": values.numeroPlanoMensura
     }
-
-    this.props.editExpMensura(id,submitJson,this.props.history.push(`/tramites/${id}`));
+    
+    this.props.editExpMensura(id,submitJson,()=>{this.props.history.push(`/tramites/${id}`)});
   }
 
   render() {

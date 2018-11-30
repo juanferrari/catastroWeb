@@ -30,13 +30,22 @@ import {
     GET_EXPEDIENTE_MENSURA_FAIL,
     DELETE_PLANO_REQUEST,
     DELETE_PLANO_SUCCESS,
-    DELETE_PLANO_FAIL
+    DELETE_PLANO_FAIL,
+    SUBDIVIDIR_PARCELA_REQUEST,
+    SUBDIVIDIR_PARCELA_SUCCESS,
+    SUBDIVIDIR_PARCELA_FAIL
 
 } from '../actions/actions_parcelas';
 
 var defaultState = {filter:'', tableInfo:{pageSize:10,page:0},actionParcela: {message:'',action_className:'hidden'}}
 export default function(state = defaultState, action) {
     switch (action.type) {
+        case SUBDIVIDIR_PARCELA_REQUEST:
+            return { ...state, planoSplitting:true};
+        case SUBDIVIDIR_PARCELA_SUCCESS:
+            return { ...state, planoSplitting:false, actionParcela:{message:'Parcela subdividida correctamente.',action_className:'alert alert-success'}};
+        case SUBDIVIDIR_PARCELA_FAIL:
+            return { ...state, planoSplitting:false, actionParcela:{message:'Error al subdividir la parcela.',action_className:'alert alert-danger'}};
         case GET_EXPEDIENTE_MENSURA_REQUEST:
             return { ...state, expedienteFetching:true};
         case GET_EXPEDIENTE_MENSURA_SUCCESS:
