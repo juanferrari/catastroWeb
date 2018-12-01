@@ -36,6 +36,7 @@ class SubdivisionMain extends Component {
         {page === 1 && <Subdividir id={this.props.id} nextPage={this.nextPage}/>}
         {page === 2 && <DatosParcela
             parcela={1}
+            id={this.props.id}
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
         />}

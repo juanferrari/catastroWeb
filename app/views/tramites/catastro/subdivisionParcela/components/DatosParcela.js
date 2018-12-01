@@ -25,7 +25,7 @@ class DatosParcela extends Component{
 				</div>
 				<div className='row text-center'>
 					<div className='col-lg-6 col-md-6  col-lg-offset-6 col-md-offset-6'>
-						<ShowParcela id={842998}/>
+						<ShowParcela id={this.props.id}/>
 					</div>
 				</div>
 				<div className='row text-center'>

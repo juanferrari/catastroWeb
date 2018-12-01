@@ -41,11 +41,19 @@ class Subdividir extends Component {
   componentWillMount(){
 
     const {id} = this.props;
-    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcela_registro_grafico_provincial&outputFormat=application%2Fjson&featureID='
+    var service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcelas_provinciales&outputFormat=application%2Fjson&featureID=';
     service_url = service_url + id;
 
     axios.get(service_url)
     .then(data=>{
+      if(data && data.data.features[0]){
+        return data
+      }
+      else{ 
+        service_url = 'http://186.33.216.232/geoserver/catastro/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=catastro:parcelas_municipales&outputFormat=application%2Fjson&featureID=' + id;
+        return axios.get(service_url)
+      }
+    }).then(data=>{
 
       var parcelaJson = JSON.parse(data.request.response);
       
@@ -95,13 +103,23 @@ class Subdividir extends Component {
       map.setView([lat, lng], this.state.zoom);
 
       L.tileLayer.wms('http://186.33.216.232/geoserver/world/wms?', {
-        layers: 'world:chacabuco_osm'
+        layers: 'world:chacabuco_osm',
+        opacity: 1
+
       }
       ).addTo(map);
 
-      var wmsInfo = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
+      var layerProvincial = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
         layers: 'world:parcelas_provinciales',
-        opacity: 0.5
+        transparent:true,
+        format:'image/png'
+      }
+      ).addTo(map);
+
+      var layerMunicipal = L.tileLayer.wms('http://186.33.216.232/geoserver/catastro/wms?', {
+        layers: 'world:parcelas_municipales',
+        transparent:true,
+        format:'image/png'
       }
       ).addTo(map);
 
@@ -177,8 +195,6 @@ class Subdividir extends Component {
              }
          }
      });*/
-
-      this.setState({map:wmsInfo._map,wmsParams:wmsInfo.wmsParams,url:wmsInfo._url});
 
     }).catch(error=>{
       console.log(error.stack)
