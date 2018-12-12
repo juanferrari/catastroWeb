@@ -44,6 +44,10 @@ export const DELETE_PLANO_REQUEST = 'DELETE_PLANO_REQUEST';
 export const DELETE_PLANO_SUCCESS = 'DELETE_PLANO_SUCCESS';
 export const DELETE_PLANO_FAIL = 'DELETE_PLANO_FAIL';
 
+export const SUBDIVISION_PARCELA_REQUEST = 'SUBDIVISION_PARCELA_REQUEST';
+export const SUBDIVISION_PARCELA_SUCCESS = 'SUBDIVISION_PARCELA_SUCCESS';
+export const SUBDIVISION_PARCELA_FAIL = 'SUBDIVISION_PARCELA_FAIL';
+
 export const SUBDIVIDIR_PARCELA_REQUEST = 'SUBDIVIDIR_PARCELA_REQUEST';
 export const SUBDIVIDIR_PARCELA_SUCCESS = 'SUBDIVIDIR_PARCELA_SUCCESS';
 export const SUBDIVIDIR_PARCELA_FAIL = 'SUBDIVIDIR_PARCELA_FAIL';
@@ -88,6 +92,51 @@ export function subdividirParcela(parcela_id,values,callback){
           }).catch( error =>{
               dispatch(subdividirParcelaFail(callback))
               console.log("error subdividirParcela",error.stack)
+            })
+      }
+}
+
+function subdivisionParcelaRequest() {
+  return {
+    type: SUBDIVISION_PARCELA_REQUEST,
+  }
+}
+
+function subdivisionParcelaSuccess(request,callback) {
+  if(callback)
+    callback();
+  return {
+    type: SUBDIVISION_PARCELA_SUCCESS,
+    payload: request
+  }
+}
+
+function subdivisionParcelaFail(callback) {
+  if(callback)
+    callback();
+  return {
+    type: SUBDIVISION_PARCELA_FAIL
+  }
+}
+
+export function subdivisionParcela(parcela_id,values,callback){
+
+  var service_url = ROOT_URL + 'parcelas/geom/' + parcela_id + '/subdivision';
+
+  console.log('valores a enviar',values);
+
+  return function(dispatch) {
+        dispatch(subdivisionParcelaRequest())
+        const request = axios.post(service_url,values,{
+          headers: {
+              'Content-Type': 'application/json',
+              'accept':"*/*",
+              'cache-control':"no-cache"
+        }}).then( request =>{
+            dispatch(subdivisionParcelaSuccess(request,callback))
+          }).catch( error =>{
+              dispatch(subdivisionParcelaFail(callback))
+              console.log("error subdivisionParcela",error.stack)
             })
       }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Map, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 import { updateParcelaInfo } from 'actions/actions_map';
-import { subdividirParcela } from 'actions/actions_parcelas'; 
+import { subdivisionParcela } from 'actions/actions_parcelas'; 
 import axios from 'axios';
 import ReactLoading from 'react-loading';
 import { FeatureGroup,Draw,addControl,extend } from 'leaflet-draw';
@@ -205,12 +205,12 @@ class Subdividir extends Component {
   subdividir(){
     console.log('continuar subdivision',this.props)
     this.props.nextPage();
-    /*const {id} = this.props.match.params;
+    const {id} = this.props;
     console.log('subdividir parcela id',id);
     console.log('subdividir parcela json',this.state.subdivisionJson);
     var geoJson = JSON.stringify(this.state.subdivisionJson);
     console.log('sendd',geoJson);
-    this.props.subdividirParcela(id,geoJson,()=>{this.props.history.push(`/tramites/${id}`)})*/
+    this.props.subdivisionParcela(id,geoJson)
   }
 
   render() {
@@ -243,4 +243,4 @@ class Subdividir extends Component {
   }
 }
 
-export default connect(null, { updateParcelaInfo,subdividirParcela })(Subdividir);
+export default connect(null, { updateParcelaInfo,subdivisionParcela })(Subdividir);

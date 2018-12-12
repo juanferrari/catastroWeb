@@ -1,56 +1,31 @@
 import React, { Component } from 'react';
-import ShowParcela from 'components/common/ShowParcela';
 import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
-import { Field, reduxForm } from 'redux-form'
-import DatosCatastrales from './subcomponents/DatosCatastrales'
+import { Field, reduxForm } from 'redux-form';
+import MedidasSuperficies from './subcomponents/MedidasSuperficies';
 
-class DatosParcela extends Component{
+class DatosParcela3 extends Component{
 	render(){
-
+		
 		var button_confirm = <button 
 					             className='btn btn-primary' 
 					             onClick={()=>this.props.onSubmit()}
 					           >  Continuar 
 					           </button>
 
-		const {parcelasSubdivididas} = this.props;
-		var parcelaGeojson;
+
 		const {handleSubmit} = this.props;
-
-		if(this.props.parcela == 1){
-			if(parcelasSubdivididas){
-				parcelaGeojson = JSON.parse(parcelasSubdivididas[0])
-			}
-		}else{
-			if(parcelasSubdivididas){
-				parcelaGeojson = JSON.parse(parcelasSubdivididas[1])
-			}	
-		}
-
-
-		if(!parcelasSubdivididas){
-	      return(
-	        <div className="centeredSpinner" >
-	          <ReactLoading type="spinningBubbles" style={{'color':"#444",'height':150,'width':150}} />
-	        </div>
-	      )
-	    }
 
 		return(
 			<form onSubmit={handleSubmit}>
 				<div className='row text-center'>
-					<h1>Datos Parcela {this.props.parcela}</h1>
+					<h1>Datos Parcela2 {this.props.parcela}</h1>
 				</div>
 				<div className='row text-center'>
 					<div className='col-lg-6 col-md-6'>
-						<DatosCatastrales id={this.props.parcela}/>
-					</div>
-					<div className='col-lg-6 col-md-6'>
-						<ShowParcela geoJson={parcelaGeojson}/>
+						<MedidasSuperficies id={this.props.parcela}/>
 					</div>
 				</div>
-				<br/>
 				<div className='row text-center'>
 				  <button type="button" className="previous btn btn-primary" onClick={()=>this.props.previousPage()}>
 		            Anterior
@@ -62,12 +37,12 @@ class DatosParcela extends Component{
 	}
 }
 
-DatosParcela = reduxForm(
+DatosParcela3 = reduxForm(
   {
     form: 'DatosParcelaForm', // <------ same form name
 	destroyOnUnmount: false, // <------ preserve form data
 	forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  })(DatosParcela);
+  })(DatosParcela3);
 
 function mapStateToProps(state){
   console.log('mapStateToProps',state)
@@ -78,4 +53,4 @@ function mapStateToProps(state){
 
 };
 
-export default connect(mapStateToProps, { })(DatosParcela);
+export default connect(mapStateToProps, { })(DatosParcela3);

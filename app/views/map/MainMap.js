@@ -47,12 +47,6 @@ class MainMap extends Component {
     .then(data=>{
       this.setState({geojson:JSON.parse(data.request.response)});
 
-      var myStyle = {
-       "color": "#ff7800",
-       "weight": 5,
-       "opacity": 0.65
-      };
-
       var map = L.map('map');
 
       map.getContainer().setAttribute('id', 'wmsContainer');
@@ -195,7 +189,13 @@ class MainMap extends Component {
         if(layer)
           layer.clearLayers();
 
-        layer = L.geoJSON(parcelaJson).addTo(map);
+        var myStyle = {
+         "color": "#8b0000",
+         "weight": 5,
+         "opacity": 0.9
+        };
+
+        layer = L.geoJSON(parcelaJson,myStyle).addTo(map);
 
         this.setState({currentGeoJsonLayer:layer})
 

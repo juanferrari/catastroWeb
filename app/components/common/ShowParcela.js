@@ -25,17 +25,20 @@ class ShowParcela extends Component {
 
     const {id} = this.props;
 
-    var parcelaJson = {"type":"FeatureCollection","totalFeatures":1,"features":[{"type":"Feature","id":"parcelas_municipales.7","geometry":{"type":"MultiPolygon","coordinates":[[[[-60.47530438,-34.62970129],[-60.47496845,-34.62966873],[-60.47581384,-34.62940399],[-60.47553578,-34.62960185],[-60.47530438,-34.62970129]]]]},"geometry_name":"geom","properties":{"id":7,"chacra":null,"circunscripcion":null,"fraccion":null,"manzana":null,"nomenclatura":null,"parcela_nom":null,"partida_provincial":null,"pseudoparcela":true,"quinta":null,"seccion":null,"parcela_id":7}}],"crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::4326"}}}
+    var parcelaJson = this.props.geoJson;
+
+    console.log('parcela componentDidMount',parcelaJson);
+
     var latLong = [];
 
     var myStyle = {
-     "color": "#ff7800",
+     "color": "#8b0000",
      "weight": 5,
      "opacity": 0.65
     };
 
-    var lng = parcelaJson.features[0].geometry.coordinates[0][0][0][0];
-    var lat = parcelaJson.features[0].geometry.coordinates[0][0][0][1];
+    var lng = parcelaJson.coordinates[0][0][0];
+    var lat = parcelaJson.coordinates[0][0][1];
 
     this.setState({geojson:parcelaJson});
 
