@@ -109,36 +109,30 @@ new CompressionPlugin({
                       fallback: "style-loader",
                       use: "css-loader"
                     })
-                  },/*
-                  {
-                    test: /\.(png|jpg|gif|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'url-loader',
-                      options:{
-			name: "/img/[name].[ext]",
-                        limit:'100000'
-                      }
-                  },*/
-                  {
-                    test: /\.(png|jpg|gif)$/,
-                    loader: 'file-loader',
-                      options:{
-                        name: "[path][name].[ext]"
-                      }
                   },
                   {
-                    test: /\.svg$/,
+                    test: /\.(png|jpg|gif)(\?v=\d+\.\d+\.\d+)?$/,
                     loader: 'file-loader',
-                      options:{
-                        name: '[path][name].[ext]'
-                      }
+                    options:{
+                      limit:'100000',
+                      name: '[path][name].[ext]'
+                    }
                   },
-
                   {
-                    test: /\.(eot|com|json|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                    test: /\.(eot|com|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                     loader: 'url-loader',
                     options:{
                       limit:'10000',
                       mimetype:'application/octet-stream'
+                    }
+                  },
+                  {
+                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'file-loader',
+                    options:{
+                      limit:'10000',
+                      mimetype:'image/svg+xml',
+                      name: '[path][name].[ext]'
                     }
                   },
 
