@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
 import { Field, reduxForm } from 'redux-form';
 import Ubicacion from './subcomponents/Ubicacion';
-
+import NumeroDomiciliario from './subcomponents/NumeroDomiciliario'
+import Calles from './subcomponents/Calles'
 class DatosParcela2 extends Component{
 	render(){
 		
@@ -24,6 +25,14 @@ class DatosParcela2 extends Component{
 				<div className='row text-center'>
 					<div className='col-lg-6 col-md-6'>
 						<Ubicacion id={this.props.parcela}/>
+					</div>
+					<div className='col-lg-6 col-md-6'>
+						<NumeroDomiciliario id={this.props.parcela}/>
+					</div>
+				</div>
+				<div className='row text-center'>
+					<div className='col-lg-6 col-md-6'>
+						<Calles id={this.props.parcela}/>
 					</div>
 				</div>
 				<div className='row text-center'>
